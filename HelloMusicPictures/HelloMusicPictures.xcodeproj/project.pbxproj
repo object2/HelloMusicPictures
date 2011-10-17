@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		39D123BF144C5925008C0E5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123BE144C5925008C0E5C /* UIKit.framework */; };
+		39D123C1144C5925008C0E5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123C0144C5925008C0E5C /* Foundation.framework */; };
+		39D123C3144C5925008C0E5C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123C2144C5925008C0E5C /* CoreGraphics.framework */; };
+		39D123C9144C5925008C0E5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39D123C7144C5925008C0E5C /* InfoPlist.strings */; };
+		39D123CB144C5925008C0E5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123CA144C5925008C0E5C /* main.m */; };
+		39D123CF144C5925008C0E5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123CE144C5925008C0E5C /* AppDelegate.m */; };
+		39D123D2144C5925008C0E5C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D123D0144C5925008C0E5C /* MainStoryboard.storyboard */; };
+		39D123D5144C5925008C0E5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123D4144C5925008C0E5C /* ViewController.m */; };
+		39D123DD144C5925008C0E5C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123DC144C5925008C0E5C /* SenTestingKit.framework */; };
+		39D123DE144C5925008C0E5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123BE144C5925008C0E5C /* UIKit.framework */; };
+		39D123DF144C5925008C0E5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123C0144C5925008C0E5C /* Foundation.framework */; };
+		39D123E7144C5925008C0E5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39D123E5144C5925008C0E5C /* InfoPlist.strings */; };
+		39D123EA144C5925008C0E5C /* HelloMusicPicturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		39D123E0144C5925008C0E5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39D123B1144C5925008C0E5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 39D123B9144C5925008C0E5C;
+			remoteInfo = HelloMusicPictures;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		39D123BA144C5925008C0E5C /* HelloMusicPictures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloMusicPictures.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		39D123BE144C5925008C0E5C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		39D123C0144C5925008C0E5C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		39D123C2144C5925008C0E5C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		39D123C6144C5925008C0E5C /* HelloMusicPictures-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelloMusicPictures-Info.plist"; sourceTree = "<group>"; };
+		39D123C8144C5925008C0E5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		39D123CA144C5925008C0E5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		39D123CC144C5925008C0E5C /* HelloMusicPictures-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HelloMusicPictures-Prefix.pch"; sourceTree = "<group>"; };
+		39D123CD144C5925008C0E5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		39D123CE144C5925008C0E5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		39D123D1144C5925008C0E5C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		39D123D3144C5925008C0E5C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		39D123D4144C5925008C0E5C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		39D123DB144C5925008C0E5C /* HelloMusicPicturesTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloMusicPicturesTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		39D123DC144C5925008C0E5C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		39D123E4144C5925008C0E5C /* HelloMusicPicturesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelloMusicPicturesTests-Info.plist"; sourceTree = "<group>"; };
+		39D123E6144C5925008C0E5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		39D123E8144C5925008C0E5C /* HelloMusicPicturesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloMusicPicturesTests.h; sourceTree = "<group>"; };
+		39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloMusicPicturesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		39D123B7144C5925008C0E5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D123BF144C5925008C0E5C /* UIKit.framework in Frameworks */,
+				39D123C1144C5925008C0E5C /* Foundation.framework in Frameworks */,
+				39D123C3144C5925008C0E5C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39D123D7144C5925008C0E5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D123DD144C5925008C0E5C /* SenTestingKit.framework in Frameworks */,
+				39D123DE144C5925008C0E5C /* UIKit.framework in Frameworks */,
+				39D123DF144C5925008C0E5C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		39D123AF144C5925008C0E5C = {
+			isa = PBXGroup;
+			children = (
+				39D123C4144C5925008C0E5C /* HelloMusicPictures */,
+				39D123E2144C5925008C0E5C /* HelloMusicPicturesTests */,
+				39D123BD144C5925008C0E5C /* Frameworks */,
+				39D123BB144C5925008C0E5C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		39D123BB144C5925008C0E5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39D123BA144C5925008C0E5C /* HelloMusicPictures.app */,
+				39D123DB144C5925008C0E5C /* HelloMusicPicturesTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		39D123BD144C5925008C0E5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39D123BE144C5925008C0E5C /* UIKit.framework */,
+				39D123C0144C5925008C0E5C /* Foundation.framework */,
+				39D123C2144C5925008C0E5C /* CoreGraphics.framework */,
+				39D123DC144C5925008C0E5C /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		39D123C4144C5925008C0E5C /* HelloMusicPictures */ = {
+			isa = PBXGroup;
+			children = (
+				39D123CD144C5925008C0E5C /* AppDelegate.h */,
+				39D123CE144C5925008C0E5C /* AppDelegate.m */,
+				39D123D0144C5925008C0E5C /* MainStoryboard.storyboard */,
+				39D123D3144C5925008C0E5C /* ViewController.h */,
+				39D123D4144C5925008C0E5C /* ViewController.m */,
+				39D123C5144C5925008C0E5C /* Supporting Files */,
+			);
+			path = HelloMusicPictures;
+			sourceTree = "<group>";
+		};
+		39D123C5144C5925008C0E5C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				39D123C6144C5925008C0E5C /* HelloMusicPictures-Info.plist */,
+				39D123C7144C5925008C0E5C /* InfoPlist.strings */,
+				39D123CA144C5925008C0E5C /* main.m */,
+				39D123CC144C5925008C0E5C /* HelloMusicPictures-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		39D123E2144C5925008C0E5C /* HelloMusicPicturesTests */ = {
+			isa = PBXGroup;
+			children = (
+				39D123E8144C5925008C0E5C /* HelloMusicPicturesTests.h */,
+				39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */,
+				39D123E3144C5925008C0E5C /* Supporting Files */,
+			);
+			path = HelloMusicPicturesTests;
+			sourceTree = "<group>";
+		};
+		39D123E3144C5925008C0E5C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				39D123E4144C5925008C0E5C /* HelloMusicPicturesTests-Info.plist */,
+				39D123E5144C5925008C0E5C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		39D123B9144C5925008C0E5C /* HelloMusicPictures */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39D123ED144C5925008C0E5C /* Build configuration list for PBXNativeTarget "HelloMusicPictures" */;
+			buildPhases = (
+				39D123B6144C5925008C0E5C /* Sources */,
+				39D123B7144C5925008C0E5C /* Frameworks */,
+				39D123B8144C5925008C0E5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HelloMusicPictures;
+			productName = HelloMusicPictures;
+			productReference = 39D123BA144C5925008C0E5C /* HelloMusicPictures.app */;
+			productType = "com.apple.product-type.application";
+		};
+		39D123DA144C5925008C0E5C /* HelloMusicPicturesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39D123F0144C5925008C0E5C /* Build configuration list for PBXNativeTarget "HelloMusicPicturesTests" */;
+			buildPhases = (
+				39D123D6144C5925008C0E5C /* Sources */,
+				39D123D7144C5925008C0E5C /* Frameworks */,
+				39D123D8144C5925008C0E5C /* Resources */,
+				39D123D9144C5925008C0E5C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				39D123E1144C5925008C0E5C /* PBXTargetDependency */,
+			);
+			name = HelloMusicPicturesTests;
+			productName = HelloMusicPicturesTests;
+			productReference = 39D123DB144C5925008C0E5C /* HelloMusicPicturesTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		39D123B1144C5925008C0E5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = TEAMBLACKCAT;
+			};
+			buildConfigurationList = 39D123B4144C5925008C0E5C /* Build configuration list for PBXProject "HelloMusicPictures" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 39D123AF144C5925008C0E5C;
+			productRefGroup = 39D123BB144C5925008C0E5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				39D123B9144C5925008C0E5C /* HelloMusicPictures */,
+				39D123DA144C5925008C0E5C /* HelloMusicPicturesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		39D123B8144C5925008C0E5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D123C9144C5925008C0E5C /* InfoPlist.strings in Resources */,
+				39D123D2144C5925008C0E5C /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39D123D8144C5925008C0E5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D123E7144C5925008C0E5C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		39D123D9144C5925008C0E5C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		39D123B6144C5925008C0E5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D123CB144C5925008C0E5C /* main.m in Sources */,
+				39D123CF144C5925008C0E5C /* AppDelegate.m in Sources */,
+				39D123D5144C5925008C0E5C /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39D123D6144C5925008C0E5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D123EA144C5925008C0E5C /* HelloMusicPicturesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		39D123E1144C5925008C0E5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 39D123B9144C5925008C0E5C /* HelloMusicPictures */;
+			targetProxy = 39D123E0144C5925008C0E5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		39D123C7144C5925008C0E5C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				39D123C8144C5925008C0E5C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		39D123D0144C5925008C0E5C /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				39D123D1144C5925008C0E5C /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		39D123E5144C5925008C0E5C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				39D123E6144C5925008C0E5C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		39D123EB144C5925008C0E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		39D123EC144C5925008C0E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		39D123EE144C5925008C0E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				INFOPLIST_FILE = "HelloMusicPictures/HelloMusicPictures-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		39D123EF144C5925008C0E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				INFOPLIST_FILE = "HelloMusicPictures/HelloMusicPictures-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		39D123F1144C5925008C0E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HelloMusicPictures.app/HelloMusicPictures";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				INFOPLIST_FILE = "HelloMusicPicturesTests/HelloMusicPicturesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		39D123F2144C5925008C0E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HelloMusicPictures.app/HelloMusicPictures";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				INFOPLIST_FILE = "HelloMusicPicturesTests/HelloMusicPicturesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		39D123B4144C5925008C0E5C /* Build configuration list for PBXProject "HelloMusicPictures" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39D123EB144C5925008C0E5C /* Debug */,
+				39D123EC144C5925008C0E5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39D123ED144C5925008C0E5C /* Build configuration list for PBXNativeTarget "HelloMusicPictures" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39D123EE144C5925008C0E5C /* Debug */,
+				39D123EF144C5925008C0E5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		39D123F0144C5925008C0E5C /* Build configuration list for PBXNativeTarget "HelloMusicPicturesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39D123F1144C5925008C0E5C /* Debug */,
+				39D123F2144C5925008C0E5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 39D123B1144C5925008C0E5C /* Project object */;
+}
