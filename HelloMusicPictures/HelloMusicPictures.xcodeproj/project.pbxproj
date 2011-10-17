@@ -20,6 +20,7 @@
 		39D123DF144C5925008C0E5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123C0144C5925008C0E5C /* Foundation.framework */; };
 		39D123E7144C5925008C0E5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39D123E5144C5925008C0E5C /* InfoPlist.strings */; };
 		39D123EA144C5925008C0E5C /* HelloMusicPicturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */; };
+		39D123F4144C5A51008C0E5C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123F3144C5A51008C0E5C /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		39D123E6144C5925008C0E5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		39D123E8144C5925008C0E5C /* HelloMusicPicturesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloMusicPicturesTests.h; sourceTree = "<group>"; };
 		39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloMusicPicturesTests.m; sourceTree = "<group>"; };
+		39D123F3144C5A51008C0E5C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39D123F4144C5A51008C0E5C /* MediaPlayer.framework in Frameworks */,
 				39D123BF144C5925008C0E5C /* UIKit.framework in Frameworks */,
 				39D123C1144C5925008C0E5C /* Foundation.framework in Frameworks */,
 				39D123C3144C5925008C0E5C /* CoreGraphics.framework in Frameworks */,
@@ -81,6 +84,7 @@
 		39D123AF144C5925008C0E5C = {
 			isa = PBXGroup;
 			children = (
+				39D123F3144C5A51008C0E5C /* MediaPlayer.framework */,
 				39D123C4144C5925008C0E5C /* HelloMusicPictures */,
 				39D123E2144C5925008C0E5C /* HelloMusicPicturesTests */,
 				39D123BD144C5925008C0E5C /* Frameworks */,
