@@ -11,4 +11,5 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)showMediaPlayer:(id)sender;
 @end

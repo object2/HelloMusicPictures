@@ -59,4 +59,6 @@
 	return YES;
 }
 
+- (IBAction)showMediaPlayer:(id)sender {
+}
 @end
