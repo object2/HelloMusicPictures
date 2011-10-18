@@ -1,5 +1,4 @@
 .DS_Store
-<<<<<<< HEAD
 *.orig
 *.swp
 *~.nib
@@ -16,6 +15,3 @@ build/
 *.xcuserstate
 
 xcuserdata
-=======
-*.orig
->>>>>>> parent of bfb7c39... 무시 파일 추가 했습니다.
