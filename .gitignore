@@ -13,9 +13,4 @@ build/
 *.mode2v3
 
 *.xcuserstate
-<<<<<<< HEAD
-
 xcuserdata
-=======
-xcuserdata
->>>>>>> gitignore 수정
