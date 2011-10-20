@@ -61,7 +61,29 @@
 
 - (IBAction)showMediaPlayer:(id)sender 
 {
-	[[[UIAlertView alloc] initWithTitle:@"임시" message:@"음악 플레이어를 띄우자" delegate:nil cancelButtonTitle:@"뿅" otherButtonTitles:nil] show];
+	MPMediaPickerController *picker =
+			[[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeMusic];
+		
+	picker.delegate						= self;
+	picker.allowsPickingMultipleItems	= YES;
+	picker.prompt						= NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
+
+	// The media item picker uses the default UI style, so it needs a default-style
+	//		status bar to match it visually
+	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleDefault animated: YES];
+
+	[self presentModalViewController: picker animated: YES];
+}
+
+
+- (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
+{
+	NSLog(@"음악 선택 %@", mediaItemCollection);
+}
+
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
+{
+	NSLog(@"음악선택 포기");
 }
 
 @end
