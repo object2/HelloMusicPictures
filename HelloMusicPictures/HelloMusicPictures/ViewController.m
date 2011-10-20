@@ -59,6 +59,9 @@
 	return YES;
 }
 
-- (IBAction)showMediaPlayer:(id)sender {
+- (IBAction)showMediaPlayer:(id)sender 
+{
+	[[[UIAlertView alloc] initWithTitle:@"임시" message:@"음악 플레이어를 띄우자" delegate:nil cancelButtonTitle:@"뿅" otherButtonTitles:nil] show];
 }
+
 @end
