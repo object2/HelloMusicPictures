@@ -111,9 +111,7 @@
 		39D123AF144C5925008C0E5C = {
 			isa = PBXGroup;
 			children = (
-				9180D55C144F117B0087AD75 /* CFNetwork.framework */,
 				9180D54C144F10A40087AD75 /* ObjectiveFlickr.xcodeproj */,
-				39D123F3144C5A51008C0E5C /* MediaPlayer.framework */,
 				39D123C4144C5925008C0E5C /* HelloMusicPictures */,
 				39D123E2144C5925008C0E5C /* HelloMusicPicturesTests */,
 				39D123BD144C5925008C0E5C /* Frameworks */,
@@ -133,6 +131,8 @@
 		39D123BD144C5925008C0E5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9180D55C144F117B0087AD75 /* CFNetwork.framework */,
+				39D123F3144C5A51008C0E5C /* MediaPlayer.framework */,
 				39D123BE144C5925008C0E5C /* UIKit.framework */,
 				39D123C0144C5925008C0E5C /* Foundation.framework */,
 				39D123C2144C5925008C0E5C /* CoreGraphics.framework */,
@@ -401,9 +401,15 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					objectiveflickr/LFWebAPIKit,
+					objectiveflickr/Source,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = MusicPictures;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -420,10 +426,16 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					objectiveflickr/LFWebAPIKit,
+					objectiveflickr/Source,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = MusicPictures;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -431,10 +443,13 @@
 		39D123EE144C5925008C0E5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				HEADER_SEARCH_PATHS = objectiveflickr/Source;
 				INFOPLIST_FILE = "HelloMusicPictures/HelloMusicPictures-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "objectiveflickr/LFWebAPIKit objectiveflickr/Source";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -442,10 +457,13 @@
 		39D123EF144C5925008C0E5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				HEADER_SEARCH_PATHS = objectiveflickr/Source;
 				INFOPLIST_FILE = "HelloMusicPictures/HelloMusicPictures-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "objectiveflickr/LFWebAPIKit objectiveflickr/Source";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -460,9 +478,14 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					$SRCROOT/objectiveflickr/LFWebAPIKit,
+					$SRCROOT/objectiveflickr/Source,
+				);
 				INFOPLIST_FILE = "HelloMusicPicturesTests/HelloMusicPicturesTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_HOST = "build/Debug-iphoneos/HelloMusicPictures.app/HelloMusicPictures";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -477,9 +500,14 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					$SRCROOT/objectiveflickr/LFWebAPIKit,
+					$SRCROOT/objectiveflickr/Source,
+				);
 				INFOPLIST_FILE = "HelloMusicPicturesTests/HelloMusicPicturesTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
-//#import "ObjectiveFlickr.h"
+#import "ObjectiveFlickr.h"
 
 @interface ViewController : UIViewController<MPMediaPickerControllerDelegate>
 
