@@ -22,12 +22,7 @@
 		39D123EA144C5925008C0E5C /* HelloMusicPicturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */; };
 		39D123F4144C5A51008C0E5C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123F3144C5A51008C0E5C /* MediaPlayer.framework */; };
 		9180D55D144F117B0087AD75 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9180D55C144F117B0087AD75 /* CFNetwork.framework */; };
-		ED0B9A1A1455896D00475983 /* ObjectiveFlickr.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0B9A151455896D00475983 /* ObjectiveFlickr.m */; };
-		ED0B9A1B1455896D00475983 /* OFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0B9A171455896D00475983 /* OFUtilities.m */; };
-		ED0B9A1C1455896D00475983 /* OFXMLMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0B9A191455896D00475983 /* OFXMLMapper.m */; };
-		ED4B42B814558E1600A3AA59 /* LFHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B42B214558E1600A3AA59 /* LFHTTPRequest.m */; };
-		ED4B42B914558E1600A3AA59 /* LFSiteReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B42B414558E1600A3AA59 /* LFSiteReachability.m */; };
-		ED4B42BA14558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B42B714558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m */; };
+		918FE4E9145595E600D87C5A /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +32,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 39D123B9144C5925008C0E5C;
 			remoteInfo = HelloMusicPictures;
+		};
+		918FE4E5145595D300D87C5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A8666490F9593B200325E1C;
+			remoteInfo = "ObjectiveFlickr (framework)";
+		};
+		918FE4E7145595D300D87C5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6ABF72E60F939BE600B9179E;
+			remoteInfo = "ObjectiveFlickr (library)";
+		};
+		918FE4EA145595F000D87C5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ABF72E50F939BE600B9179E;
+			remoteInfo = "ObjectiveFlickr (library)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -62,20 +78,8 @@
 		39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloMusicPicturesTests.m; sourceTree = "<group>"; };
 		39D123F3144C5A51008C0E5C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		9180D55C144F117B0087AD75 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveFlickr.xcodeproj; path = objectiveflickr/ObjectiveFlickr.xcodeproj; sourceTree = "<group>"; };
 		91B84B1114543990002D2429 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
-		ED0B9A141455896D00475983 /* ObjectiveFlickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveFlickr.h; sourceTree = "<group>"; };
-		ED0B9A151455896D00475983 /* ObjectiveFlickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectiveFlickr.m; sourceTree = "<group>"; };
-		ED0B9A161455896D00475983 /* OFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFUtilities.h; sourceTree = "<group>"; };
-		ED0B9A171455896D00475983 /* OFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFUtilities.m; sourceTree = "<group>"; };
-		ED0B9A181455896D00475983 /* OFXMLMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFXMLMapper.h; sourceTree = "<group>"; };
-		ED0B9A191455896D00475983 /* OFXMLMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFXMLMapper.m; sourceTree = "<group>"; };
-		ED4B42B114558E1600A3AA59 /* LFHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFHTTPRequest.h; sourceTree = "<group>"; };
-		ED4B42B214558E1600A3AA59 /* LFHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFHTTPRequest.m; sourceTree = "<group>"; };
-		ED4B42B314558E1600A3AA59 /* LFSiteReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFSiteReachability.h; sourceTree = "<group>"; };
-		ED4B42B414558E1600A3AA59 /* LFSiteReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSiteReachability.m; sourceTree = "<group>"; };
-		ED4B42B514558E1600A3AA59 /* LFWebAPIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFWebAPIKit.h; sourceTree = "<group>"; };
-		ED4B42B614558E1600A3AA59 /* NSData+LFHTTPFormExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+LFHTTPFormExtensions.h"; sourceTree = "<group>"; };
-		ED4B42B714558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+LFHTTPFormExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 				39D123BF144C5925008C0E5C /* UIKit.framework in Frameworks */,
 				39D123C1144C5925008C0E5C /* Foundation.framework in Frameworks */,
 				39D123C3144C5925008C0E5C /* CoreGraphics.framework in Frameworks */,
+				918FE4E9145595E600D87C5A /* libObjectiveFlickr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +112,7 @@
 		39D123AF144C5925008C0E5C = {
 			isa = PBXGroup;
 			children = (
-				ED0B9A131455896D00475983 /* Source */,
+				918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */,
 				39D123C4144C5925008C0E5C /* HelloMusicPictures */,
 				39D123E2144C5925008C0E5C /* HelloMusicPicturesTests */,
 				39D123BD144C5925008C0E5C /* Frameworks */,
@@ -181,25 +186,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		ED0B9A131455896D00475983 /* Source */ = {
+		918FE4DD145595D300D87C5A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED4B42B114558E1600A3AA59 /* LFHTTPRequest.h */,
-				ED4B42B214558E1600A3AA59 /* LFHTTPRequest.m */,
-				ED4B42B314558E1600A3AA59 /* LFSiteReachability.h */,
-				ED4B42B414558E1600A3AA59 /* LFSiteReachability.m */,
-				ED4B42B514558E1600A3AA59 /* LFWebAPIKit.h */,
-				ED4B42B614558E1600A3AA59 /* NSData+LFHTTPFormExtensions.h */,
-				ED4B42B714558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m */,
-				ED0B9A141455896D00475983 /* ObjectiveFlickr.h */,
-				ED0B9A151455896D00475983 /* ObjectiveFlickr.m */,
-				ED0B9A161455896D00475983 /* OFUtilities.h */,
-				ED0B9A171455896D00475983 /* OFUtilities.m */,
-				ED0B9A181455896D00475983 /* OFXMLMapper.h */,
-				ED0B9A191455896D00475983 /* OFXMLMapper.m */,
+				918FE4E6145595D300D87C5A /* ObjectiveFlickr.framework */,
+				918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */,
 			);
-			name = Source;
-			path = objectiveflickr/Source;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +209,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				918FE4EB145595F000D87C5A /* PBXTargetDependency */,
 			);
 			name = HelloMusicPictures;
 			productName = HelloMusicPictures;
@@ -261,6 +255,12 @@
 			mainGroup = 39D123AF144C5925008C0E5C;
 			productRefGroup = 39D123BB144C5925008C0E5C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 918FE4DD145595D300D87C5A /* Products */;
+					ProjectRef = 918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				39D123B9144C5925008C0E5C /* HelloMusicPictures */,
@@ -268,6 +268,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		918FE4E6145595D300D87C5A /* ObjectiveFlickr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectiveFlickr.framework;
+			remoteRef = 918FE4E5145595D300D87C5A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libObjectiveFlickr.a;
+			remoteRef = 918FE4E7145595D300D87C5A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		39D123B8144C5925008C0E5C /* Resources */ = {
@@ -313,12 +330,6 @@
 				39D123CB144C5925008C0E5C /* main.m in Sources */,
 				39D123CF144C5925008C0E5C /* AppDelegate.m in Sources */,
 				39D123D5144C5925008C0E5C /* ViewController.m in Sources */,
-				ED0B9A1A1455896D00475983 /* ObjectiveFlickr.m in Sources */,
-				ED0B9A1B1455896D00475983 /* OFUtilities.m in Sources */,
-				ED0B9A1C1455896D00475983 /* OFXMLMapper.m in Sources */,
-				ED4B42B814558E1600A3AA59 /* LFHTTPRequest.m in Sources */,
-				ED4B42B914558E1600A3AA59 /* LFSiteReachability.m in Sources */,
-				ED4B42BA14558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +348,11 @@
 			isa = PBXTargetDependency;
 			target = 39D123B9144C5925008C0E5C /* HelloMusicPictures */;
 			targetProxy = 39D123E0144C5925008C0E5C /* PBXContainerItemProxy */;
+		};
+		918FE4EB145595F000D87C5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ObjectiveFlickr (library)";
+			targetProxy = 918FE4EA145595F000D87C5A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
