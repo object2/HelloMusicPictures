@@ -42,6 +42,9 @@ NSInteger curPictureIdx = 0;
 
 
 @implementation SnapAndRunViewController
+
+@synthesize nextPicTimer;
+
 - (void)viewDidUnload
 {
     self.flickrRequest = nil;
@@ -213,7 +216,8 @@ NSInteger curPictureIdx = 0;
         
     }
 	else if(inRequest.sessionInfo == kShowPictureStep) {
-		responseDict = inResponseDictionary;
+		[responseDict release];
+		responseDict = [inResponseDictionary retain];
 		NSLog(@"response %@", inResponseDictionary.textContent);
 //		numOfPictures = [[responseDict valueForKeyPath:@"photos.photo"] count];
 		numOfPictures = 10;
@@ -221,7 +225,9 @@ NSInteger curPictureIdx = 0;
 		
 		NSLog(@"count is %d", [[responseDict valueForKeyPath:@"photos.photo"] count]);
 		if (numOfPictures > 0) {
-			[[NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:NO] fire];
+
+			self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES];
+			[nextPicTimer fire];
 
 		}
 		

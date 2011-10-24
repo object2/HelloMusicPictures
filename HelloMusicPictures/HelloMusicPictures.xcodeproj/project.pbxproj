@@ -22,6 +22,12 @@
 		39D123EA144C5925008C0E5C /* HelloMusicPicturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */; };
 		39D123F4144C5A51008C0E5C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123F3144C5A51008C0E5C /* MediaPlayer.framework */; };
 		9180D55D144F117B0087AD75 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9180D55C144F117B0087AD75 /* CFNetwork.framework */; };
+		ED0B9A1A1455896D00475983 /* ObjectiveFlickr.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0B9A151455896D00475983 /* ObjectiveFlickr.m */; };
+		ED0B9A1B1455896D00475983 /* OFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0B9A171455896D00475983 /* OFUtilities.m */; };
+		ED0B9A1C1455896D00475983 /* OFXMLMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0B9A191455896D00475983 /* OFXMLMapper.m */; };
+		ED4B42B814558E1600A3AA59 /* LFHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B42B214558E1600A3AA59 /* LFHTTPRequest.m */; };
+		ED4B42B914558E1600A3AA59 /* LFSiteReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B42B414558E1600A3AA59 /* LFSiteReachability.m */; };
+		ED4B42BA14558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B42B714558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +63,19 @@
 		39D123F3144C5A51008C0E5C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		9180D55C144F117B0087AD75 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		91B84B1114543990002D2429 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
+		ED0B9A141455896D00475983 /* ObjectiveFlickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveFlickr.h; sourceTree = "<group>"; };
+		ED0B9A151455896D00475983 /* ObjectiveFlickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectiveFlickr.m; sourceTree = "<group>"; };
+		ED0B9A161455896D00475983 /* OFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFUtilities.h; sourceTree = "<group>"; };
+		ED0B9A171455896D00475983 /* OFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFUtilities.m; sourceTree = "<group>"; };
+		ED0B9A181455896D00475983 /* OFXMLMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFXMLMapper.h; sourceTree = "<group>"; };
+		ED0B9A191455896D00475983 /* OFXMLMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFXMLMapper.m; sourceTree = "<group>"; };
+		ED4B42B114558E1600A3AA59 /* LFHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFHTTPRequest.h; sourceTree = "<group>"; };
+		ED4B42B214558E1600A3AA59 /* LFHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFHTTPRequest.m; sourceTree = "<group>"; };
+		ED4B42B314558E1600A3AA59 /* LFSiteReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFSiteReachability.h; sourceTree = "<group>"; };
+		ED4B42B414558E1600A3AA59 /* LFSiteReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSiteReachability.m; sourceTree = "<group>"; };
+		ED4B42B514558E1600A3AA59 /* LFWebAPIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFWebAPIKit.h; sourceTree = "<group>"; };
+		ED4B42B614558E1600A3AA59 /* NSData+LFHTTPFormExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+LFHTTPFormExtensions.h"; sourceTree = "<group>"; };
+		ED4B42B714558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+LFHTTPFormExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +107,7 @@
 		39D123AF144C5925008C0E5C = {
 			isa = PBXGroup;
 			children = (
+				ED0B9A131455896D00475983 /* Source */,
 				39D123C4144C5925008C0E5C /* HelloMusicPictures */,
 				39D123E2144C5925008C0E5C /* HelloMusicPicturesTests */,
 				39D123BD144C5925008C0E5C /* Frameworks */,
@@ -159,6 +179,27 @@
 				39D123E5144C5925008C0E5C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ED0B9A131455896D00475983 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				ED4B42B114558E1600A3AA59 /* LFHTTPRequest.h */,
+				ED4B42B214558E1600A3AA59 /* LFHTTPRequest.m */,
+				ED4B42B314558E1600A3AA59 /* LFSiteReachability.h */,
+				ED4B42B414558E1600A3AA59 /* LFSiteReachability.m */,
+				ED4B42B514558E1600A3AA59 /* LFWebAPIKit.h */,
+				ED4B42B614558E1600A3AA59 /* NSData+LFHTTPFormExtensions.h */,
+				ED4B42B714558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m */,
+				ED0B9A141455896D00475983 /* ObjectiveFlickr.h */,
+				ED0B9A151455896D00475983 /* ObjectiveFlickr.m */,
+				ED0B9A161455896D00475983 /* OFUtilities.h */,
+				ED0B9A171455896D00475983 /* OFUtilities.m */,
+				ED0B9A181455896D00475983 /* OFXMLMapper.h */,
+				ED0B9A191455896D00475983 /* OFXMLMapper.m */,
+			);
+			name = Source;
+			path = objectiveflickr/Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +313,12 @@
 				39D123CB144C5925008C0E5C /* main.m in Sources */,
 				39D123CF144C5925008C0E5C /* AppDelegate.m in Sources */,
 				39D123D5144C5925008C0E5C /* ViewController.m in Sources */,
+				ED0B9A1A1455896D00475983 /* ObjectiveFlickr.m in Sources */,
+				ED0B9A1B1455896D00475983 /* OFUtilities.m in Sources */,
+				ED0B9A1C1455896D00475983 /* OFXMLMapper.m in Sources */,
+				ED4B42B814558E1600A3AA59 /* LFHTTPRequest.m in Sources */,
+				ED4B42B914558E1600A3AA59 /* LFSiteReachability.m in Sources */,
+				ED4B42BA14558E1600A3AA59 /* NSData+LFHTTPFormExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

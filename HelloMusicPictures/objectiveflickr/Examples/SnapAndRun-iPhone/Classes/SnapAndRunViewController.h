@@ -43,12 +43,14 @@
 	UITextField *keywordTextField;
 	UIWebView *webView;
 	NSDictionary *responseDict;
+	
+	NSTimer *nextPicTimer;
 }
 - (IBAction)authorizeAction;
 - (IBAction)snapPictureAction;
 - (IBAction)showPictureAction;
 - (void)showNextPicture;
-
+@property (nonatomic, retain) NSTimer *nextPicTimer;
 @property (nonatomic, retain) IBOutlet UILabel *authorizeDescriptionLabel;
 @property (nonatomic, retain) IBOutlet UILabel *snapPictureDescriptionLabel;
 @property (nonatomic, retain) IBOutlet UIButton *snapPictureButton;

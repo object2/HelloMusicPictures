@@ -31,13 +31,6 @@ NSString *const OFXMLMapperExceptionName = @"OFXMLMapperException";
 NSString *const OFXMLTextContentKey = @"_text";
 
 @implementation OFXMLMapper
-- (void)dealloc
-{
-    [resultantDictionary release];
-	[elementStack release];
-	[currentElementName release];
-    [super dealloc];
-}
 
 - (id)init
 {
@@ -56,12 +49,11 @@ NSString *const OFXMLTextContentKey = @"_text";
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:inData];
 	[parser setDelegate:self];
 	[parser parse];
-	[parser release];
 }
 
 - (NSDictionary *)resultantDictionary
 {
-	return [[resultantDictionary retain] autorelease];
+	return resultantDictionary;
 }
 
 + (NSDictionary *)dictionaryMappedFromXMLData:(NSData *)inData
@@ -69,7 +61,7 @@ NSString *const OFXMLTextContentKey = @"_text";
 	OFXMLMapper *mapper = [[OFXMLMapper alloc] init];
 	[mapper runWithData:inData];
 	NSDictionary *result = [mapper resultantDictionary];
-	[mapper release];
+	mapper;
 	return result;
 }
 
@@ -82,13 +74,10 @@ NSString *const OFXMLTextContentKey = @"_text";
 	if (element) {
 		if (![element isKindOfClass:[NSMutableArray class]]) {
 			if ([element isKindOfClass:[NSMutableDictionary class]]) {
-				[element retain];
 				[currentDictionary removeObjectForKey:elementName];
 				
 				NSMutableArray *newArray = [NSMutableArray arrayWithObject:element];
 				[currentDictionary setObject:newArray forKey:elementName];
-				[element release];
-				
 				element = newArray;
 			}
 			else {
@@ -113,8 +102,7 @@ NSString *const OFXMLTextContentKey = @"_text";
 	currentDictionary = mutableAttrDict;
 	
 	NSString *tmp = currentElementName;
-	currentElementName = [elementName retain];
-	[tmp release];
+	currentElementName = elementName;
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -141,7 +129,6 @@ NSString *const OFXMLTextContentKey = @"_text";
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-	[resultantDictionary release];
 	resultantDictionary = nil;
 }
 @end
