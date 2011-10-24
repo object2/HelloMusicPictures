@@ -55,8 +55,8 @@
 		6AA112381442678000A02F41 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6AAFED990F972C8700752C5C /* SnapAndRun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SnapAndRun.png; path = Images/SnapAndRun.png; sourceTree = "<group>"; };
 		6AE01E540F94DFC4000FE708 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		6AE01F0C0F94E3A7000FE708 /* SampleAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleAPIKey.h; path = ../../SampleAPIKey.h; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* SnapAndRun-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SnapAndRun-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		9131E7F014545F2900EABD69 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +97,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				6AE01F0C0F94E3A7000FE708 /* SampleAPIKey.h */,
+				9131E7F014545F2900EABD69 /* APIKey.h */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				6AA1124914428FF900A02F41 /* ObjectiveFlickr */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,

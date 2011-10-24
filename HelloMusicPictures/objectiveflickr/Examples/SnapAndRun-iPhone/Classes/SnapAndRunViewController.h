@@ -38,14 +38,26 @@
     UILabel *snapPictureDescriptionLabel;
     UIButton *authorizeButton;
     UIButton *snapPictureButton;
+	
+	UIButton *showPictureButton;
+	UITextField *keywordTextField;
+	UIWebView *webView;
+	NSDictionary *responseDict;
 }
 - (IBAction)authorizeAction;
 - (IBAction)snapPictureAction;
+- (IBAction)showPictureAction;
+- (void)showNextPicture;
 
 @property (nonatomic, retain) IBOutlet UILabel *authorizeDescriptionLabel;
 @property (nonatomic, retain) IBOutlet UILabel *snapPictureDescriptionLabel;
 @property (nonatomic, retain) IBOutlet UIButton *snapPictureButton;
 @property (nonatomic, retain) IBOutlet UIButton *authorizeButton;
+
+@property (nonatomic, retain) IBOutlet UITextField *keywordTextField;
+@property (nonatomic, retain) IBOutlet UIButton *showPictureButton;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) NSDictionary *responseDict;
 
 @property (nonatomic, retain) OFFlickrAPIRequest *flickrRequest;
 @property (nonatomic, retain) UIImagePickerController *imagePicker;

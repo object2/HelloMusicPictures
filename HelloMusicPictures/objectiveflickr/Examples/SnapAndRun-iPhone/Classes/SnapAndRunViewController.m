@@ -32,6 +32,9 @@ NSString *kFetchRequestTokenStep = @"kFetchRequestTokenStep";
 NSString *kGetUserInfoStep = @"kGetUserInfoStep";
 NSString *kSetImagePropertiesStep = @"kSetImagePropertiesStep";
 NSString *kUploadImageStep = @"kUploadImageStep";
+NSString *kShowPictureStep = @"kShowPictureSte";
+NSInteger numOfPictures = 0;
+NSInteger curPictureIdx = 0;
 
 @interface SnapAndRunViewController (PrivateMethods)
 - (void)updateUserInterface:(NSNotification *)notification;
@@ -68,6 +71,8 @@ NSString *kUploadImageStep = @"kUploadImageStep";
 	}
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInterface:) name:SnapAndRunShouldUpdateAuthInfoNotification object:nil];
+	
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -132,6 +137,22 @@ NSString *kUploadImageStep = @"kUploadImageStep";
 
 #pragma mark Actions
 
+- (IBAction)showPictureAction
+{
+	NSString *keyword = [keywordTextField text];
+	if ([keyword length] < 1) {
+		keyword = @"music";
+	}
+	self.flickrRequest.sessionInfo = kShowPictureStep;
+
+	// http://www.flickr.com/services/api/flickr.photos.search.html
+	
+	if (![flickrRequest isRunning]) {
+		[flickrRequest callAPIMethodWithGET:@"flickr.photos.search" 
+								  arguments:[NSDictionary dictionaryWithObjectsAndKeys:keyword, @"text", keyword, @"tags", @"10", @"per_page", nil]];
+	}
+}
+
 - (IBAction)snapPictureAction
 {
 	if ([self.flickrRequest isRunning]) {
@@ -190,6 +211,50 @@ NSString *kUploadImageStep = @"kUploadImageStep";
 		[UIApplication sharedApplication].idleTimerDisabled = NO;		
         
     }
+	else if(inRequest.sessionInfo == kShowPictureStep) {
+//		responseDict = [inResponseDictionary re;
+		NSLog(@"response %@", inResponseDictionary.textContent);
+//		numOfPictures = [[responseDict valueForKeyPath:@"photos.photo"] count];
+		numOfPictures = 10;
+		
+		
+		NSLog(@"count is %d", [[responseDict valueForKeyPath:@"photos.photo"] count]);
+		if (numOfPictures > 0) {
+			[[NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES] fire];
+
+		}
+		
+	}
+}
+
+- (void)showNextPicture
+{
+	if (responseDict == Nil) {
+		NSLog(@"responseDict is nil");
+	}
+	NSDictionary *photoDict = [[responseDict valueForKeyPath:@"photos.photo"] objectAtIndex:curPictureIdx];
+	NSURL *photoURL = [[SnapAndRunAppDelegate sharedDelegate].flickrContext
+					   photoSourceURLFromDictionary:photoDict size:OFFlickrSmallSize];
+	NSString *htmlSource = [NSString stringWithFormat:
+							@"<html>"
+							@"<head>"
+							@"  <style>body { margin: 0; padding: 0; } </style>"
+							@"</head>"
+							@"<body>"
+							@"  <table border=\"0\" align=\"center\" valign=\"center\" cellspacing=\"0\" cellpadding=\"0\" height=\"240\">"
+							@"    <tr><td><img src=\"%@\" /></td></tr>"
+							@"  </table>"
+							@"</body>"
+							@"</html>"
+							, photoURL];
+	
+	[webView loadHTMLString:htmlSource baseURL:nil];
+
+	curPictureIdx++;
+	if (curPictureIdx >= numOfPictures) {
+		curPictureIdx = 0;
+	}
+	
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError
@@ -301,4 +366,6 @@ NSString *kUploadImageStep = @"kUploadImageStep";
 @synthesize authorizeDescriptionLabel;
 @synthesize snapPictureButton;
 @synthesize snapPictureDescriptionLabel;
+	
+@synthesize keywordTextField, showPictureButton, webView, responseDict;	
 @end

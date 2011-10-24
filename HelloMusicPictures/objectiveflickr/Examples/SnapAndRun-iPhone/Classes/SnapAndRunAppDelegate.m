@@ -27,7 +27,7 @@
 
 #import "SnapAndRunAppDelegate.h"
 #import "SnapAndRunViewController.h"
-#import "SampleAPIKey.h"
+#import "APIKey.h"
 
 NSString *SnapAndRunShouldUpdateAuthInfoNotification = @"SnapAndRunShouldUpdateAuthInfoNotification";
 

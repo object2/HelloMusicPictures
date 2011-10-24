@@ -56,6 +56,7 @@
 		39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloMusicPicturesTests.m; sourceTree = "<group>"; };
 		39D123F3144C5A51008C0E5C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		9180D55C144F117B0087AD75 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		91B84B1114543990002D2429 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +120,7 @@
 		39D123C4144C5925008C0E5C /* HelloMusicPictures */ = {
 			isa = PBXGroup;
 			children = (
+				91B84B1114543990002D2429 /* FlickrAPIKey.h */,
 				39D123CD144C5925008C0E5C /* AppDelegate.h */,
 				39D123CE144C5925008C0E5C /* AppDelegate.m */,
 				39D123D0144C5925008C0E5C /* MainStoryboard.storyboard */,
@@ -213,6 +215,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 39D123AF144C5925008C0E5C;
 			productRefGroup = 39D123BB144C5925008C0E5C /* Products */;
