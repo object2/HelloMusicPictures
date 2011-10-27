@@ -30,8 +30,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
-	flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:OBJECTIVE_FLICKR_SAMPLE_API_KEY sharedSecret:OBJECTIVE_FLICKR_SAMPLE_API_SHARED_SECRET];
-	flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
+	self.flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:OBJECTIVE_FLICKR_SAMPLE_API_KEY sharedSecret:OBJECTIVE_FLICKR_SAMPLE_API_SHARED_SECRET];
+	self.flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
 //	[flickrContext set
 	
 	[flickrRequest setDelegate:self];

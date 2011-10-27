@@ -22,7 +22,7 @@
 		39D123EA144C5925008C0E5C /* HelloMusicPicturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D123E9144C5925008C0E5C /* HelloMusicPicturesTests.m */; };
 		39D123F4144C5A51008C0E5C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123F3144C5A51008C0E5C /* MediaPlayer.framework */; };
 		9180D55D144F117B0087AD75 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9180D55C144F117B0087AD75 /* CFNetwork.framework */; };
-		918FE4E9145595E600D87C5A /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */; };
+		918FE4E9145595E600D87C5A /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
