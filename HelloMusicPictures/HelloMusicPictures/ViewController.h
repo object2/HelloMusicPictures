@@ -10,9 +10,17 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "ObjectiveFlickr.h"
 
-@interface ViewController : UIViewController <MPMediaPickerControllerDelegate>
+@interface ViewController : UIViewController <MPMediaPickerControllerDelegate, OFFlickrAPIRequestDelegate>
 {
+	OFFlickrAPIContext *flickrContext;
+	OFFlickrAPIRequest *flickrRequest;
+	IBOutlet UIWebView *picWebView;
+	
 }
 - (IBAction)showMediaPlayer:(id)sender;
+- (void)showPictureWithKeyword:(NSString *)keyword;
+@property (nonatomic, strong) UIWebView *picWebView;
+@property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
+@property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
 
 @end
