@@ -12,33 +12,55 @@
 
 @interface ViewController : UIViewController <MPMediaPickerControllerDelegate, OFFlickrAPIRequestDelegate>
 {
+	// for MPMediaPlayer
+	IBOutlet UISlider *volumeSlider;
+    IBOutlet UIButton *playPauseButton;
+	
+    IBOutlet UILabel *titleLabel;
+    IBOutlet UILabel *artistLabel;
+    IBOutlet UILabel *albumLabel;
+	
+    MPMusicPlayerController *musicPlayer;
+	
+	IBOutlet UIButton *prevButton;
+	IBOutlet UIButton *nextButton;
+
+	
+	// for Flickr
 	OFFlickrAPIContext *flickrContext;
 	OFFlickrAPIRequest *flickrRequest;
 
 	IBOutlet UIImageView *picImageView;
 	
 	NSTimer *nextPicTimer;
-	
-    
-	
-	UIButton *showPictureButton;
-	UITextField *keywordTextField;
 	NSDictionary *responseDict;
 	
 
 	
 }
-- (IBAction)showMediaPlayer:(id)sender;
+
+// for Flickr
 - (void)showPictureWithKeyword:(NSString *)keyword;
 - (void)showNextPicture;
 - (void)loadImageWithUrl:(NSURL *)imageUrl;
 - (void)displayImage:(UIImage *)image;
 
-@property (nonatomic, retain) NSTimer *nextPicTimer;
-@property (nonatomic, retain) NSDictionary *responseDict;
+// for MPMediaPlayer
+- (IBAction)showMediaPlayer:(id)sender;
+- (IBAction)volumeChanged:(id)sender;
+- (IBAction)previousSong:(id)sender;
+- (IBAction)playPause:(id)sender;
+- (IBAction)nextSong:(id)sender;
 
-@property (nonatomic, retain) OFFlickrAPIRequest *flickrRequest;
+- (void) registerMediaPlayerNotifications;
 
+// for MPMediaPlayer
+@property (nonatomic, strong) MPMusicPlayerController *musicPlayer;
+
+// for Flicker
+@property (nonatomic, strong) NSTimer *nextPicTimer;
+@property (nonatomic, strong) NSDictionary *responseDict;
+@property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
 @property (nonatomic, strong) UIImageView *picImageView;
 @property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
 

@@ -12,8 +12,9 @@
 
 @implementation ViewController
 
-@synthesize picImageView,  flickrContext, flickrRequest;
+@synthesize picImageView, flickrContext, flickrRequest;
 @synthesize nextPicTimer, responseDict;
+@synthesize musicPlayer;
 
 NSInteger numOfPictures = 0;
 NSInteger curPictureIdx = 0;
@@ -29,18 +30,51 @@ NSInteger curPictureIdx = 0;
 
 #pragma mark - View lifecycle
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+													name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
+												  object: musicPlayer];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+													name: MPMusicPlayerControllerPlaybackStateDidChangeNotification
+												  object: musicPlayer];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+													name: MPMusicPlayerControllerVolumeDidChangeNotification
+												  object: musicPlayer];
+	
+	[musicPlayer endGeneratingPlaybackNotifications];
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
 	// Do any additional setup after loading the view, typically from a nib.
+	musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+	[volumeSlider setValue:[musicPlayer volume]];
+	
+	
+	if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {		
+//		[playPauseButton setImage:[UIImage imageNamed:@"pauseButton.png"] forState:UIControlStateNormal];
+		
+		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
+	} else {
+//		[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
+		
+		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
+	}
+
+	
+	
+	[self registerMediaPlayerNotifications];
 	
 	self.flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:OBJECTIVE_FLICKR_SAMPLE_API_KEY sharedSecret:OBJECTIVE_FLICKR_SAMPLE_API_SHARED_SECRET];
 	self.flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
 	
 	[flickrRequest setDelegate:self];
-	
-	
-	
 	// TODO : 뮤직 플레이어 완성 시 아래 메소드는 음악 선택 후 불려지도록 옮겨져야함
 	[self showPictureWithKeyword:@"music"];
 
@@ -80,6 +114,92 @@ NSInteger curPictureIdx = 0;
 	return YES;
 }
 
+#pragma mark - MediaPlayer
+- (void) registerMediaPlayerNotifications
+{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	
+    [notificationCenter addObserver: self
+                           selector: @selector (handle_NowPlayingItemChanged:)
+                               name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
+                             object: musicPlayer];
+	
+    [notificationCenter addObserver: self
+                           selector: @selector (handle_PlaybackStateChanged:)
+                               name: MPMusicPlayerControllerPlaybackStateDidChangeNotification
+                             object: musicPlayer];
+	
+    [notificationCenter addObserver: self
+                           selector: @selector (handle_VolumeChanged:)
+                               name: MPMusicPlayerControllerVolumeDidChangeNotification
+                             object: musicPlayer];
+	
+    [musicPlayer beginGeneratingPlaybackNotifications];
+}
+
+- (void) handle_NowPlayingItemChanged: (id) notification
+{
+    MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
+    //UIImage *artworkImage = [UIImage imageNamed:@"noArtworkImage.png"];
+//    MPMediaItemArtwork *artwork = [currentItem valueForProperty: MPMediaItemPropertyArtwork];
+	
+//    if (artwork) {
+//        artworkImage = [artwork imageWithSize: CGSizeMake (200, 200)];
+//    }
+//	
+    //[artworkImageView setImage:artworkImage];
+	
+    NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
+    if (titleString) {
+        titleLabel.text = [NSString stringWithFormat:@"Title: %@",titleString];
+    } else {
+        titleLabel.text = @"Title: Unknown title";
+    }
+	
+    NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
+    if (artistString) {
+        artistLabel.text = [NSString stringWithFormat:@"Artist: %@",artistString];
+    } else {
+        artistLabel.text = @"Artist: Unknown artist";
+    }
+	
+    NSString *albumString = [currentItem valueForProperty:MPMediaItemPropertyAlbumTitle];
+    if (albumString) {
+        albumLabel.text = [NSString stringWithFormat:@"Album: %@",albumString];
+    } else {
+        albumLabel.text = @"Album: Unknown album";
+    }
+	
+
+}
+
+- (void) handle_PlaybackStateChanged: (id) notification
+{
+	MPMusicPlaybackState playbackState = [musicPlayer playbackState];
+	
+	if (playbackState == MPMusicPlaybackStatePaused) {
+		//[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
+		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
+		
+	} else if (playbackState == MPMusicPlaybackStatePlaying) {
+//		[playPauseButton setImage:[UIImage imageNamed:@"pauseButton.png"] forState:UIControlStateNormal];
+		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
+		
+	} else if (playbackState == MPMusicPlaybackStateStopped) {
+		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
+//		[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
+		[musicPlayer stop];
+		
+	}
+	
+}
+
+- (void) handle_VolumeChanged: (id) notification
+{
+    [volumeSlider setValue:[musicPlayer volume]];
+}
+
+
 - (IBAction)showMediaPlayer:(id)sender 
 {
 	MPMediaPickerController *picker =
@@ -100,12 +220,48 @@ NSInteger curPictureIdx = 0;
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
 {
 	NSLog(@"음악 선택 %@", mediaItemCollection);
+	if (mediaItemCollection) {
+		
+        [musicPlayer setQueueWithItemCollection: mediaItemCollection];
+        [musicPlayer play];
+    }
+	
+    [self dismissModalViewControllerAnimated: YES];
 }
 
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
 {
 	NSLog(@"음악선택 포기");
+	[self dismissModalViewControllerAnimated: YES];
 }
+
+
+- (IBAction)volumeChanged:(id)sender
+{
+    [musicPlayer setVolume:[volumeSlider value]];
+}
+
+- (IBAction)playPause:(id)sender
+{
+    if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
+        [musicPlayer pause];
+		
+    } else {
+        [musicPlayer play];
+		
+    }
+}
+
+- (IBAction)previousSong:(id)sender
+{
+    [musicPlayer skipToPreviousItem];
+}
+
+- (IBAction)nextSong:(id)sender
+{
+    [musicPlayer skipToNextItem];
+}
+
 
 #pragma mark - Flickr
 - (void)showPictureWithKeyword:(NSString *)keyword
