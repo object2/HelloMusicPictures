@@ -61,7 +61,6 @@ NSString *const OFXMLTextContentKey = @"_text";
 	OFXMLMapper *mapper = [[OFXMLMapper alloc] init];
 	[mapper runWithData:inData];
 	NSDictionary *result = [mapper resultantDictionary];
-	mapper;
 	return result;
 }
 
@@ -119,8 +118,7 @@ NSString *const OFXMLTextContentKey = @"_text";
 {
 	NSString *existingContent = [currentDictionary objectForKey:OFXMLTextContentKey];
 	if (existingContent) {
-		NSString *newContent = [existingContent stringByAppendingString:string];
-		[currentDictionary setObject:newContent forKey:OFXMLTextContentKey];		
+		[currentDictionary setObject:[existingContent stringByAppendingString:string] forKey:OFXMLTextContentKey];		
 	}
 	else {
 		[currentDictionary setObject:string forKey:OFXMLTextContentKey];

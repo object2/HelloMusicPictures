@@ -150,10 +150,8 @@ NSDictionary *OFExtractURLQueryParameter(NSString *inQuery)
         return nil;        
     }
 
-    NSArray *params = [inQuery componentsSeparatedByString:@"&"];
-    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    for (NSString *p in params) {
+    for (NSString *p in [inQuery componentsSeparatedByString:@"&"]) {
         NSArray *kv = [p componentsSeparatedByString:@"="];
         if ([kv count] != 2) {
             return nil;
