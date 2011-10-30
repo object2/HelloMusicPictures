@@ -15,6 +15,7 @@
 @synthesize picImageView, flickrContext, flickrRequest;
 @synthesize nextPicTimer, responseDict;
 @synthesize musicPlayer;
+@synthesize pauseStart, previousFireDate;
 
 NSInteger numOfPictures = 0;
 NSInteger curPictureIdx = 0;
@@ -58,11 +59,9 @@ NSInteger curPictureIdx = 0;
 	
 	
 	if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {		
-//		[playPauseButton setImage:[UIImage imageNamed:@"pauseButton.png"] forState:UIControlStateNormal];
 		
 		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
 	} else {
-//		[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
 		
 		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
 	}
@@ -76,7 +75,7 @@ NSInteger curPictureIdx = 0;
 	
 	[flickrRequest setDelegate:self];
 	// TODO : 뮤직 플레이어 완성 시 아래 메소드는 음악 선택 후 불려지도록 옮겨져야함
-	[self showPictureWithKeyword:@"music"];
+	//[self showPictureWithKeyword:@"music"];
 
 	
 }
@@ -140,6 +139,10 @@ NSInteger curPictureIdx = 0;
 - (void) handle_NowPlayingItemChanged: (id) notification
 {
     MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
+	
+	
+	
+	
     //UIImage *artworkImage = [UIImage imageNamed:@"noArtworkImage.png"];
 //    MPMediaItemArtwork *artwork = [currentItem valueForProperty: MPMediaItemPropertyArtwork];
 	
@@ -171,6 +174,24 @@ NSInteger curPictureIdx = 0;
     }
 	
 
+	
+	// TODO 키워드 뽑아내기
+	NSString *keyword = @"music";
+	if(artistString) {
+		keyword = artistString;
+	} else if(titleString) {
+		keyword = titleString;
+	} else if(albumString) {
+		keyword = albumString;
+	} 
+	
+	[self showPictureWithKeyword:keyword];
+
+
+	
+	
+	
+
 }
 
 - (void) handle_PlaybackStateChanged: (id) notification
@@ -178,17 +199,15 @@ NSInteger curPictureIdx = 0;
 	MPMusicPlaybackState playbackState = [musicPlayer playbackState];
 	
 	if (playbackState == MPMusicPlaybackStatePaused) {
-		//[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
 		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
 		
 	} else if (playbackState == MPMusicPlaybackStatePlaying) {
-//		[playPauseButton setImage:[UIImage imageNamed:@"pauseButton.png"] forState:UIControlStateNormal];
 		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
 		
 	} else if (playbackState == MPMusicPlaybackStateStopped) {
 		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
-//		[playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
 		[musicPlayer stop];
+		[self stopShowPicture];
 		
 	}
 	
@@ -245,9 +264,11 @@ NSInteger curPictureIdx = 0;
 {
     if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
         [musicPlayer pause];
+		[self pauseShowPicture];
 		
     } else {
         [musicPlayer play];
+		[self restartShowPicture];
 		
     }
 }
@@ -267,6 +288,7 @@ NSInteger curPictureIdx = 0;
 - (void)showPictureWithKeyword:(NSString *)keyword
 {
 
+	NSLog(@"Searching photo with '%@'", keyword);
 	
 	if (![flickrRequest isRunning]) {
 		[flickrRequest callAPIMethodWithGET:@"flickr.photos.search" 
@@ -310,6 +332,34 @@ NSInteger curPictureIdx = 0;
 	if (curPictureIdx >= numOfPictures) {
 		curPictureIdx = 0;
 	}
+
+}
+
+- (void)stopShowPicture
+{
+	NSLog(@"stop pic");
+	[nextPicTimer invalidate];
+
+}
+
+- (void)pauseShowPicture
+{
+	NSLog(@"pause pic");
+	pauseStart = [NSDate dateWithTimeIntervalSinceNow:0];
+	
+	previousFireDate = [nextPicTimer fireDate];
+	
+	[nextPicTimer setFireDate:[NSDate distantFuture]];
+}
+
+
+
+- (void)restartShowPicture
+{
+	NSLog(@"restart pic");
+	float pauseTime = -1 * [pauseStart timeIntervalSinceNow];
+	
+	[nextPicTimer setFireDate:[previousFireDate initWithTimeInterval:pauseTime sinceDate:previousFireDate]];
 
 }
 	

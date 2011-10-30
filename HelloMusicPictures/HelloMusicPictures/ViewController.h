@@ -24,6 +24,9 @@
 	
 	IBOutlet UIButton *prevButton;
 	IBOutlet UIButton *nextButton;
+	
+//	NSDate pauseStart;
+//	NSDate previousFiringDate;
 
 	
 	// for Flickr
@@ -35,6 +38,9 @@
 	NSTimer *nextPicTimer;
 	NSDictionary *responseDict;
 	
+	NSDate *pauseStart;
+	NSDate *previousFireDate;
+	
 
 	
 }
@@ -44,6 +50,10 @@
 - (void)showNextPicture;
 - (void)loadImageWithUrl:(NSURL *)imageUrl;
 - (void)displayImage:(UIImage *)image;
+- (void)stopShowPicture;
+- (void)restartShowPicture;
+- (void)pauseShowPicture;
+
 
 // for MPMediaPlayer
 - (IBAction)showMediaPlayer:(id)sender;
@@ -58,6 +68,8 @@
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;
 
 // for Flicker
+@property (nonatomic, strong) NSDate *pauseStart;
+@property (nonatomic, strong) NSDate *previousFireDate;
 @property (nonatomic, strong) NSTimer *nextPicTimer;
 @property (nonatomic, strong) NSDictionary *responseDict;
 @property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
