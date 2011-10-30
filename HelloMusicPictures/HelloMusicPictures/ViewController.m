@@ -12,7 +12,11 @@
 
 @implementation ViewController
 
-@synthesize picWebView, flickrContext, flickrRequest;
+@synthesize picImageView,  flickrContext, flickrRequest;
+@synthesize nextPicTimer, responseDict;
+
+NSInteger numOfPictures = 0;
+NSInteger curPictureIdx = 0;
 
 
 - (void)didReceiveMemoryWarning
@@ -32,15 +36,14 @@
 	
 	self.flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:OBJECTIVE_FLICKR_SAMPLE_API_KEY sharedSecret:OBJECTIVE_FLICKR_SAMPLE_API_SHARED_SECRET];
 	self.flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
-//	[flickrContext set
 	
 	[flickrRequest setDelegate:self];
 	
-//	[self nextRandomPhotoAction:self];
 	
-//	[[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(nextRandomPhotoAction:) userInfo:nil repeats:YES] fire];
 	
-//	[webView setDrawsBackground:NO];
+	// TODO : 뮤직 플레이어 완성 시 아래 메소드는 음악 선택 후 불려지도록 옮겨져야함
+	[self showPictureWithKeyword:@"music"];
+
 	
 }
 
@@ -107,42 +110,64 @@
 #pragma mark - Flickr
 - (void)showPictureWithKeyword:(NSString *)keyword
 {
+
+	
 	if (![flickrRequest isRunning]) {
-		[flickrRequest callAPIMethodWithGET:@"flickr.photos.getRecent" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"1", @"per_page", nil]];
+		[flickrRequest callAPIMethodWithGET:@"flickr.photos.search" 
+								  arguments:[NSDictionary dictionaryWithObjectsAndKeys:keyword, @"text", keyword, @"tags", @"20", @"per_page", nil]];
 	}
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
 {
-	NSDictionary *photoDict = [[inResponseDictionary valueForKeyPath:@"photos.photo"] objectAtIndex:0];
 	
-	NSString *title = [photoDict objectForKey:@"title"];
-	if (![title length]) {
-		title = @"No title";
-	}
+	self.responseDict = inResponseDictionary;
+	NSLog(@"response %@", inResponseDictionary.textContent);
+	numOfPictures = [[responseDict valueForKeyPath:@"photos.photo"] count];
+	//NSLog(@"numOfPictures = %d", numOfPictures);
+	//numOfPictures = 10;
 	
-//	NSURL *photoSourcePage = [flickrContext photoWebPageURLFromDictionary:photoDict];
-//	NSDictionary *linkAttr = [NSDictionary dictionaryWithObjectsAndKeys:photoSourcePage, NSLinkAttributeName, nil];
-//	NSMutableAttributedString *attrString = [[[NSMutableAttributedString alloc] initWithString:title attributes:linkAttr] autorelease];	
-//	[[textView textStorage] setAttributedString:attrString];
 	
-	NSURL *photoURL = [flickrContext photoSourceURLFromDictionary:photoDict size:OFFlickrSmallSize];
-	NSString *htmlSource = [NSString stringWithFormat:
-							@"<html>"
-							@"<head>"
-							@"  <style>body { margin: 0; padding: 0; } </style>"
-							@"</head>"
-							@"<body>"
-							@"  <table border=\"0\" align=\"center\" valign=\"center\" cellspacing=\"0\" cellpadding=\"0\" height=\"240\">"
-							@"    <tr><td><img src=\"%@\" /></td></tr>"
-							@"  </table>"
-							@"</body>"
-							@"</html>"
-							, photoURL];
-	
-	[picWebView loadHTMLString:htmlSource baseURL:nil];
-	
+	NSLog(@"count is %d", [[responseDict valueForKeyPath:@"photos.photo"] count]);
+	if (numOfPictures > 0) {
 
+		[self showNextPicture];
+		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES];
+		[nextPicTimer fire];
+		
+	}
+
+}
+
+- (void)showNextPicture
+{
+	if (responseDict == Nil) {
+		NSLog(@"responseDict is nil");
+	}
+	NSDictionary *photoDict = [[responseDict valueForKeyPath:@"photos.photo"] objectAtIndex:curPictureIdx];
+	NSURL *photoURL = [flickrContext photoSourceURLFromDictionary:photoDict size:@""];
+	
+	NSLog(@"showing %@", photoURL);
+	[self loadImageWithUrl:photoURL];
+	
+	curPictureIdx++;
+	if (curPictureIdx >= numOfPictures) {
+		curPictureIdx = 0;
+	}
+
+}
+	
+// 네트워크를 통해 이미지를 매번 불러옴
+// 개선방향 : 목록에 있는 이미지를 순차적으로 로딩하여 캐싱한 후 불러오도록 수정
+- (void)loadImageWithUrl:(NSURL *)imageUrl {
+	NSData* imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
+	UIImage* image = [[UIImage alloc] initWithData:imageData];
+	[self performSelectorOnMainThread:@selector(displayImage:) withObject:image waitUntilDone:NO];
+}
+
+
+- (void)displayImage:(UIImage *)image {
+	[picImageView setImage:image]; //UIImageView
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError

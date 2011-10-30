@@ -14,13 +14,32 @@
 {
 	OFFlickrAPIContext *flickrContext;
 	OFFlickrAPIRequest *flickrRequest;
-	IBOutlet UIWebView *picWebView;
+
+	IBOutlet UIImageView *picImageView;
+	
+	NSTimer *nextPicTimer;
+	
+    
+	
+	UIButton *showPictureButton;
+	UITextField *keywordTextField;
+	NSDictionary *responseDict;
+	
+
 	
 }
 - (IBAction)showMediaPlayer:(id)sender;
 - (void)showPictureWithKeyword:(NSString *)keyword;
-@property (nonatomic, strong) UIWebView *picWebView;
+- (void)showNextPicture;
+- (void)loadImageWithUrl:(NSURL *)imageUrl;
+- (void)displayImage:(UIImage *)image;
+
+@property (nonatomic, retain) NSTimer *nextPicTimer;
+@property (nonatomic, retain) NSDictionary *responseDict;
+
+@property (nonatomic, retain) OFFlickrAPIRequest *flickrRequest;
+
+@property (nonatomic, strong) UIImageView *picImageView;
 @property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
-@property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
 
 @end
