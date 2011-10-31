@@ -61,7 +61,7 @@ NSInteger curPictureIdx = 0;
 	if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {		
 		
 		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
-	} else {
+	}else {
 		
 		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
 	}
