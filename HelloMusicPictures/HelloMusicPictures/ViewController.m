@@ -308,6 +308,9 @@ NSInteger curPictureIdx = 0;
 	
 	NSLog(@"count is %d", [[responseDict valueForKeyPath:@"photos.photo"] count]);
 	if (numOfPictures > 0) {
+		
+		curPictureIdx = 0;
+		
 
 		[self showNextPicture];
 		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES];
