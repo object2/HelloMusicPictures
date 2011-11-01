@@ -454,6 +454,48 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 	return streamContext;
 }
 
+-(void) changeRunloopAndTimers
+{
+	_lastSentBytes = 0;
+    _lastSentDataUpdateTime = [NSDate timeIntervalSinceReferenceDate];
+	
+    // we create _requestMessageBodyTracker (timer for tracking sent data) first
+    _requestMessageBodyTracker = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:LFHTTPRequestDefaultTrackerFireInterval target:self selector:@selector(handleRequestMessageBodyTrackerTick:) userInfo:nil repeats:YES];
+	
+    [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSRunLoopCommonModes];
+    [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSDefaultRunLoopMode];
+	
+    if (_shouldWaitUntilDone) {
+        NSRunLoop *currentRunLoop = [NSRunLoop currentRunLoop];
+        NSString *currentMode = [currentRunLoop currentMode];
+		
+		if (![currentMode length]) {
+			currentMode = NSDefaultRunLoopMode;
+		}
+		
+		BOOL isReentrant = (_synchronousMessagePort != nil);
+		
+		if (!isReentrant) {
+			_synchronousMessagePort = (NSMessagePort *)[[NSPort port] retain];
+			[currentRunLoop addPort:_synchronousMessagePort forMode:currentMode];
+		}
+		
+        while ([self isRunning]) {
+            [currentRunLoop runMode:currentMode beforeDate:[NSDate distantFuture]];
+        }
+		
+		if (!isReentrant) {
+			[currentRunLoop removePort:_synchronousMessagePort forMode:currentMode];
+			[_synchronousMessagePort release];
+			_synchronousMessagePort = nil;
+		}
+		else {
+			// sends another message to exit the runloop
+			[self _exitRunLoop];
+		}
+    }	
+}
+
 - (BOOL)_performMethod:(NSString *)methodName onURL:(NSURL *)url withData:(NSData *)data orWithInputStream:(NSInputStream *)inputStream knownContentSize:(NSUInteger)byteStreamSize
 {
 	if (!url || _readStream) {
@@ -548,46 +590,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         return NO;
     }
 
-
-	_lastSentBytes = 0;
-    _lastSentDataUpdateTime = [NSDate timeIntervalSinceReferenceDate];
-
-    // we create _requestMessageBodyTracker (timer for tracking sent data) first
-    _requestMessageBodyTracker = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:LFHTTPRequestDefaultTrackerFireInterval target:self selector:@selector(handleRequestMessageBodyTrackerTick:) userInfo:nil repeats:YES];
-
-    [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSRunLoopCommonModes];
-    [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSDefaultRunLoopMode];
-
-    if (_shouldWaitUntilDone) {
-        NSRunLoop *currentRunLoop = [NSRunLoop currentRunLoop];
-        NSString *currentMode = [currentRunLoop currentMode];
-		
-		if (![currentMode length]) {
-			currentMode = NSDefaultRunLoopMode;
-		}
-		
-		BOOL isReentrant = (_synchronousMessagePort != nil);
-		
-		if (!isReentrant) {
-			_synchronousMessagePort = (NSMessagePort *)[[NSPort port] retain];
-			[currentRunLoop addPort:_synchronousMessagePort forMode:currentMode];
-		}
-		
-        while ([self isRunning]) {
-            [currentRunLoop runMode:currentMode beforeDate:[NSDate distantFuture]];
-        }
-		
-		if (!isReentrant) {
-			[currentRunLoop removePort:_synchronousMessagePort forMode:currentMode];
-			[_synchronousMessagePort release];
-			_synchronousMessagePort = nil;
-		}
-		else {
-			// sends another message to exit the runloop
-			[self _exitRunLoop];
-		}
-    }
-
+	[self changeRunloopAndTimers];
     return YES;
 }
 
