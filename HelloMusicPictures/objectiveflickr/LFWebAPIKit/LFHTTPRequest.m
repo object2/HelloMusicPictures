@@ -432,14 +432,10 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 - (BOOL)_performMethod:(NSString *)methodName onURL:(NSURL *)url withData:(NSData *)data orWithInputStream:(NSInputStream *)inputStream knownContentSize:(unsigned int)byteStreamSize
 #endif
 {
-	if (!url) {
+	if (!url || _readStream) {
 		return NO;
 	}
-
-    if (_readStream) {
-        return NO;
-    }
-
+	
     CFHTTPMessageRef request = CFHTTPMessageCreateRequest(NULL, (CFStringRef)methodName, (CFURLRef)url, kCFHTTPVersion1_1);
     if (!request) {
         return NO;
@@ -455,6 +451,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         [headerDictionary setObject:_contentType forKey:@"Content-Type"];
     }
 
+	// compute request message byte size
     if (inputStream) {
         if (byteStreamSize && byteStreamSize != NSUIntegerMax) {
             [headerDictionary setObject:[NSString stringWithFormat:@"%lu", byteStreamSize] forKey:@"Content-Length"];
@@ -475,12 +472,14 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         [headerDictionary addEntriesFromDictionary:_requestHeader];
     }
 
+	// set http message header with dictionary
     NSEnumerator *dictEnumerator = [headerDictionary keyEnumerator];
     id key;
     while ((key = [dictEnumerator nextObject])) {
         CFHTTPMessageSetHeaderFieldValue(request, (CFStringRef)[key description], (CFStringRef)[headerDictionary objectForKey:key]);
     }
 
+	// set http message body
     if (!inputStream && data) {
         CFHTTPMessageSetBody(request, (CFDataRef)data);
     }
