@@ -467,13 +467,15 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 
 	// compute request message byte size
 
+	NSString *wowo = nil;
     if (inputStream && byteStreamSize && byteStreamSize != NSUIntegerMax) {
-		[headerDictionary setObject:[NSString stringWithFormat:@"%lu", byteStreamSize] forKey:@"Content-Length"];
+		wowo = [NSString stringWithFormat:@"%lu", byteStreamSize];
     }
 
     if(!inputStream && [data length]) {
-		[headerDictionary setObject:[NSString stringWithFormat:@"%lu", [data length]] forKey:@"Content-Length"];
+		wowo = [NSString stringWithFormat:@"%lu", [data length]];
     }
+	if(wowo) [headerDictionary setObject:wowo forKey:@"Content-Length"];
 
 	_requestMessageBodySize = inputStream ? ((byteStreamSize && byteStreamSize != NSUIntegerMax) ? byteStreamSize : NSUIntegerMax) : [data length];
 	
