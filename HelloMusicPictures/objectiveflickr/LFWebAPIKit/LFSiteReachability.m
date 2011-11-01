@@ -145,13 +145,19 @@ static void LFSiteReachabilityCallback(SCNetworkReachabilityRef inTarget, SCNetw
 	}
 }
 
-- (BOOL)networkConnectivityExists
+-(struct sockaddr_in) zeroSocketAddress
 {
 	// 0.0.0.0
 	struct sockaddr_in zeroAddress;
 	bzero(&zeroAddress, sizeof(zeroAddress));
 	zeroAddress.sin_len = sizeof(zeroAddress);
 	zeroAddress.sin_family = AF_INET;
+	return zeroAddress;
+}
+
+- (BOOL)networkConnectivityExists
+{
+	struct sockaddr_in zeroAddress = [self zeroSocketAddress];
 	
 	SCNetworkReachabilityRef localReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
 	SCNetworkReachabilityFlags flags = 0;
@@ -171,11 +177,7 @@ static void LFSiteReachabilityCallback(SCNetworkReachabilityRef inTarget, SCNetw
 {
 	[self stopChecking];
 
-	// 0.0.0.0
-	struct sockaddr_in zeroAddress;
-	bzero(&zeroAddress, sizeof(zeroAddress));
-	zeroAddress.sin_len = sizeof(zeroAddress);
-	zeroAddress.sin_family = AF_INET;
+	struct sockaddr_in zeroAddress = [self zeroSocketAddress];
 	
 	reachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
 	SCNetworkReachabilityFlags flags = 0;
