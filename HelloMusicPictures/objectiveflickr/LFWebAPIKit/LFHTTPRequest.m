@@ -491,15 +491,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         CFHTTPMessageSetBody(request, (CFDataRef)data);
     }
 
-    CFReadStreamRef tmpReadStream;
-
-    if (inputStream) {
-        tmpReadStream = CFReadStreamCreateForStreamedHTTPRequest(NULL, request, (CFReadStreamRef)inputStream);
-    }
-    else {
-        tmpReadStream = CFReadStreamCreateForHTTPRequest(NULL, request);
-    }
-
+    CFReadStreamRef tmpReadStream = inputStream ? CFReadStreamCreateForStreamedHTTPRequest(NULL, request, (CFReadStreamRef)inputStream) : CFReadStreamCreateForHTTPRequest(NULL, request);
     CFRelease(request);
     if (!tmpReadStream) {
         return NO;
@@ -554,7 +546,6 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     _requestMessageBodyTracker = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:LFHTTPRequestDefaultTrackerFireInterval target:self selector:@selector(handleRequestMessageBodyTrackerTick:) userInfo:nil repeats:YES];
 
     [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSRunLoopCommonModes];
-
     [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSDefaultRunLoopMode];
 
     if (_shouldWaitUntilDone) {
