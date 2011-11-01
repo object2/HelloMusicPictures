@@ -496,6 +496,14 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     }	
 }
 
+-(void) detachAndReleaseThePreviousDataBuffer
+{
+	if ([_receivedData length]) {
+        [_receivedData release];
+        _receivedData = [[NSMutableData alloc] init];
+    }
+}
+
 - (BOOL)_performMethod:(NSString *)methodName onURL:(NSURL *)url withData:(NSData *)data orWithInputStream:(NSInputStream *)inputStream knownContentSize:(NSUInteger)byteStreamSize
 {
 	if (!url || _readStream) {
@@ -568,11 +576,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         return NO;
     }
 
-    // detach and release the previous data buffer
-    if ([_receivedData length]) {
-        [_receivedData release];
-        _receivedData = [[NSMutableData alloc] init];
-    }
+	[self detachAndReleaseThePreviousDataBuffer];
 
     CFReadStreamScheduleWithRunLoop(tmpReadStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
 
