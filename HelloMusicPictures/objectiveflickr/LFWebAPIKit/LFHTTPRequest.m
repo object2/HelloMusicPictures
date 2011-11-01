@@ -408,12 +408,17 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 
 @interface NSString(DictionaryKey)
 -(void) beValueForKey:(NSString*)anObject into:(NSMutableDictionary*)aDictionary;
++(NSString*) stringWithUnsignedLong:(NSUInteger)anInteger;
 @end
 
 @implementation NSString(DictionaryKey)
 -(void) beValueForKey:(NSString*)anObject into:(NSMutableDictionary*)aDictionary
 {
 	[aDictionary setObject:self forKey:anObject];
+}
++(NSString*) stringWithUnsignedLong:(NSUInteger)anInteger
+{
+	return [self stringWithFormat:@"lu", anInteger];
 }
 @end
 
@@ -469,11 +474,11 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 
 	NSString *wowo = nil;
     if (inputStream && byteStreamSize && byteStreamSize != NSUIntegerMax) {
-		wowo = [NSString stringWithFormat:@"%lu", byteStreamSize];
+		wowo = [NSString stringWithUnsignedLong: byteStreamSize];
     }
 
     if(!inputStream && [data length]) {
-		wowo = [NSString stringWithFormat:@"%lu", [data length]];
+		wowo = [NSString stringWithUnsignedLong: [data length]];
     }
 	[wowo beValueForKey:@"Content-Length" into:headerDictionary];
 
