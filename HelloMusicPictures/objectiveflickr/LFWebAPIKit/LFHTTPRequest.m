@@ -426,6 +426,16 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     return !!_readStream;
 }
 
+-(CFStreamClientContext) defaultStreamClientContext
+{
+	CFStreamClientContext streamContext;
+    streamContext.version = 0;
+    streamContext.info = self;
+    streamContext.retain = 0;
+    streamContext.release = 0;
+    streamContext.copyDescription = 0;
+	return streamContext;
+}
 
 - (BOOL)_performMethod:(NSString *)methodName onURL:(NSURL *)url withData:(NSData *)data orWithInputStream:(NSInputStream *)inputStream knownContentSize:(NSUInteger)byteStreamSize
 {
@@ -505,17 +515,9 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         CFRelease(proxyDict);
     }
 
-    CFStreamClientContext streamContext;
-    streamContext.version = 0;
-    streamContext.info = self;
-    streamContext.retain = 0;
-    streamContext.release = 0;
-    streamContext.copyDescription = 0;
-
-    CFOptionFlags eventFlags = kCFStreamEventHasBytesAvailable | kCFStreamEventEndEncountered | kCFStreamEventErrorOccurred;
-
+	CFStreamClientContext streamContext = [self defaultStreamClientContext];
     // open the stream with callback function
-    if (!CFReadStreamSetClient(tmpReadStream, eventFlags, LFHRReadStreamClientCallBack, &streamContext))
+    if (!CFReadStreamSetClient(tmpReadStream, kCFStreamEventHasBytesAvailable | kCFStreamEventEndEncountered | kCFStreamEventErrorOccurred, LFHRReadStreamClientCallBack, &streamContext))
     {
         CFRelease(tmpReadStream);
         return NO;
