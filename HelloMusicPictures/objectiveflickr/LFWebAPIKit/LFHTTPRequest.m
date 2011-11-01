@@ -426,11 +426,8 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     return !!_readStream;
 }
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_4
+
 - (BOOL)_performMethod:(NSString *)methodName onURL:(NSURL *)url withData:(NSData *)data orWithInputStream:(NSInputStream *)inputStream knownContentSize:(NSUInteger)byteStreamSize
-#else
-- (BOOL)_performMethod:(NSString *)methodName onURL:(NSURL *)url withData:(NSData *)data orWithInputStream:(NSInputStream *)inputStream knownContentSize:(unsigned int)byteStreamSize
-#endif
 {
 	if (!url || _readStream) {
 		return NO;
@@ -501,11 +498,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     CFReadStreamSetProperty(tmpReadStream, kCFStreamPropertyHTTPShouldAutoredirect, kCFBooleanTrue);
 
     // apply current proxy settings
-	#if !TARGET_OS_IPHONE
-		CFDictionaryRef proxyDict = SCDynamicStoreCopyProxies(NULL); // kCFNetworkProxiesHTTPProxy
-	#else
-		CFDictionaryRef proxyDict = CFNetworkCopySystemProxySettings();
-	#endif	
+	CFDictionaryRef proxyDict = CFNetworkCopySystemProxySettings();
 
     if (proxyDict) {
         CFReadStreamSetProperty(tmpReadStream, kCFStreamPropertyHTTPProxy, proxyDict);
@@ -558,20 +551,9 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     // we create _requestMessageBodyTracker (timer for tracking sent data) first
     _requestMessageBodyTracker = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:LFHTTPRequestDefaultTrackerFireInterval target:self selector:@selector(handleRequestMessageBodyTrackerTick:) userInfo:nil repeats:YES];
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4
-    // this is 10.5 only
     [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSRunLoopCommonModes];
-#endif
 
     [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSDefaultRunLoopMode];
-
-    // These two are defined in the AppKit, not in the Foundation
-    #if TARGET_OS_MAC && !TARGET_OS_IPHONE
-    extern NSString *NSModalPanelRunLoopMode;
-    extern NSString *NSEventTrackingRunLoopMode;
-    [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSEventTrackingRunLoopMode];
-    [[NSRunLoop currentRunLoop] addTimer:_requestMessageBodyTracker forMode:NSModalPanelRunLoopMode];
-    #endif
 
     if (_shouldWaitUntilDone) {
         NSRunLoop *currentRunLoop = [NSRunLoop currentRunLoop];
