@@ -312,13 +312,19 @@ NSInteger curPictureIdx = 0;
 		curPictureIdx = 0;
 		
 
-		[self showNextPicture];
+//		[self showNextPicture];
 		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES];
 		[nextPicTimer fire];
 		
 	}
 
 }
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError
+{
+}
+
+#pragma mark - Picture
 
 - (void)showNextPicture
 {
@@ -369,9 +375,15 @@ NSInteger curPictureIdx = 0;
 // 네트워크를 통해 이미지를 매번 불러옴
 // 개선방향 : 목록에 있는 이미지를 순차적으로 로딩하여 캐싱한 후 불러오도록 수정
 - (void)loadImageWithUrl:(NSURL *)imageUrl {
-	NSData* imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
-	UIImage* image = [[UIImage alloc] initWithData:imageData];
-	[self performSelectorOnMainThread:@selector(displayImage:) withObject:image waitUntilDone:NO];
+	
+	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(queue, ^{
+		NSData* imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
+		UIImage* image = [[UIImage alloc] initWithData:imageData];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [picImageView setImage:image]; //UIImageView
+        });
+    });
 }
 
 
@@ -379,8 +391,6 @@ NSInteger curPictureIdx = 0;
 	[picImageView setImage:image]; //UIImageView
 }
 
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError
-{
-}
+
 
 @end
