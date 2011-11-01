@@ -405,6 +405,18 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 }
 @end
 
+
+@interface NSString(DictionaryKey)
+-(void) beValueForKey:(NSString*)anObject into:(NSMutableDictionary*)aDictionary;
+@end
+
+@implementation NSString(DictionaryKey)
+-(void) beValueForKey:(NSString*)anObject into:(NSMutableDictionary*)aDictionary
+{
+	[aDictionary setObject:self forKey:anObject];
+}
+@end
+
 @implementation LFHTTPRequest
 - (id)init
 {
@@ -450,13 +462,8 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 
     // combine the header
     NSMutableDictionary *headerDictionary = [NSMutableDictionary dictionary];
-    if (_userAgent) {
-        [headerDictionary setObject:_userAgent forKey:@"User-Agent"];
-    }
-
-    if (_contentType) {
-        [headerDictionary setObject:_contentType forKey:@"Content-Type"];
-    }
+	[_userAgent beValueForKey:@"User-Agent" into:headerDictionary];
+	[_contentType beValueForKey:@"Content-Type" into:headerDictionary];
 
 	// compute request message byte size
     if (inputStream) {
