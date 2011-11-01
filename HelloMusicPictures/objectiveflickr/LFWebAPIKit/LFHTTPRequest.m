@@ -466,7 +466,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 	[_contentType beValueForKey:@"Content-Type" into:headerDictionary];
 
 	// compute request message byte size
-b
+
 	NSString *wowo = nil;
     if (inputStream && byteStreamSize && byteStreamSize != NSUIntegerMax) {
 		wowo = [NSString stringWithFormat:@"%lu", byteStreamSize];
