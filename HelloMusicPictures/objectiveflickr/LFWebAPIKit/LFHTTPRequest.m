@@ -528,9 +528,8 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 
     // detach and release the previous data buffer
     if ([_receivedData length]) {
-        NSMutableData *tmp = _receivedData;
+        [_receivedData release];
         _receivedData = [[NSMutableData alloc] init];
-        [tmp release];
     }
 
     CFReadStreamScheduleWithRunLoop(tmpReadStream, CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
