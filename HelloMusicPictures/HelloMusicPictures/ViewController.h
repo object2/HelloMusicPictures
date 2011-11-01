@@ -49,7 +49,6 @@
 - (void)showPictureWithKeyword:(NSString *)keyword;
 - (void)showNextPicture;
 - (void)loadImageWithUrl:(NSURL *)imageUrl;
-- (void)displayImage:(UIImage *)image;
 - (void)stopShowPicture;
 - (void)restartShowPicture;
 - (void)pauseShowPicture;

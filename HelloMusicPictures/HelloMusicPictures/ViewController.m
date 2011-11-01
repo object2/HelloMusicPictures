@@ -387,10 +387,6 @@ NSInteger curPictureIdx = 0;
 }
 
 
-- (void)displayImage:(UIImage *)image {
-	[picImageView setImage:image]; //UIImageView
-}
-
 
 
 @end
