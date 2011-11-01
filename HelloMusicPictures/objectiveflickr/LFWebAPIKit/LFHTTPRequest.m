@@ -466,9 +466,20 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 	[_contentType beValueForKey:@"Content-Type" into:headerDictionary];
 
 	// compute request message byte size
+
     if (inputStream) {
         if (byteStreamSize && byteStreamSize != NSUIntegerMax) {
             [headerDictionary setObject:[NSString stringWithFormat:@"%lu", byteStreamSize] forKey:@"Content-Length"];
+        }
+    }
+    else {
+        if ([data length]) {
+            [headerDictionary setObject:[NSString stringWithFormat:@"%lu", [data length]] forKey:@"Content-Length"];
+        }
+    }
+
+    if (inputStream) {
+        if (byteStreamSize && byteStreamSize != NSUIntegerMax) {
             _requestMessageBodySize = byteStreamSize;
         }
         else {
@@ -476,16 +487,18 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         }
     }
     else {
-        if ([data length]) {
-            [headerDictionary setObject:[NSString stringWithFormat:@"%lu", [data length]] forKey:@"Content-Length"];
-        }
         _requestMessageBodySize = [data length];
     }
-
+	
+	
+	
+	
+	
     if (_requestHeader) {
         [headerDictionary addEntriesFromDictionary:_requestHeader];
     }
 
+	
 	// set http message header with dictionary
     NSEnumerator *dictEnumerator = [headerDictionary keyEnumerator];
     id key;
