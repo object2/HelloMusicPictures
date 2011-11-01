@@ -411,7 +411,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     if ((self = [super init])) {
         _timeoutInterval = LFHTTPRequestDefaultTimeoutInterval;
 
-        _receivedData = [NSMutableData new];
+        _receivedData = [[NSMutableData alloc] init];
         _expectedDataLength = NSUIntegerMax;
         _readBufferSize = LFHTTPRequestDefaultReadBufferSize;
         _readBuffer = calloc(1, _readBufferSize);
@@ -532,7 +532,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     // detach and release the previous data buffer
     if ([_receivedData length]) {
         NSMutableData *tmp = _receivedData;
-        _receivedData = [NSMutableData new];
+        _receivedData = [[NSMutableData alloc] init];
         [tmp release];
     }
 
@@ -635,7 +635,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 - (NSData *)getReceivedDataAndDetachFromRequest
 {
     NSData *returnedData = [_receivedData autorelease];
-    _receivedData = [NSMutableData new];
+    _receivedData = [[NSMutableData alloc] init];
 
     [_receivedContentType release];
     _receivedContentType = nil;
@@ -758,7 +758,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
 
 void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType eventType, void *clientCallBackInfo)
 {
-    id pool = [NSAutoreleasePool new];
+    id pool = [[NSAutoreleasePool alloc] init];
 
     LFHTTPRequest *request = (LFHTTPRequest *)clientCallBackInfo;
     switch (eventType) {
