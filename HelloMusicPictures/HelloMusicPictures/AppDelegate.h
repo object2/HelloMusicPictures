@@ -7,29 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "ObjectiveFlickr.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>//, OFFlickrAPIRequestDelegate>
 {
-	// for Flickr
-//	UINavigationController *viewController;
-//	UIActivityIndicatorView *activityIndicator;
-//	UIView *progressView;
-//	UIButton *cancelButton;
-//	UILabel *progressDescription;
-//
-//	OFFlickrAPIContext *flickrContext;
-//	OFFlickrAPIRequest *flickrRequest;
-//	NSString *flickrUserName;
 }
-
-
-//+ (AppDelegate *)sharedDelegate;
-//- (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret;
-//- (OFFlickrAPIRequest *)flickrRequest;
-//
-//@property (nonatomic, readonly) OFFlickrAPIContext *flickrContext;
-//@property (nonatomic, strong) NSString *flickrUserName;
-
 @end
-//extern NSString *SRCallbackURLBaseString;
