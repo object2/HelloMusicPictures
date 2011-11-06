@@ -289,8 +289,6 @@ NSInteger curPictureIdx = 0;
 {
 
 	NSLog(@"Searching photo with '%@'", keyword);
-	
-	
 	// License
 	// id 4 : Attribution  : 상업적 사용 O, 수정 O, 공유 O
 	// id 6 : A.. NoDerivs : 상업적 사용 O, 수정 X, 공유 O
@@ -300,14 +298,12 @@ NSInteger curPictureIdx = 0;
 	// id 5 : A.. Share : 상업적 사용 O, 수정 O, 공유 O (수정 시 동일 라이선스 유지)
 	// id 7 : 라이선스 정보 없음 : public domain?
 	
-	
-	
-	
-	
 	if (![flickrRequest isRunning]) {
 		[flickrRequest callAPIMethodWithGET:@"flickr.photos.search" 
 								  arguments:[NSDictionary dictionaryWithObjectsAndKeys:keyword, @"text", keyword, @"tags",
 											 @"20", @"per_page", @"4, 6, 5, 7", @"license", nil]];
+	} else {
+		NSLog(@"flickrRequest is running");
 	}
 }
 
@@ -337,6 +333,8 @@ NSInteger curPictureIdx = 0;
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError
 {
+	NSLog(@"Error! %@ , %@", inRequest.description, inError.description);
+	
 }
 
 #pragma mark - Picture
@@ -390,6 +388,7 @@ NSInteger curPictureIdx = 0;
 // 네트워크를 통해 이미지를 매번 불러옴
 // 개선방향 : 목록에 있는 이미지를 순차적으로 로딩하여 캐싱한 후 불러오도록 수정
 - (void)loadImageWithUrl:(NSURL *)imageUrl {
+	NSLog(@"loadImageWithUrl");
 	
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^{
