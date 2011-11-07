@@ -116,7 +116,7 @@
                                             <action selector="nextSong:" destination="2" eventType="touchUpInside" id="bhL-E2-TWn"/>
                                         </connections>
                                     </button>
-                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Wfj-Te-Aye">
+                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Wfj-Te-Aye">
                                         <rect key="frame" x="683" y="64" width="79" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <connections>

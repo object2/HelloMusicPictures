@@ -284,8 +284,7 @@ NSInteger curPictureIdx = 0;
 }
 
 - (IBAction)randomPlay:(id)sender
-{
-	
+{	
 	if(randomSwitch.on)
 	{
 		[musicPlayer setShuffleMode:MPMusicShuffleModeSongs];
