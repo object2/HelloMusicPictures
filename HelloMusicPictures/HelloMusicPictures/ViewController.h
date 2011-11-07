@@ -52,6 +52,7 @@
 - (void)restartShowPicture;
 - (void)pauseShowPicture;
 
+- (IBAction)saveImage:(id)sender;
 
 // for MPMediaPlayer
 - (IBAction)showMediaPlayer:(id)sender;

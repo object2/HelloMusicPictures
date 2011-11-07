@@ -387,6 +387,14 @@ NSInteger curPictureIdx = 0;
 	[nextPicTimer setFireDate:[NSDate distantFuture]];
 }
 
+- (IBAction)saveImage:(id)sender {
+	UIImageWriteToSavedPhotosAlbum(picImageView.image, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+	NSLog(@"%s %@ error=%@ context=%@", __PRETTY_FUNCTION__, image, error, contextInfo);
+}
 
 
 - (void)restartShowPicture
