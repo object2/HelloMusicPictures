@@ -23,6 +23,7 @@
 		39D123F4144C5A51008C0E5C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123F3144C5A51008C0E5C /* MediaPlayer.framework */; };
 		9180D55D144F117B0087AD75 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9180D55C144F117B0087AD75 /* CFNetwork.framework */; };
 		918FE4E9145595E600D87C5A /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		D33EFEDB1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveFlickr.xcodeproj; path = objectiveflickr/ObjectiveFlickr.xcodeproj; sourceTree = "<group>"; };
 		91B84B1114543990002D2429 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
 		91D51B441459BC380076C84D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D33EFED91468098C0044D1A7 /* MPMediaPickerControllerLandScape.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MPMediaPickerControllerLandScape.h; sourceTree = "<group>"; };
+		D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMediaPickerControllerLandScape.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 		39D123AF144C5925008C0E5C = {
 			isa = PBXGroup;
 			children = (
+				D33EFED91468098C0044D1A7 /* MPMediaPickerControllerLandScape.h */,
+				D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */,
 				91D51B441459BC380076C84D /* SystemConfiguration.framework */,
 				918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */,
 				39D123C4144C5925008C0E5C /* HelloMusicPictures */,
@@ -332,6 +337,7 @@
 				39D123CB144C5925008C0E5C /* main.m in Sources */,
 				39D123CF144C5925008C0E5C /* AppDelegate.m in Sources */,
 				39D123D5144C5925008C0E5C /* ViewController.m in Sources */,
+				D33EFEDB1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

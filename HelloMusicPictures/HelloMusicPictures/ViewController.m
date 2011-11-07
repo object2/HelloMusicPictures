@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "FlickrAPIKey.h"
-
+#import "MPMediaPickerControllerLandScape.h"
 
 @implementation ViewController
 
@@ -221,8 +221,8 @@ NSInteger curPictureIdx = 0;
 
 - (IBAction)showMediaPlayer:(id)sender
 {
-	MPMediaPickerController *picker =
-			[[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeMusic];
+	MPMediaPickerControllerLandScape *picker =
+			[[MPMediaPickerControllerLandScape alloc] initWithMediaTypes: MPMediaTypeMusic];
 		
 	picker.delegate						= self;
 	picker.allowsPickingMultipleItems	= YES;
