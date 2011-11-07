@@ -574,7 +574,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
         CFRelease(proxyDict);
     }
 
-	if ([self openTheStreamWithCallbackFunction: tmpReadStream]) {
+	if (![self openTheStreamWithCallbackFunction: tmpReadStream]) {
 		CFRelease(tmpReadStream);
 		return NO;
 	};
