@@ -25,6 +25,8 @@
 	IBOutlet UIButton *prevButton;
 	IBOutlet UIButton *nextButton;
 	
+	IBOutlet UISwitch *randomSwitch;
+	
 //	NSDate pauseStart;
 //	NSDate previousFiringDate;
 
@@ -39,10 +41,7 @@
 	NSDictionary *responseDict;
 	
 	NSDate *pauseStart;
-	NSDate *previousFireDate;
-	
-
-	
+	NSDate *previousFireDate;	
 }
 
 // for Flickr
@@ -60,6 +59,7 @@
 - (IBAction)previousSong:(id)sender;
 - (IBAction)playPause:(id)sender;
 - (IBAction)nextSong:(id)sender;
+- (IBAction)randomPlay:(id)sender;
 
 - (void) registerMediaPlayerNotifications;
 

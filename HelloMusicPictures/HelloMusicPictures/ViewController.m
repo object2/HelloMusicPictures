@@ -219,7 +219,7 @@ NSInteger curPictureIdx = 0;
 }
 
 
-- (IBAction)showMediaPlayer:(id)sender 
+- (IBAction)showMediaPlayer:(id)sender
 {
 	MPMediaPickerController *picker =
 			[[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeMusic];
@@ -281,6 +281,19 @@ NSInteger curPictureIdx = 0;
 - (IBAction)nextSong:(id)sender
 {
     [musicPlayer skipToNextItem];
+}
+
+- (IBAction)randomPlay:(id)sender
+{
+	
+	if(randomSwitch.on)
+	{
+		[musicPlayer setShuffleMode:MPMusicShuffleModeSongs];
+		//[musicPlayer skipToNextItem];
+	}
+	else{
+		[musicPlayer setShuffleMode:MPMusicShuffleModeDefault];
+	}
 }
 
 
