@@ -24,6 +24,7 @@
 		9180D55D144F117B0087AD75 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9180D55C144F117B0087AD75 /* CFNetwork.framework */; };
 		918FE4E9145595E600D87C5A /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		D33EFEDB1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */; };
+		D3BB9418146927B000CF59D5 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB9417146927B000CF59D5 /* ImageLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,8 +83,10 @@
 		918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveFlickr.xcodeproj; path = objectiveflickr/ObjectiveFlickr.xcodeproj; sourceTree = "<group>"; };
 		91B84B1114543990002D2429 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
 		91D51B441459BC380076C84D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		D33EFED91468098C0044D1A7 /* MPMediaPickerControllerLandScape.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MPMediaPickerControllerLandScape.h; sourceTree = "<group>"; };
+		D33EFED91468098C0044D1A7 /* MPMediaPickerControllerLandScape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPMediaPickerControllerLandScape.h; sourceTree = "<group>"; };
 		D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMediaPickerControllerLandScape.m; sourceTree = "<group>"; };
+		D3BB9416146927B000CF59D5 /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
+		D3BB9417146927B000CF59D5 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +162,8 @@
 				39D123D3144C5925008C0E5C /* ViewController.h */,
 				39D123D4144C5925008C0E5C /* ViewController.m */,
 				39D123C5144C5925008C0E5C /* Supporting Files */,
+				D3BB9416146927B000CF59D5 /* ImageLoader.h */,
+				D3BB9417146927B000CF59D5 /* ImageLoader.m */,
 			);
 			path = HelloMusicPictures;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 				39D123CF144C5925008C0E5C /* AppDelegate.m in Sources */,
 				39D123D5144C5925008C0E5C /* ViewController.m in Sources */,
 				D33EFEDB1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m in Sources */,
+				D3BB9418146927B000CF59D5 /* ImageLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

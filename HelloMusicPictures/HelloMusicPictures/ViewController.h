@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "ObjectiveFlickr.h"
 
-@interface ViewController : UIViewController <MPMediaPickerControllerDelegate, OFFlickrAPIRequestDelegate>
+@class ImageLoader;
+
+@interface ViewController : UIViewController <MPMediaPickerControllerDelegate>
 {
 	// for MPMediaPlayer
 	IBOutlet UISlider *volumeSlider;
@@ -19,35 +20,23 @@
     IBOutlet UILabel *titleLabel;
     IBOutlet UILabel *artistLabel;
     IBOutlet UILabel *albumLabel;
-	
-    MPMusicPlayerController *musicPlayer;
-	
 	IBOutlet UIButton *prevButton;
-	IBOutlet UIButton *nextButton;
-	
+	IBOutlet UIButton *nextButton;	
 	IBOutlet UISwitch *randomSwitch;
-	
-//	NSDate pauseStart;
-//	NSDate previousFiringDate;
-
-	
-	// for Flickr
-	OFFlickrAPIContext *flickrContext;
-	OFFlickrAPIRequest *flickrRequest;
-
 	IBOutlet UIImageView *picImageView;
+	
+	
+	MPMusicPlayerController *musicPlayer;
 	
 	NSTimer *nextPicTimer;
 	NSDictionary *responseDict;
 	
 	NSDate *pauseStart;
 	NSDate *previousFireDate;	
+	ImageLoader *imageLoader;
 }
 
-// for Flickr
-- (void)showPictureWithKeyword:(NSString *)keyword;
 - (void)showNextPicture;
-- (void)loadImageWithUrl:(NSURL *)imageUrl;
 - (void)stopShowPicture;
 - (void)restartShowPicture;
 - (void)pauseShowPicture;
@@ -71,9 +60,9 @@
 @property (nonatomic, strong) NSDate *pauseStart;
 @property (nonatomic, strong) NSDate *previousFireDate;
 @property (nonatomic, strong) NSTimer *nextPicTimer;
-@property (nonatomic, strong) NSDictionary *responseDict;
-@property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
+
+
 @property (nonatomic, strong) UIImageView *picImageView;
-@property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
+
 
 @end

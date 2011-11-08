@@ -7,18 +7,18 @@
 //
 
 #import "ViewController.h"
-#import "FlickrAPIKey.h"
 #import "MPMediaPickerControllerLandScape.h"
+#import "ImageLoader.h"
 
 @implementation ViewController
 
-@synthesize picImageView, flickrContext, flickrRequest;
-@synthesize nextPicTimer, responseDict;
+@synthesize picImageView;
+@synthesize nextPicTimer;
 @synthesize musicPlayer;
 @synthesize pauseStart, previousFireDate;
 
-NSInteger numOfPictures = 0;
-NSInteger curPictureIdx = 0;
+
+
 
 
 - (void)didReceiveMemoryWarning
@@ -69,11 +69,8 @@ NSInteger curPictureIdx = 0;
 	
 	
 	[self registerMediaPlayerNotifications];
+	imageLoader = [[ImageLoader alloc] init];
 	
-	self.flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:OBJECTIVE_FLICKR_SAMPLE_API_KEY sharedSecret:OBJECTIVE_FLICKR_SAMPLE_API_SHARED_SECRET];
-	self.flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
-	
-	[flickrRequest setDelegate:self];
 	// TODO : 뮤직 플레이어 완성 시 아래 메소드는 음악 선택 후 불려지도록 옮겨져야함
 	//[self showPictureWithKeyword:@"music"];
 
@@ -185,13 +182,10 @@ NSInteger curPictureIdx = 0;
 		keyword = albumString;
 	} 
 	
-	[self showPictureWithKeyword:keyword];
-
-
-	
-	
-	
-
+	[imageLoader loadImages:keyword completion:^{
+		[nextPicTimer invalidate];
+		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES];
+	}];
 }
 
 - (void) handle_PlaybackStateChanged: (id) notification
@@ -296,79 +290,14 @@ NSInteger curPictureIdx = 0;
 }
 
 
-#pragma mark - Flickr
-- (void)showPictureWithKeyword:(NSString *)keyword
-{
-
-	NSLog(@"Searching photo with '%@'", keyword);
-	// License
-	// id 4 : Attribution  : 상업적 사용 O, 수정 O, 공유 O
-	// id 6 : A.. NoDerivs : 상업적 사용 O, 수정 X, 공유 O
-	// id 3 : A.. NonComm, NoDrivs : 상업적 사용 X, 수정 X, 공유 O
-	// id 2 : A.. NonComm : 상업적 사용 X, 수정 O, 공유 O
-	// id 1 : A.. NonComm Share : 상업적 사용 X, 수정 O, 공유 O (수정 시 동일 라이선스 유지)
-	// id 5 : A.. Share : 상업적 사용 O, 수정 O, 공유 O (수정 시 동일 라이선스 유지)
-	// id 7 : 라이선스 정보 없음 : public domain?
-	
-	if (![flickrRequest isRunning]) {
-		[flickrRequest callAPIMethodWithGET:@"flickr.photos.search" 
-								  arguments:[NSDictionary dictionaryWithObjectsAndKeys:keyword, @"text", keyword, @"tags",
-											 @"20", @"per_page", @"4, 6, 5, 7", @"license", nil]];
-	} else {
-		NSLog(@"flickrRequest is running");
-	}
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
-{
-	
-	self.responseDict = inResponseDictionary;
-	NSLog(@"response %@", inResponseDictionary.textContent);
-	numOfPictures = [[responseDict valueForKeyPath:@"photos.photo"] count];
-	//NSLog(@"numOfPictures = %d", numOfPictures);
-	//numOfPictures = 10;
-	
-	
-	NSLog(@"count is %d", [[responseDict valueForKeyPath:@"photos.photo"] count]);
-	if (numOfPictures > 0) {
-		
-		curPictureIdx = 0;
-		
-
-//		[self showNextPicture];
-		[nextPicTimer invalidate];
-		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES];
-		[nextPicTimer fire];
-		
-	}
-
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError
-{
-	NSLog(@"Error! %@ , %@", inRequest.description, inError.description);
-	
-}
 
 #pragma mark - Picture
 
 - (void)showNextPicture
 {
-	if (responseDict == Nil) {
-		NSLog(@"responseDict is nil");
-	}
-	NSDictionary *photoDict = [[responseDict valueForKeyPath:@"photos.photo"] objectAtIndex:curPictureIdx];
-	NSURL *photoURL = [flickrContext photoSourceURLFromDictionary:photoDict size:@""];
-	
-//	NSLog(@"showing %@", photoURL);
-	[self loadImageWithUrl:photoURL];
-	
-	curPictureIdx++;
-	if (curPictureIdx >= numOfPictures) {
-		curPictureIdx = 0;
-	}
-
+	[picImageView setImage:[imageLoader nextImage]];
 }
+
 
 - (void)stopShowPicture
 {
@@ -404,22 +333,6 @@ NSInteger curPictureIdx = 0;
 	
 	[nextPicTimer setFireDate:[previousFireDate initWithTimeInterval:pauseTime sinceDate:previousFireDate]];
 
-}
-	
-// 네트워크를 통해 이미지를 매번 불러옴
-// 개선방향 : 목록에 있는 이미지를 순차적으로 로딩하여 캐싱한 후 불러오도록 수정
-- (void)loadImageWithUrl:(NSURL *)imageUrl {
-//	NSLog(@"loadImageWithUrl");
-	
-	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    dispatch_async(queue, ^{
-		NSData* imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
-		UIImage* image = [[UIImage alloc] initWithData:imageData];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [picImageView setImage:image]; //UIImageView
-			NSLog(@"setImage");
-        });
-    });
 }
 
 
