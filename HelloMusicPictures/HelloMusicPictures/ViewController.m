@@ -130,6 +130,8 @@
                                name: MPMusicPlayerControllerVolumeDidChangeNotification
                              object: musicPlayer];
 	
+	
+	
     [musicPlayer beginGeneratingPlaybackNotifications];
 }
 
@@ -204,6 +206,8 @@
 		[self stopShowPicture];
 		
 	}
+	
+
 	
 }
 
