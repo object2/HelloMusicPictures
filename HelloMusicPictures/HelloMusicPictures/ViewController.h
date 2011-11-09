@@ -28,7 +28,7 @@
 	
 	int imageIdx;
 	int imageShowing;
-	
+	CGFloat imageEffectFlag; // 화면 애니메이션에서 사용
 	
 	
 	MPMusicPlayerController *musicPlayer;
@@ -48,7 +48,7 @@
 - (void)restartShowPicture;
 - (void)pauseShowPicture;
 
-- (void)fadeScreen;
+- (void)startSlideshow;
 - (void)toggleAlpha;
 - (void)toggleShowing;
 - (CGAffineTransform)getAfterTransformWithWidth:(CGFloat)width height:(CGFloat)height;
@@ -67,7 +67,8 @@
 - (IBAction)nextSong:(id)sender;
 - (IBAction)randomPlay:(id)sender;
 
-- (void) registerMediaPlayerNotifications;
+- (void)registerMediaPlayerNotifications;
+- (void)registerImageReadyNotification;
 
 // for MPMediaPlayer
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;

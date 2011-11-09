@@ -58,6 +58,7 @@
 	 Save data if appropriate.
 	 See also applicationDidEnterBackground:.
 	 */
+	//self.window.
 }
 
 @end

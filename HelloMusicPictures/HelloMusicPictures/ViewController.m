@@ -25,7 +25,7 @@
 
 
 
-CGFloat flag = 1.0; // 화면 애니메이션에서 사용
+
 
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +52,10 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 													name: MPMusicPlayerControllerVolumeDidChangeNotification
 												  object: musicPlayer];
 	
+	[[NSNotificationCenter defaultCenter] removeObserver: self
+													name:@"registerImageReadyNotification"
+												  object: imageLoader];
+	
 	[musicPlayer endGeneratingPlaybackNotifications];
 
 }
@@ -59,6 +63,8 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	imageEffectFlag = 1.0;
 	
 	// Do any additional setup after loading the view, typically from a nib.
 	musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
@@ -77,6 +83,7 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 	
 	[self registerMediaPlayerNotifications];
 	imageLoader = [[ImageLoader alloc] init];
+	[self registerImageReadyNotification];
 	
 	// TODO : 뮤직 플레이어 완성 시 아래 메소드는 음악 선택 후 불려지도록 옮겨져야함
 	//[self showPictureWithKeyword:@"music"];
@@ -142,21 +149,13 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
     [musicPlayer beginGeneratingPlaybackNotifications];
 }
 
+
+
 - (void) handle_NowPlayingItemChanged: (id) notification
 {
     MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
 	
 	
-	
-	
-    //UIImage *artworkImage = [UIImage imageNamed:@"noArtworkImage.png"];
-//    MPMediaItemArtwork *artwork = [currentItem valueForProperty: MPMediaItemPropertyArtwork];
-	
-//    if (artwork) {
-//        artworkImage = [artwork imageWithSize: CGSizeMake (200, 200)];
-//    }
-//	
-    //[artworkImageView setImage:artworkImage];
 	
     NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
     if (titleString) {
@@ -192,17 +191,21 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 	} 
 	
 	[imageLoader loadImages:keyword completion:^{
+		NSLog(@"load completed");
 		[nextPicTimer invalidate];
 
 		imageShowing = 1;
 		picImageView1.alpha = 1.0;
 		picImageView2.alpha = 0.0;
 		
+		// picImageView1.image = 디폴트 이미지
 		
+		/*
 		picImageView1.image = [imageLoader nextImage];
+		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:9.2 target:self selector:@selector(startSlideshow) 
+														   userInfo:nil repeats:YES];
+		 */
 		
-//		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(showNextPicture) userInfo:nil repeats:YES];
-		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:9.2 target:self selector:@selector(fadeScreen) userInfo:nil repeats:YES];
 	}];
 }
 
@@ -382,12 +385,12 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 		if(width / height > 1.6) {
 			//float aspectRatio = L_HEIGHT / height;
 			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * flag, 0);
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
 			NSLog(@"Moving hor");
 			
 		} else if(width / height < 0.8) {
 			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * flag); // 임시
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
 			NSLog(@"Moving ver %d", dy);
 		} else {
 			transform = CGAffineTransformMakeScale(1.4, 1.4);	
@@ -397,11 +400,11 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 		if(width / height > 1.2) {
 			//float aspectRatio = P_HEIGHT / height;
 			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * flag, 0);
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
 			
 		} else if(width / height < 0.6) {
 			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * flag); // 임시
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
 			
 		} else {
 			transform = CGAffineTransformMakeScale(1.4, 1.4);	
@@ -417,16 +420,16 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 	CGAffineTransform transform = CGAffineTransformIdentity;
 	
 	if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-		if(width / height > 1.5) {
+		if(width / height > 1.6) {
 			//float aspectRatio = L_HEIGHT / height;
-			flag = flag * -1;
+			imageEffectFlag = imageEffectFlag * -1;
 			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * flag, 0);
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
 			
 		} else if(width / height < 0.8) {
-			flag = flag * -1;
+			imageEffectFlag = imageEffectFlag * -1;
 			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * flag); // 임시
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag);
 
 		} else {
 			transform = CGAffineTransformIdentity;
@@ -436,14 +439,14 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 	} else {
 		if(width / height > 1.2) {
 			//float aspectRatio = P_HEIGHT / height;
-			flag = flag * -1;
+			imageEffectFlag = imageEffectFlag * -1;
 			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * flag, 0);
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
 			
 		} else if(width / height < 0.6) {
-			flag = flag * -1;
+			imageEffectFlag = imageEffectFlag * -1;
 			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * flag); // 임시
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); 
 			
 		} else {
 			transform = CGAffineTransformIdentity;
@@ -458,16 +461,9 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 
 
 
-- (void)fadeScreen
+- (void)startSlideshow
 {
 	// beforeAnimation
-	
-	
-//	imageIdx++;
-//	if(imageIdx > [imageLoader numOfPictures] - 1)
-//		imageIdx = 0;
-	
-	
 	if (imageShowing == 1) {
 		picImageView2.image = [imageLoader nextImage];//[imageList objectAtIndex:imageIdx];
 		picImageView2.transform = [self getBeforeTransformWithWidth:picImageView2.image.size.width 
@@ -488,11 +484,7 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 	 //  delay:1.0
 	 //options:UIViewAnimationCurveLinear
 	 animations:^{ /* fade animations */ 
-		 
 		 [self toggleAlpha];
-		 
-		 
-		 
 	 } 
 	 completion:^(BOOL finished){
 		 // beforeAnimation
@@ -522,5 +514,26 @@ CGFloat flag = 1.0; // 화면 애니메이션에서 사용
 	
 }
 
+- (void)registerImageReadyNotification
+{
+	
+	NSLog(@"Observer 등록");
+	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	
+	[notificationCenter addObserver: self
+						   selector: @selector(imageIsReady:)
+							   name: @"imageReadyNotification"
+							 object: nil];
+
+}
+
+- (void)imageIsReady:(id)notification
+{
+	NSLog(@"Image is Ready");
+	picImageView1.image = [imageLoader nextImage];
+	self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:9.2 target:self selector:@selector(startSlideshow) 
+													   userInfo:nil repeats:YES];
+	[self.nextPicTimer fire];
+}
 
 @end

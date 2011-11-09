@@ -38,7 +38,6 @@
 }
 
 
-
 - (void)loadImageWithUrl:(NSURL *)imageUrl
 {
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
@@ -47,6 +46,10 @@
 		UIImage* image = [[UIImage alloc] initWithData:imageData];
         dispatch_sync(dispatch_get_main_queue(), ^{
             [images addObject:image]; //UIImageView
+			if ([images count] == 1) {
+				NSLog(@"Noti 보내염");
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"imageReadyNotification" object:nil];
+			}
 			NSLog(@"addObject:image %@", imageUrl.absoluteString);
         });
     });
@@ -102,6 +105,8 @@
 {
 	return numOfPictures;
 }
+
+
 
 
 @end
