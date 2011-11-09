@@ -16,7 +16,7 @@
 	self = [super init];
 	if (self) {
 		
-		curPictureIdx = 0;
+		curPictureIdx = -1;
 		numOfPictures = 0;
 		
 		self.flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:OBJECTIVE_FLICKR_SAMPLE_API_KEY sharedSecret:OBJECTIVE_FLICKR_SAMPLE_API_SHARED_SECRET];
@@ -26,13 +26,18 @@
 	return self;
 }
 
+
+
 - (UIImage*)nextImage
 {
 	if ([images count] == 0)
 		return nil;
 	curPictureIdx = (curPictureIdx+1)%[images count];
+	NSLog(@"nextImage..  idx is %d", curPictureIdx);
 	return [images objectAtIndex:curPictureIdx];
 }
+
+
 
 - (void)loadImageWithUrl:(NSURL *)imageUrl
 {
@@ -42,7 +47,7 @@
 		UIImage* image = [[UIImage alloc] initWithData:imageData];
         dispatch_sync(dispatch_get_main_queue(), ^{
             [images addObject:image]; //UIImageView
-			NSLog(@"addObject:image");
+			NSLog(@"addObject:image %@", imageUrl.absoluteString);
         });
     });
 }
@@ -82,6 +87,8 @@
 		NSURL *photoURL = [flickrContext photoSourceURLFromDictionary:photoDict size:@""];
 		[self loadImageWithUrl:photoURL];
 	}
+	
+	curPictureIdx = -1;
 	completeWithResponse();
 }
 
@@ -89,6 +96,11 @@
 {
 	NSLog(@"Error! %@ , %@", inRequest.description, inError.description);
 	
+}
+
+- (NSInteger)numOfPictures
+{
+	return numOfPictures;
 }
 
 

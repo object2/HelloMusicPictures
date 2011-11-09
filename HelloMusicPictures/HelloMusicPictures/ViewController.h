@@ -23,7 +23,12 @@
 	IBOutlet UIButton *prevButton;
 	IBOutlet UIButton *nextButton;	
 	IBOutlet UISwitch *randomSwitch;
-	IBOutlet UIImageView *picImageView;
+	IBOutlet UIImageView *picImageView1;
+	IBOutlet UIImageView *picImageView2;
+	
+	int imageIdx;
+	int imageShowing;
+	
 	
 	
 	MPMusicPlayerController *musicPlayer;
@@ -34,6 +39,8 @@
 	NSDate *pauseStart;
 	NSDate *previousFireDate;	
 	ImageLoader *imageLoader;
+	
+	
 }
 
 - (void)showNextPicture;
@@ -41,7 +48,16 @@
 - (void)restartShowPicture;
 - (void)pauseShowPicture;
 
+- (void)fadeScreen;
+- (void)toggleAlpha;
+- (void)toggleShowing;
+- (CGAffineTransform)getAfterTransformWithWidth:(CGFloat)width height:(CGFloat)height;
+- (CGAffineTransform)getBeforeTransformWithWidth:(CGFloat)width height:(CGFloat)height;
+
+
+
 - (IBAction)saveImage:(id)sender;
+
 
 // for MPMediaPlayer
 - (IBAction)showMediaPlayer:(id)sender;
@@ -61,8 +77,8 @@
 @property (nonatomic, strong) NSDate *previousFireDate;
 @property (nonatomic, strong) NSTimer *nextPicTimer;
 
-
-@property (nonatomic, strong) UIImageView *picImageView;
+@property (nonatomic, strong) UIImageView *picImageView2;
+@property (nonatomic, strong) UIImageView *picImageView1;
 
 
 @end

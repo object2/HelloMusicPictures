@@ -26,6 +26,8 @@ typedef void (^CompleteWithResponse)();
 @property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
 @property (nonatomic, strong) NSDictionary *responseDict;
 
+
 - (void)loadImages:(NSString *)keyword completion:(CompleteWithResponse)completion;
 - (UIImage*)nextImage;
+- (NSInteger)numOfPictures;
 @end
