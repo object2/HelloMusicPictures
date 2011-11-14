@@ -99,9 +99,29 @@
 	 delay:0.0
 	 options:UIViewAnimationCurveEaseOut
 	 animations:^{		
-		 [controls setAlpha: [controls alpha]>0.7?0.0:0.8];
+		 [controls setAlpha: 0.8];
 	 }
 	 completion:^(BOOL finished){
+		 [UIView 
+		  animateWithDuration:3.0
+		  delay:0.0
+		  options:UIViewAnimationCurveEaseOut
+		  animations:^{		
+			   [controls setAlpha: 0.81];
+		  }
+		  completion:^(BOOL finished){
+			  [UIView 
+			   animateWithDuration:0.5
+			   delay:0.0
+			   options:UIViewAnimationCurveEaseOut
+			   animations:^{		
+				   [controls setAlpha: 0.0];
+			   }
+			   completion:^(BOOL finished){
+				   
+			   }];  
+		  }];
+
 	 }];
 }
 
