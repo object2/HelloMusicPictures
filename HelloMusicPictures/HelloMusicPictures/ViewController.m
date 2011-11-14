@@ -113,6 +113,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+	[controls setAlpha: 0.0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
