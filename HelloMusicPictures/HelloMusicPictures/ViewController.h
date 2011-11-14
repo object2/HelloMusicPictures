@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class ImageLoader;
 
@@ -25,6 +26,7 @@
 	IBOutlet UISwitch *randomSwitch;
 	IBOutlet UIImageView *picImageView1;
 	IBOutlet UIImageView *picImageView2;
+	IBOutlet UITextView *lyricsView;
 	
 	int imageIdx;
 	int imageShowing;

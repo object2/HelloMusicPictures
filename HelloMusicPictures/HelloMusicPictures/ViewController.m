@@ -23,17 +23,11 @@
 @synthesize musicPlayer;
 @synthesize pauseStart, previousFireDate;
 
-
-
-
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
-
 
 
 #pragma mark - View lifecycle
@@ -155,9 +149,7 @@
 {
     MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
 	
-	
-	
-    NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
+	NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
     if (titleString) {
         titleLabel.text = [NSString stringWithFormat:@"%@",titleString];
     } else {
@@ -172,13 +164,22 @@
     }
 	
     NSString *albumString = [currentItem valueForProperty:MPMediaItemPropertyAlbumTitle];
-    if (albumString) {
+	if (albumString) {
         albumLabel.text = [NSString stringWithFormat:@"%@",albumString];
     } else {
         albumLabel.text = @"Unknown Album";
     }
-	
-
+		
+	NSURL*     songURL = [currentItem valueForProperty:MPMediaItemPropertyAssetURL];
+	AVAsset* songAsset = [AVURLAsset URLAssetWithURL:songURL options:nil];
+	NSString*   lyrics = [songAsset lyrics];
+		
+	if (lyrics) {
+		lyricsView.text = [NSString stringWithFormat:@"%@",lyrics];
+	}else
+	{
+		lyricsView.text = @"가사가 없음..";
+	}
 	
 	// TODO 키워드 뽑아내기
 	NSString *keyword = @"music";

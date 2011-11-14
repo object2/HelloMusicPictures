@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390A27D214710DD100140DFA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 390A27D114710DD100140DFA /* AVFoundation.framework */; };
 		39D123BF144C5925008C0E5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123BE144C5925008C0E5C /* UIKit.framework */; };
 		39D123C1144C5925008C0E5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123C0144C5925008C0E5C /* Foundation.framework */; };
 		39D123C3144C5925008C0E5C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D123C2144C5925008C0E5C /* CoreGraphics.framework */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		390A27D114710DD100140DFA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		39D123BA144C5925008C0E5C /* HelloMusicPictures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloMusicPictures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D123BE144C5925008C0E5C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		39D123C0144C5925008C0E5C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -94,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				390A27D214710DD100140DFA /* AVFoundation.framework in Frameworks */,
 				9180D55D144F117B0087AD75 /* CFNetwork.framework in Frameworks */,
 				39D123F4144C5A51008C0E5C /* MediaPlayer.framework in Frameworks */,
 				39D123BF144C5925008C0E5C /* UIKit.framework in Frameworks */,
@@ -142,6 +145,7 @@
 		39D123BD144C5925008C0E5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				390A27D114710DD100140DFA /* AVFoundation.framework */,
 				9180D55C144F117B0087AD75 /* CFNetwork.framework */,
 				39D123F3144C5A51008C0E5C /* MediaPlayer.framework */,
 				39D123BE144C5925008C0E5C /* UIKit.framework */,
