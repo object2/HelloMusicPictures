@@ -26,6 +26,8 @@
 		918FE4E9145595E600D87C5A /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918FE4E8145595D300D87C5A /* libObjectiveFlickr.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		D33EFEDB1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */; };
 		D3BB9418146927B000CF59D5 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB9417146927B000CF59D5 /* ImageLoader.m */; };
+		ED31AD78147140FD00336D28 /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED31AD77147140FD00336D28 /* CoverView.m */; };
+		ED31AD7B147144E800336D28 /* UIControl+disappearGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ED31AD7A147144E800336D28 /* UIControl+disappearGUI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,10 @@
 		D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMediaPickerControllerLandScape.m; sourceTree = "<group>"; };
 		D3BB9416146927B000CF59D5 /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		D3BB9417146927B000CF59D5 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
+		ED31AD76147140FD00336D28 /* CoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverView.h; sourceTree = "<group>"; };
+		ED31AD77147140FD00336D28 /* CoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverView.m; sourceTree = "<group>"; };
+		ED31AD79147144E800336D28 /* UIControl+disappearGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+disappearGUI.h"; sourceTree = "<group>"; };
+		ED31AD7A147144E800336D28 /* UIControl+disappearGUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+disappearGUI.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				91B84B1114543990002D2429 /* FlickrAPIKey.h */,
+				ED31AD76147140FD00336D28 /* CoverView.h */,
+				ED31AD77147140FD00336D28 /* CoverView.m */,
 				39D123CD144C5925008C0E5C /* AppDelegate.h */,
 				39D123CE144C5925008C0E5C /* AppDelegate.m */,
 				39D123D0144C5925008C0E5C /* MainStoryboard.storyboard */,
@@ -168,6 +176,8 @@
 				39D123C5144C5925008C0E5C /* Supporting Files */,
 				D3BB9416146927B000CF59D5 /* ImageLoader.h */,
 				D3BB9417146927B000CF59D5 /* ImageLoader.m */,
+				ED31AD79147144E800336D28 /* UIControl+disappearGUI.h */,
+				ED31AD7A147144E800336D28 /* UIControl+disappearGUI.m */,
 			);
 			path = HelloMusicPictures;
 			sourceTree = "<group>";
@@ -348,6 +358,8 @@
 				39D123D5144C5925008C0E5C /* ViewController.m in Sources */,
 				D33EFEDB1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m in Sources */,
 				D3BB9418146927B000CF59D5 /* ImageLoader.m in Sources */,
+				ED31AD78147140FD00336D28 /* CoverView.m in Sources */,
+				ED31AD7B147144E800336D28 /* UIControl+disappearGUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

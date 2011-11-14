@@ -18,6 +18,7 @@
 
 @implementation ViewController
 
+@synthesize controlsHideTimer;
 @synthesize picImageView1, picImageView2;
 @synthesize nextPicTimer;
 @synthesize musicPlayer;
@@ -58,6 +59,12 @@
 {
     [super viewDidLoad];
 	
+	[[NSNotificationCenter defaultCenter] addObserver: self
+                           selector: @selector (disappearTimerReset:)
+                               name: @"helloworld"
+                             object: nil];
+
+	
 	imageEffectFlag = 1.0;
 	
 	// Do any additional setup after loading the view, typically from a nib.
@@ -94,15 +101,21 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[UIView 
-	 animateWithDuration:0.5
-	 delay:0.0
-	 options:UIViewAnimationCurveEaseOut
-	 animations:^{		
-		 [controls setAlpha: [controls alpha]>0.7?0.0:0.8];
-	 }
-	 completion:^(BOOL finished){
-	 }];
+	NSLog(@"touch begin!!");
+//	[UIView 
+//	 animateWithDuration:0.5
+//	 delay:0.0
+//	 options:UIViewAnimationCurveEaseOut
+//	 animations:^{		
+//		 [controls setAlpha: [controls alpha]>0.7?0.0:0.8];
+//	 }
+//	 completion:^(BOOL finished){
+//	 }];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touch end!!");
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -131,6 +144,12 @@
 	return YES;
 }
 
+
+-(void) disappearTimerReset:(NSNotification*)aNotification
+{
+	NSLog(@"소식 들었다");
+}
+
 #pragma mark - MediaPlayer
 - (void) registerMediaPlayerNotifications
 {
@@ -150,8 +169,6 @@
                            selector: @selector (handle_VolumeChanged:)
                                name: MPMusicPlayerControllerVolumeDidChangeNotification
                              object: musicPlayer];
-	
-	
 	
     [musicPlayer beginGeneratingPlaybackNotifications];
 }

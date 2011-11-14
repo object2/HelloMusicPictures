@@ -43,9 +43,9 @@
 	NSDate *previousFireDate;	
 	ImageLoader *imageLoader;
 	
-	
+	NSTimer *controlsHideTimer;
 }
-
+@property(nonatomic, retain) NSTimer *controlsHideTimer;
 - (void)showNextPicture;
 - (void)stopShowPicture;
 - (void)restartShowPicture;
