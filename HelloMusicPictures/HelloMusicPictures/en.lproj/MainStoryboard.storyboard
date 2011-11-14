@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="10K549" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -165,6 +165,7 @@
                     <connections>
                         <outlet property="albumLabel" destination="Cqh-AR-BIl" id="d9Q-ye-8KU"/>
                         <outlet property="artistLabel" destination="qQ8-4t-bK3" id="fj0-9j-aop"/>
+                        <outlet property="controls" destination="KXd-5H-Sm7" id="7q5-nK-9Bu"/>
                         <outlet property="lyricsView" destination="ESt-UZ-Kd5" id="n0r-tL-Nii"/>
                         <outlet property="nextButton" destination="6q9-MZ-Egn" id="RA7-uL-JKO"/>
                         <outlet property="picImageView1" destination="VEN-RU-G7d" id="RD6-5P-hHO"/>
@@ -193,6 +194,7 @@
                 <relationship kind="action" name="volumeChanged:"/>
                 <relationship kind="outlet" name="albumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="artistLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="controls" candidateClass="UIView"/>
                 <relationship kind="outlet" name="lyricsView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="picImageView1" candidateClass="UIImageView"/>

@@ -81,15 +81,24 @@
 	
 	// TODO : 뮤직 플레이어 완성 시 아래 메소드는 음악 선택 후 불려지도록 옮겨져야함
 	//[self showPictureWithKeyword:@"music"];
-
-	
+	[self.view setMultipleTouchEnabled: YES];
 }
 
 - (void)viewDidUnload
 {
+	controls = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	[controls setAlpha: [controls alpha]>0.7?0.0:0.8];
+	[UIView commitAnimations];
 }
 
 - (void)viewWillAppear:(BOOL)animated

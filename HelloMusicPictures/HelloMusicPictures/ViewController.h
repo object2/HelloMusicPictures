@@ -32,6 +32,7 @@
 	int imageShowing;
 	CGFloat imageEffectFlag; // 화면 애니메이션에서 사용
 	
+	IBOutlet UIView *controls;
 	
 	MPMusicPlayerController *musicPlayer;
 	
