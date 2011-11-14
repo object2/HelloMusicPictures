@@ -94,11 +94,15 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.5];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-	[controls setAlpha: [controls alpha]>0.7?0.0:0.8];
-	[UIView commitAnimations];
+	[UIView 
+	 animateWithDuration:0.5
+	 delay:0.0
+	 options:UIViewAnimationCurveEaseOut
+	 animations:^{		
+		 [controls setAlpha: [controls alpha]>0.7?0.0:0.8];
+	 }
+	 completion:^(BOOL finished){
+	 }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
