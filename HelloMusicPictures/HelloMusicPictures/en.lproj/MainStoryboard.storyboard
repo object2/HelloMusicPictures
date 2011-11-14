@@ -181,32 +181,6 @@
             <point key="canvasLocation" x="-187" y="68"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="nextSong:"/>
-                <relationship kind="action" name="playPause:"/>
-                <relationship kind="action" name="previousSong:"/>
-                <relationship kind="action" name="randomPlay:"/>
-                <relationship kind="action" name="saveImage:"/>
-                <relationship kind="action" name="showMediaPlayer:"/>
-                <relationship kind="action" name="volumeChanged:"/>
-                <relationship kind="outlet" name="albumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="artistLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="controls" candidateClass="UIView"/>
-                <relationship kind="outlet" name="lyricsView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="picImageView1" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="picImageView2" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="playPauseButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="prevButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="randomSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="volumeSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
