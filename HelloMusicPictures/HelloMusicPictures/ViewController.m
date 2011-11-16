@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MPMediaPickerControllerLandScape.h"
 #import "ImageLoader.h"
+#import <Twitter/TWTweetComposeViewController.h> 
 
 #define L_WIDTH 1024
 #define L_HEIGHT 748
@@ -233,6 +234,8 @@
 	}];
 }
 
+
+
 - (void) handle_PlaybackStateChanged: (id) notification
 {
 	MPMusicPlaybackState playbackState = [musicPlayer playbackState];
@@ -333,6 +336,17 @@
 	}
 	else{
 		[musicPlayer setShuffleMode:MPMusicShuffleModeDefault];
+	}
+}
+
+- (IBAction)twit:(id)sender 
+{
+	if ([TWTweetComposeViewController canSendTweet]) 
+	{
+		TWTweetComposeViewController *twtCntrlr = [[TWTweetComposeViewController alloc] init];
+		[twtCntrlr setInitialText:[NSString stringWithFormat:@"%@ - %@ #nowplaying #HellowMusicPicutures",titleLabel.text,artistLabel.text]];
+		[self presentViewController:twtCntrlr animated:YES completion:^{ 
+		}]; 
 	}
 }
 

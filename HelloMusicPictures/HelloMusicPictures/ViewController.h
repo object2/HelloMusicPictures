@@ -69,6 +69,7 @@
 - (IBAction)playPause:(id)sender;
 - (IBAction)nextSong:(id)sender;
 - (IBAction)randomPlay:(id)sender;
+- (IBAction)twit:(id)sender;
 
 - (void)registerMediaPlayerNotifications;
 
