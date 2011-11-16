@@ -46,11 +46,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 													name: MPMusicPlayerControllerVolumeDidChangeNotification
 												  object: musicPlayer];
-	
-	[[NSNotificationCenter defaultCenter] removeObserver: self
-													name:@"registerImageReadyNotification"
-												  object: imageLoader];
-	
+		
 	[musicPlayer endGeneratingPlaybackNotifications];
 
 }
@@ -59,11 +55,6 @@
 {
     [super viewDidLoad];
 	
-	[[NSNotificationCenter defaultCenter] addObserver: self
-                           selector: @selector (disappearTimerReset:)
-                               name: @"helloworld"
-                             object: nil];
-
 	
 	imageEffectFlag = 1.0;
 	
@@ -84,10 +75,7 @@
 	
 	[self registerMediaPlayerNotifications];
 	imageLoader = [[ImageLoader alloc] init];
-	[self registerImageReadyNotification];
 	
-	// TODO : 뮤직 플레이어 완성 시 아래 메소드는 음악 선택 후 불려지도록 옮겨져야함
-	//[self showPictureWithKeyword:@"music"];
 	[self.view setMultipleTouchEnabled: YES];
 }
 
@@ -102,15 +90,15 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	NSLog(@"touch begin!!");
-//	[UIView 
-//	 animateWithDuration:0.5
-//	 delay:0.0
-//	 options:UIViewAnimationCurveEaseOut
-//	 animations:^{		
-//		 [controls setAlpha: [controls alpha]>0.7?0.0:0.8];
-//	 }
-//	 completion:^(BOOL finished){
-//	 }];
+	[UIView 
+	 animateWithDuration:0.5
+	 delay:0.0
+	 options:UIViewAnimationCurveEaseOut
+	 animations:^{		
+		 [controls setAlpha: [controls alpha]>0.7?0.0:0.8];
+	 }
+	 completion:^(BOOL finished){
+	 }];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -146,10 +134,6 @@
 }
 
 
--(void) disappearTimerReset:(NSNotification*)aNotification
-{
-	NSLog(@"소식 들었다");
-}
 
 #pragma mark - MediaPlayer
 - (void) registerMediaPlayerNotifications
@@ -224,19 +208,27 @@
 	
 	[imageLoader loadImages:keyword completion:^{
 		NSLog(@"load completed");
-		[nextPicTimer invalidate];
-
+		
 		imageShowing = 1;
 		picImageView1.alpha = 1.0;
 		picImageView2.alpha = 0.0;
 		
-		// picImageView1.image = 디폴트 이미지
-		
-		/*
+
 		picImageView1.image = [imageLoader nextImage];
+
+		[nextPicTimer invalidate];
 		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:9.2 target:self selector:@selector(startSlideshow) 
 														   userInfo:nil repeats:YES];
-		 */
+		
+		MPMusicPlaybackState playbackState = [musicPlayer playbackState];
+		if (playbackState == MPMusicPlaybackStatePlaying) {
+			[self.nextPicTimer fire];
+		}
+		else
+		{
+			[self pauseShowPicture];
+		}
+		
 		
 	}];
 }
@@ -544,28 +536,6 @@
 	 }
 	 ];
 	
-}
-
-- (void)registerImageReadyNotification
-{
-	
-	NSLog(@"Observer 등록");
-	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-	
-	[notificationCenter addObserver: self
-						   selector: @selector(imageIsReady:)
-							   name: @"imageReadyNotification"
-							 object: nil];
-
-}
-
-- (void)imageIsReady:(id)notification
-{
-	NSLog(@"Image is Ready");
-	picImageView1.image = [imageLoader nextImage];
-	self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:9.2 target:self selector:@selector(startSlideshow) 
-													   userInfo:nil repeats:YES];
-	[self.nextPicTimer fire];
 }
 
 @end

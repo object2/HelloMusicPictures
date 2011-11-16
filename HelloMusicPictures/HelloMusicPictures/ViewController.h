@@ -71,7 +71,6 @@
 - (IBAction)randomPlay:(id)sender;
 
 - (void)registerMediaPlayerNotifications;
-- (void)registerImageReadyNotification;
 
 // for MPMediaPlayer
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;

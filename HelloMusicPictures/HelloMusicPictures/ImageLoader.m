@@ -47,8 +47,7 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             [images addObject:image]; //UIImageView
 			if ([images count] == 1) {
-				NSLog(@"Noti 보내염");
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"imageReadyNotification" object:nil];
+				completeWithResponse();
 			}
 			NSLog(@"addObject:image %@", imageUrl.absoluteString);
         });
@@ -92,7 +91,6 @@
 	}
 	
 	curPictureIdx = -1;
-	completeWithResponse();
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError
