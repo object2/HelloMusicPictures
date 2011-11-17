@@ -8,6 +8,7 @@
 
 #import "ImageLoader.h"
 #import "FlickrAPIKey.h"
+#import "ImageCaching.h"
 
 @implementation ImageLoader
 @synthesize flickrContext, flickrRequest, responseDict, completeWithResponse, images;
@@ -42,14 +43,19 @@
 {
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^{
-		NSData* imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
+		NSData* imageData = [[ImageCaching sharedInstance] LoadImageDataCacheWithUrl:imageUrl.absoluteString];
+		if (!imageData) {
+			imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
+			[[ImageCaching sharedInstance] addImageData:imageData Url:imageUrl.absoluteString];
+			NSLog(@"imageData loading");
+		}
+		
 		UIImage* image = [[UIImage alloc] initWithData:imageData];
         dispatch_sync(dispatch_get_main_queue(), ^{
             [images addObject:image]; //UIImageView
 			if ([images count] == 1) {
 				completeWithResponse();
 			}
-			NSLog(@"addObject:image %@", imageUrl.absoluteString);
         });
     });
 }
@@ -72,7 +78,7 @@
 	if (![flickrRequest isRunning]) {
 		[flickrRequest callAPIMethodWithGET:@"flickr.photos.search" 
 								  arguments:[NSDictionary dictionaryWithObjectsAndKeys:keyword, @"text", keyword, @"tags",
-											 @"20", @"per_page", @"4, 6, 5, 7", @"license", nil]];
+											 [NSString stringWithFormat:@"%d",ImageCacheCount], @"per_page", @"4, 6, 5, 7", @"license", nil]];
 	} else {
 		NSLog(@"flickrRequest is running");
 	}
