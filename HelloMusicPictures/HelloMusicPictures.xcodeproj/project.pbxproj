@@ -28,6 +28,7 @@
 		D36B14231473697700BC39B0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36B14221473697700BC39B0 /* Twitter.framework */; };
 		D3BB9418146927B000CF59D5 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB9417146927B000CF59D5 /* ImageLoader.m */; };
 		D3DB535A1473AFF600EF8193 /* ImageCaching.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DB53591473AFF600EF8193 /* ImageCaching.m */; };
+		D3DB53831474E61700EF8193 /* FlickrImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DB53821474E61700EF8193 /* FlickrImageLoader.m */; };
 		ED31AD78147140FD00336D28 /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED31AD77147140FD00336D28 /* CoverView.m */; };
 		ED31AD7B147144E800336D28 /* UIControl+disappearGUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ED31AD7A147144E800336D28 /* UIControl+disappearGUI.m */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,8 @@
 		D3BB9417146927B000CF59D5 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		D3DB53581473AFF600EF8193 /* ImageCaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCaching.h; sourceTree = "<group>"; };
 		D3DB53591473AFF600EF8193 /* ImageCaching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCaching.m; sourceTree = "<group>"; };
+		D3DB53811474E61700EF8193 /* FlickrImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrImageLoader.h; path = HelloMusicPictures/FlickrImageLoader.h; sourceTree = "<group>"; };
+		D3DB53821474E61700EF8193 /* FlickrImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrImageLoader.m; path = HelloMusicPictures/FlickrImageLoader.m; sourceTree = "<group>"; };
 		ED31AD76147140FD00336D28 /* CoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverView.h; sourceTree = "<group>"; };
 		ED31AD77147140FD00336D28 /* CoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverView.m; sourceTree = "<group>"; };
 		ED31AD79147144E800336D28 /* UIControl+disappearGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+disappearGUI.h"; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 		39D123AF144C5925008C0E5C = {
 			isa = PBXGroup;
 			children = (
+				D3DB53811474E61700EF8193 /* FlickrImageLoader.h */,
+				D3DB53821474E61700EF8193 /* FlickrImageLoader.m */,
 				D3DB53581473AFF600EF8193 /* ImageCaching.h */,
 				D3DB53591473AFF600EF8193 /* ImageCaching.m */,
 				D33EFED91468098C0044D1A7 /* MPMediaPickerControllerLandScape.h */,
@@ -370,6 +375,7 @@
 				ED31AD78147140FD00336D28 /* CoverView.m in Sources */,
 				ED31AD7B147144E800336D28 /* UIControl+disappearGUI.m in Sources */,
 				D3DB535A1473AFF600EF8193 /* ImageCaching.m in Sources */,
+				D3DB53831474E61700EF8193 /* FlickrImageLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

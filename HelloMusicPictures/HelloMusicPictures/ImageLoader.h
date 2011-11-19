@@ -7,26 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ObjectiveFlickr.h"
+#import "ImageCaching.h"
+
 typedef void (^CompleteWithResponse)();
-@interface ImageLoader : NSObject <OFFlickrAPIRequestDelegate>
+@interface ImageLoader : NSObject 
 {
 	NSMutableArray *images;
-	
-	// for Flickr
-	OFFlickrAPIContext *flickrContext;
-	OFFlickrAPIRequest *flickrRequest;
 	NSInteger curPictureIdx;
 	NSInteger numOfPictures;
 }
 
 @property (nonatomic, copy) CompleteWithResponse completeWithResponse;
 @property (nonatomic, retain) NSMutableArray *images;
-@property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
-@property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
-@property (nonatomic, strong) NSDictionary *responseDict;
 
-
+- (void)loadImageWithUrl:(NSURL *)imageUrl;
+- (void)loadImages:(NSString *)keyword;
 - (void)loadImages:(NSString *)keyword completion:(CompleteWithResponse)completion;
 - (UIImage*)nextImage;
 - (NSInteger)numOfPictures;

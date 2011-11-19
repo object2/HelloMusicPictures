@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "MPMediaPickerControllerLandScape.h"
-#import "ImageLoader.h"
+#import "FlickrImageLoader.h"
 #import <Twitter/TWTweetComposeViewController.h> 
 
 #define L_WIDTH 1024
@@ -75,7 +75,7 @@
 	
 	
 	[self registerMediaPlayerNotifications];
-	imageLoader = [[ImageLoader alloc] init];
+	imageLoader = [[FlickrImageLoader alloc] init];
 	
 	[self.view setMultipleTouchEnabled: YES];
 }
