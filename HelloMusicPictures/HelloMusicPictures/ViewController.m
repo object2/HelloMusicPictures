@@ -206,15 +206,20 @@
     } else {
         albumLabel.text = @"Unknown Album";
     }
+	
 		
 	NSURL*     songURL = [currentItem valueForProperty:MPMediaItemPropertyAssetURL];
 	AVAsset* songAsset = [AVURLAsset URLAssetWithURL:songURL options:nil];
 	NSString*   lyrics = [songAsset lyrics];
 		
 	if (lyrics) {
+		
+		[lyricsView setHidden:NO];
 		lyricsView.text = [NSString stringWithFormat:@"%@",lyrics];
+		
 	}else
 	{
+		[lyricsView setHidden:YES];
 		lyricsView.text = @"가사가 없음..";
 	}
 	
