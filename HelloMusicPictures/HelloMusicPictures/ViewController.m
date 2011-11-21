@@ -263,7 +263,7 @@
 }
 
 
-- (IBAction)showMediaPlayer:(id)sender
+- (IBAction)showMediaPickerViewController:(id)sender
 {
 	MPMediaPickerControllerLandScape *picker =
 			[[MPMediaPickerControllerLandScape alloc] initWithMediaTypes: MPMediaTypeMusic];

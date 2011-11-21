@@ -63,7 +63,7 @@
 
 
 // for MPMediaPlayer
-- (IBAction)showMediaPlayer:(id)sender;
+- (IBAction)showMediaPickerViewController:(id)sender;
 - (IBAction)volumeChanged:(id)sender;
 - (IBAction)previousSong:(id)sender;
 - (IBAction)playPause:(id)sender;
