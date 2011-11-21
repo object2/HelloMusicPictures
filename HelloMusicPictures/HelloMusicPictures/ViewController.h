@@ -44,6 +44,7 @@
 	ImageLoader *imageLoader;
 	
 	NSTimer *controlsHideTimer;
+	UISwipeGestureRecognizer *swipeRecog;
 }
 @property(nonatomic, retain) NSTimer *controlsHideTimer;
 - (void)showNextPicture;

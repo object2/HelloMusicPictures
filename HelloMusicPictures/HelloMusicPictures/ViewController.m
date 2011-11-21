@@ -54,10 +54,20 @@
 
 }
 
+-(void) twoFingerSwipeUp:(id)sender
+{
+	NSLog(@"swip!!");
+	[self showMediaPickerViewController:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
+	swipeRecog = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeUp:)];
+	swipeRecog.numberOfTouchesRequired = 2;
+	swipeRecog.direction = UISwipeGestureRecognizerDirectionUp;
+	[self.view addGestureRecognizer: swipeRecog];
 	
 	imageEffectFlag = 1.0;
 	
@@ -118,14 +128,12 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touch begin!!");
-	[self animateControlsWithAlpha:0.8f];
-	[self extendControlsHidingTimer];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	NSLog(@"touch end!!");
+	[self animateControlsWithAlpha:0.8f];
+	[self extendControlsHidingTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
