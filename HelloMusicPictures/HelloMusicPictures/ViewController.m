@@ -186,6 +186,11 @@
 {
     MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
 	
+	if (currentItem == nil) return; //곡이 없으면 스킵
+	
+	
+//	NSLog(@"currentItem is %@", currentItem);
+	
 	NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
     if (titleString) {
         titleLabel.text = [NSString stringWithFormat:@"%@",titleString];
