@@ -16,6 +16,7 @@
 #define P_WIDTH 768
 #define P_HEIGHT 1004
 
+#define GUI_TIME 5.0f
 
 @implementation ViewController
 
@@ -36,6 +37,7 @@
 
 - (void)dealloc
 {
+	self.controlsHideTimer = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 													name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
 												  object: musicPlayer];
@@ -88,18 +90,37 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+-(void) extendControlsHidingTimer
 {
-	NSLog(@"touch begin!!");
+	[self.controlsHideTimer invalidate];
+	self.controlsHideTimer = [NSTimer scheduledTimerWithTimeInterval:GUI_TIME target:self selector:@selector(onControlsHidingTimerEvent:) userInfo:nil repeats:NO];
+}
+
+-(void) animateControlsWithAlpha:(CGFloat)aFloat
+{
 	[UIView 
 	 animateWithDuration:0.5
 	 delay:0.0
 	 options:UIViewAnimationCurveEaseOut
 	 animations:^{		
-		 [controls setAlpha: [controls alpha]>0.7?0.0:0.8];
+		 [controls setAlpha: aFloat];
 	 }
 	 completion:^(BOOL finished){
 	 }];
+}
+
+-(void) onControlsHidingTimerEvent:(NSTimer*)aTimer
+{
+	[self.controlsHideTimer invalidate];
+	self.controlsHideTimer = nil;
+	[self animateControlsWithAlpha:0.0f];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touch begin!!");
+	[self animateControlsWithAlpha:0.8f];
+	[self extendControlsHidingTimer];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -265,6 +286,7 @@
 
 - (IBAction)showMediaPickerViewController:(id)sender
 {
+	[self extendControlsHidingTimer];
 	MPMediaPickerControllerLandScape *picker =
 			[[MPMediaPickerControllerLandScape alloc] initWithMediaTypes: MPMediaTypeMusic];
 		
@@ -301,11 +323,13 @@
 
 - (IBAction)volumeChanged:(id)sender
 {
+	[self extendControlsHidingTimer];
     [musicPlayer setVolume:[volumeSlider value]];
 }
 
 - (IBAction)playPause:(id)sender
 {
+	[self extendControlsHidingTimer];
     if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
         [musicPlayer pause];
 		[self pauseShowPicture];
@@ -319,16 +343,19 @@
 
 - (IBAction)previousSong:(id)sender
 {
+	[self extendControlsHidingTimer];
     [musicPlayer skipToPreviousItem];
 }
 
 - (IBAction)nextSong:(id)sender
 {
+	[self extendControlsHidingTimer];
     [musicPlayer skipToNextItem];
 }
 
 - (IBAction)randomPlay:(id)sender
 {	
+	[self extendControlsHidingTimer];
 	if(randomSwitch.on)
 	{
 		[musicPlayer setShuffleMode:MPMusicShuffleModeSongs];
@@ -341,6 +368,7 @@
 
 - (IBAction)twit:(id)sender 
 {
+	[self extendControlsHidingTimer];
 	if ([TWTweetComposeViewController canSendTweet]) 
 	{
 		TWTweetComposeViewController *twtCntrlr = [[TWTweetComposeViewController alloc] init];
@@ -378,6 +406,7 @@
 }
 
 - (IBAction)saveImage:(id)sender {
+	[self extendControlsHidingTimer];
 	UIImageWriteToSavedPhotosAlbum(picImageView1.image, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
