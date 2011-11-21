@@ -68,12 +68,9 @@ static ImageCaching *_instance;
 	{
 		defaluts = [NSUserDefaults standardUserDefaults];
 		NSDictionary *imageCacheDatas = [defaluts objectForKey:@"imageCacheDatas"];
-		if (imageCacheDatas) {
-			self.imageDatas = [NSMutableDictionary dictionaryWithDictionary:imageCacheDatas];
-		}
-		else
-			self.imageDatas = [NSMutableDictionary dictionary];
-		
+		self.imageDatas = [NSMutableDictionary dictionary];
+		if (imageCacheDatas)
+			[self.imageDatas addEntriesFromDictionary: imageCacheDatas];
 	}
 	return self;
 }
