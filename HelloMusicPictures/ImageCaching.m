@@ -95,7 +95,7 @@ static ImageCaching *_instance;
 		[imageDatas removeObjectsForKeys:removekeys];
 	}
 	[imageDatas setObject:data forKey:aUrl];
-	NSLog(@"%d",[imageDatas count]);
+//	NSLog(@"%d",[imageDatas count]);
 }
 
 - (void)save

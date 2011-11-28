@@ -29,7 +29,7 @@
 	if ([images count] == 0)
 		return nil;
 	curPictureIdx = (curPictureIdx+1)%[images count];
-	NSLog(@"nextImage..  idx is %d", curPictureIdx);
+//	NSLog(@"nextImage..  idx is %d", curPictureIdx);
 	return [images objectAtIndex:curPictureIdx];
 }
 
@@ -42,7 +42,7 @@
 		if (!imageData) {
 			imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
 			[[ImageCaching sharedInstance] addImageData:imageData Url:imageUrl.absoluteString];
-			NSLog(@"imageData loading");
+//			NSLog(@"imageData loading");
 		}
 		
 		UIImage* image = [[UIImage alloc] initWithData:imageData];

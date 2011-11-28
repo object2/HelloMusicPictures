@@ -28,7 +28,7 @@
 #pragma mark - Flickr
 - (void)loadImages:(NSString *)keyword 
 {
-	NSLog(@"Searching photo with '%@'", keyword);
+//	NSLog(@"Searching photo with '%@'", keyword);
 	// License
 	// id 4 : Attribution  : 상업적 사용 O, 수정 O, 공유 O
 	// id 6 : A.. NoDerivs : 상업적 사용 O, 수정 X, 공유 O
@@ -50,7 +50,7 @@
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
 {
 	self.responseDict = inResponseDictionary;
-	NSLog(@"response %@", inResponseDictionary.textContent);
+//	NSLog(@"response %@", inResponseDictionary.textContent);
 	numOfPictures = [[responseDict valueForKeyPath:@"photos.photo"] count];
 	
 	for (NSDictionary *photoDict in [responseDict valueForKeyPath:@"photos.photo"]) {
