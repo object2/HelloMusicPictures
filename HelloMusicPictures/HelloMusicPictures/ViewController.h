@@ -63,7 +63,9 @@
 
 
 - (IBAction)saveImage:(id)sender;
-
+// flickr
+- (NSString *)removeSpecialCharacter:(NSString *)str;
+- (NSString *)makeKeywordWithTitle:(NSString*)title artist:(NSString *)artist album:(NSString*)album;
 
 // for MPMediaPlayer
 - (IBAction)showMediaPickerViewController:(id)sender;
@@ -86,6 +88,9 @@
 
 @property (nonatomic, strong) UIImageView *picImageView2;
 @property (nonatomic, strong) UIImageView *picImageView1;
+
+
+
 
 
 @end

@@ -40,7 +40,7 @@
 	
 	if (![flickrRequest isRunning]) {
 		[flickrRequest callAPIMethodWithGET:@"flickr.photos.search" 
-								  arguments:[NSDictionary dictionaryWithObjectsAndKeys:keyword, @"text", keyword, @"tags",
+								  arguments:[NSDictionary dictionaryWithObjectsAndKeys:keyword,  @"tags", //@"text", keyword,
 											 [NSString stringWithFormat:@"%d",ImageCacheCount], @"per_page", @"4, 6, 5, 7", @"license", nil]];
 	} else {
 		NSLog(@"flickrRequest is running");
