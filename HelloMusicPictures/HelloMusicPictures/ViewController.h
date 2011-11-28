@@ -45,6 +45,8 @@
 	
 	NSTimer *controlsHideTimer;
 	UISwipeGestureRecognizer *swipeRecog;
+	UISwipeGestureRecognizer *swipeRecogRight;
+	UISwipeGestureRecognizer *swipeRecogLeft;
 }
 @property(nonatomic, retain) NSTimer *controlsHideTimer;
 - (void)showNextPicture;

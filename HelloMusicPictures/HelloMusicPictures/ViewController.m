@@ -60,6 +60,20 @@
 	[self showMediaPickerViewController:nil];
 }
 
+-(void)swipeNextSong:(id)sender
+{
+	NSLog(@"swipeNextSong========");
+	[self nextSong:nil];
+}
+
+-(void)swipePrevSong:(id)sender
+{
+	NSLog(@"swipePrevSong========");
+	[self previousSong:nil];
+}
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,6 +82,17 @@
 	swipeRecog.numberOfTouchesRequired = 2;
 	swipeRecog.direction = UISwipeGestureRecognizerDirectionUp;
 	[self.view addGestureRecognizer: swipeRecog];
+	
+	
+	swipeRecogRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeNextSong:)];
+	swipeRecogRight.numberOfTouchesRequired = 3;
+	swipeRecogRight.direction = UISwipeGestureRecognizerDirectionLeft;
+	[self.view addGestureRecognizer:swipeRecogRight];
+	
+	swipeRecogLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipePrevSong:)];
+	swipeRecogLeft.numberOfTouchesRequired = 3;
+	swipeRecogLeft.direction = UISwipeGestureRecognizerDirectionRight;
+	[self.view addGestureRecognizer:swipeRecogLeft];
 	
 	imageEffectFlag = 1.0;
 	
