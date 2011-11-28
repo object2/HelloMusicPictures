@@ -194,10 +194,10 @@
 {
     MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
 	
-	if (currentItem == nil) return; //곡이 없으면 스킵
+	if (currentItem == nil) 
+		return; //곡이 없으면 스킵
 	
 	
-//	NSLog(@"currentItem is %@", currentItem);
 	
 	NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
     if (titleString) {
@@ -234,6 +234,12 @@
 	{
 		[lyricsView setHidden:YES];
 		lyricsView.text = @"가사가 없음..";
+	}
+	
+	if (picImageView1.image == nil) 
+	{
+		MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
+		[picImageView1 setImage:[artwork imageWithSize:artwork.bounds.size]];
 	}
 	
 	// TODO 키워드 뽑아내기
