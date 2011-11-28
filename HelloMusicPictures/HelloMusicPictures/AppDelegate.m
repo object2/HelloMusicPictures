@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	application.idleTimerDisabled = YES;
 	[ImageCaching sharedInstance];
     return YES;
 

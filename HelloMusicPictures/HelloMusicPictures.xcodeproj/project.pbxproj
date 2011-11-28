@@ -436,7 +436,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: hongjun kim (RPSKLK3KHV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -457,7 +457,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = MusicPictures;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4487F44C-0878-4929-A207-C377427EAABB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -471,7 +471,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: hongjun kim (RPSKLK3KHV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -486,7 +486,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = MusicPictures;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4487F44C-0878-4929-A207-C377427EAABB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -499,12 +499,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: hongjun kim (RPSKLK3KHV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = objectiveflickr/Source;
 				INFOPLIST_FILE = "HelloMusicPictures/HelloMusicPictures-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4487F44C-0878-4929-A207-C377427EAABB";
 				USER_HEADER_SEARCH_PATHS = "objectiveflickr/LFWebAPIKit objectiveflickr/Source";
 				WRAPPER_EXTENSION = app;
 			};
@@ -514,12 +516,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: hongjun kim (RPSKLK3KHV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelloMusicPictures/HelloMusicPictures-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = objectiveflickr/Source;
 				INFOPLIST_FILE = "HelloMusicPictures/HelloMusicPictures-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4487F44C-0878-4929-A207-C377427EAABB";
 				USER_HEADER_SEARCH_PATHS = "objectiveflickr/LFWebAPIKit objectiveflickr/Source";
 				WRAPPER_EXTENSION = app;
 			};
