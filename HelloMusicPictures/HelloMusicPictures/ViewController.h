@@ -77,6 +77,8 @@
 - (IBAction)twit:(id)sender;
 
 - (void)registerMediaPlayerNotifications;
+- (void)displayMusicInfo:(MPMediaItem *)currentItem;
+- (NSString *)makeKeywordWithItem:(MPMediaItem *)currentItem;
 
 // for MPMediaPlayer
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;

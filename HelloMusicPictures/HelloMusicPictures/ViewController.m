@@ -191,6 +191,7 @@
 
 
 #pragma mark - MediaPlayer
+
 - (void) registerMediaPlayerNotifications
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -214,7 +215,7 @@
 }
 
 
-
+// 음악이 바뀌면
 - (void) handle_NowPlayingItemChanged: (id) notification
 {
     MPMediaItem *currentItem = [musicPlayer nowPlayingItem];
@@ -222,28 +223,7 @@
 	if (currentItem == nil) 
 		return; //곡이 없으면 스킵
 	
-	
-	
-	NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
-    if (titleString) {
-        titleLabel.text = [NSString stringWithFormat:@"%@",titleString];
-    } else {
-        titleLabel.text = @"Unknown Title";
-    }
-	
-    NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
-    if (artistString) {
-        artistLabel.text = [NSString stringWithFormat:@"%@",artistString];
-    } else {
-        artistLabel.text = @"Unknown Artist";
-    }
-	
-    NSString *albumString = [currentItem valueForProperty:MPMediaItemPropertyAlbumTitle];
-	if (albumString) {
-        albumLabel.text = [NSString stringWithFormat:@"%@",albumString];
-    } else {
-        albumLabel.text = @"Unknown Album";
-    }
+	[self displayMusicInfo:currentItem];
 	
 		
 	NSURL*     songURL = [currentItem valueForProperty:MPMediaItemPropertyAssetURL];
@@ -267,12 +247,12 @@
 		[picImageView1 setImage:[artwork imageWithSize:artwork.bounds.size]];
 	}
 	
-	// TODO 키워드 뽑아내기
 	
-	NSString *filteredKeyword = [self makeKeywordWithTitle:titleString artist:artistString album:albumString];
+	// 키워드를 걸러냄
+	NSString *filteredKeyword = [self makeKeywordWithItem:currentItem];
 
 
-	
+	// 이미지 불러오기
 	[imageLoader loadImages:filteredKeyword completion:^{
 		NSLog(@"load completed");
 		
@@ -300,87 +280,30 @@
 	}];
 }
 
-- (NSString *)removeSpecialCharacter:(NSString *)str
+
+// 음악 정보 추출
+- (void)displayMusicInfo:(MPMediaItem *)currentItem
 {
-	NSString *result = nil;
-
-	result = [[[[[str 
-				  stringByReplacingOccurrencesOfString:@"(" withString:@" "] 
-				 stringByReplacingOccurrencesOfString:@")" withString:@" "] 
-				stringByReplacingOccurrencesOfString:@"  " withString:@" "] 
-			   stringByReplacingOccurrencesOfString:@"'" withString:@""] 
-			  stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+	NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
+    if (titleString) {
+        titleLabel.text = [NSString stringWithFormat:@"%@",titleString];
+    } else {
+        titleLabel.text = @"Unknown Title";
+    }
 	
-	return result;
-}
-
-- (NSString *)makeKeywordWithTitle:(NSString*)title artist:(NSString *)artist album:(NSString*)album
-{
-	NSMutableArray *keywordList = [[NSMutableArray alloc] init];
+    NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
+    if (artistString) {
+        artistLabel.text = [NSString stringWithFormat:@"%@",artistString];
+    } else {
+        artistLabel.text = @"Unknown Artist";
+    }
 	
-	NSString *keyword = artist;
-
-	keyword = [self removeSpecialCharacter:keyword];
-	NSArray *keywordTmp = [keyword componentsSeparatedByString:@" "];
-	
-	for (int i = 0; i < keywordTmp.count; i++) {
-		if ([[keywordTmp objectAtIndex:i] length] > 2) {
-			[keywordList addObject:[keywordTmp objectAtIndex:i]];
-		}
-	}
-	
-	
-	keyword = [self removeSpecialCharacter:title];
-	keywordTmp = [keyword componentsSeparatedByString:@" "];
-	
-	for (int i = 0; i < keywordTmp.count; i++) {
-		if ([[keywordTmp objectAtIndex:i] length] > 2) {
-			[keywordList addObject:[keywordTmp objectAtIndex:i]];
-		}
-	}
-	
-	
-	
-	keyword = [self removeSpecialCharacter:album];
-	keywordTmp = [keyword componentsSeparatedByString:@" "];
-	
-	for (int i = 0; i < keywordTmp.count; i++) {
-		if ([[keywordTmp objectAtIndex:i] length] > 2) {
-			[keywordList addObject:[keywordTmp objectAtIndex:i]];
-		}
-	}
-	
-	NSString *filteredKeyword = nil;
-	
-	// 쓸만한 키워드가 없으면 기본 검색어로
-	if (keywordList.count < 1) {
-		filteredKeyword = @"music";
-	} else {
-		
-		// 검색어가 6개 이상이면 글자수가 많은 것만 취한다
-		if (keywordList.count > 5 /* keyword limit */) { 
-			NSLog(@"검색어가 %d개나 되어 짤라냅니다.", keywordList.count);
-			NSLog(@"before: %@", [keywordList componentsJoinedByString:@", "]);
-			NSSortDescriptor *sortDescriptor;
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"length"
-														  ascending:NO];
-			NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-			[keywordList sortUsingDescriptors:sortDescriptors];
-			
-			for (int i = keywordList.count - 1; i > 4/* keyword limit index */; i--) {
-				[keywordList removeObjectAtIndex:i];
-			}
-			
-			NSLog(@"after : %@", [keywordList componentsJoinedByString:@", "]);
-
-			
-		}
-		
-		filteredKeyword = [keywordList componentsJoinedByString:@", "];
-	}
-	
-	return filteredKeyword;
-	
+    NSString *albumString = [currentItem valueForProperty:MPMediaItemPropertyAlbumTitle];
+	if (albumString) {
+        albumLabel.text = [NSString stringWithFormat:@"%@",albumString];
+    } else {
+        albumLabel.text = @"Unknown Album";
+    }
 }
 
 
@@ -412,22 +335,6 @@
 }
 
 
-- (IBAction)showMediaPickerViewController:(id)sender
-{
-	[self extendControlsHidingTimer];
-	MPMediaPickerControllerLandScape *picker =
-			[[MPMediaPickerControllerLandScape alloc] initWithMediaTypes: MPMediaTypeMusic];
-		
-	picker.delegate						= self;
-	picker.allowsPickingMultipleItems	= YES;
-	picker.prompt						= NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
-
-	// The media item picker uses the default UI style, so it needs a default-style
-	//		status bar to match it visually
-	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleDefault animated: YES];
-
-	[self presentModalViewController: picker animated: YES];
-}
 
 
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
@@ -448,6 +355,27 @@
 	[self dismissModalViewControllerAnimated: YES];
 }
 
+
+
+#pragma mark - buttons
+
+
+- (IBAction)showMediaPickerViewController:(id)sender
+{
+	[self extendControlsHidingTimer];
+	MPMediaPickerControllerLandScape *picker =
+	[[MPMediaPickerControllerLandScape alloc] initWithMediaTypes: MPMediaTypeMusic];
+	
+	picker.delegate						= self;
+	picker.allowsPickingMultipleItems	= YES;
+	picker.prompt						= NSLocalizedString (@"Add songs to play", "Prompt in media item picker");
+	
+	// The media item picker uses the default UI style, so it needs a default-style
+	//		status bar to match it visually
+	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleDefault animated: YES];
+	
+	[self presentModalViewController: picker animated: YES];
+}
 
 - (IBAction)volumeChanged:(id)sender
 {
@@ -505,6 +433,102 @@
 		}]; 
 	}
 }
+
+#pragma mark - keyword
+
+// 키워드에 불필요한 문자 제거
+- (NSString *)removeSpecialCharacter:(NSString *)str
+{
+	NSString *result = nil;
+	
+	result = [[[[[str 
+				  stringByReplacingOccurrencesOfString:@"(" withString:@" "] 
+				 stringByReplacingOccurrencesOfString:@")" withString:@" "] 
+				stringByReplacingOccurrencesOfString:@"  " withString:@" "] 
+			   stringByReplacingOccurrencesOfString:@"'" withString:@""] 
+			  stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+	
+	return result;
+}
+
+// 키워드 뽑아내기
+- (NSString *)makeKeywordWithItem:(MPMediaItem *)currentItem
+{
+	return [self makeKeywordWithTitle:[currentItem valueForProperty:MPMediaItemPropertyTitle]
+							   artist:[currentItem valueForProperty:MPMediaItemPropertyArtist]
+								album:[currentItem valueForProperty:MPMediaItemPropertyAlbumTitle]];
+}
+
+// 키워드 뽑아내기
+- (NSString *)makeKeywordWithTitle:(NSString*)title artist:(NSString *)artist album:(NSString*)album
+{
+	NSMutableArray *keywordList = [[NSMutableArray alloc] init];
+	
+	NSString *keyword = artist;
+	
+	keyword = [self removeSpecialCharacter:keyword];
+	NSArray *keywordTmp = [keyword componentsSeparatedByString:@" "];
+	
+	for (int i = 0; i < keywordTmp.count; i++) {
+		if ([[keywordTmp objectAtIndex:i] length] > 2) {
+			[keywordList addObject:[keywordTmp objectAtIndex:i]];
+		}
+	}
+	
+	
+	keyword = [self removeSpecialCharacter:title];
+	keywordTmp = [keyword componentsSeparatedByString:@" "];
+	
+	for (int i = 0; i < keywordTmp.count; i++) {
+		if ([[keywordTmp objectAtIndex:i] length] > 2) {
+			[keywordList addObject:[keywordTmp objectAtIndex:i]];
+		}
+	}
+	
+	
+	
+	keyword = [self removeSpecialCharacter:album];
+	keywordTmp = [keyword componentsSeparatedByString:@" "];
+	
+	for (int i = 0; i < keywordTmp.count; i++) {
+		if ([[keywordTmp objectAtIndex:i] length] > 2) {
+			[keywordList addObject:[keywordTmp objectAtIndex:i]];
+		}
+	}
+	
+	NSString *filteredKeyword = nil;
+	
+	// 쓸만한 키워드가 없으면 기본 검색어로
+	if (keywordList.count < 1) {
+		filteredKeyword = @"music";
+	} else {
+		
+		// 검색어가 6개 이상이면 글자수가 많은 것만 취한다
+		if (keywordList.count > 5 /* keyword limit */) { 
+			NSLog(@"검색어가 %d개나 되어 짤라냅니다.", keywordList.count);
+			NSLog(@"before: %@", [keywordList componentsJoinedByString:@", "]);
+			NSSortDescriptor *sortDescriptor;
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"length"
+														 ascending:NO];
+			NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+			[keywordList sortUsingDescriptors:sortDescriptors];
+			
+			for (int i = keywordList.count - 1; i > 4/* keyword limit index */; i--) {
+				[keywordList removeObjectAtIndex:i];
+			}
+			
+			NSLog(@"after : %@", [keywordList componentsJoinedByString:@", "]);
+			
+			
+		}
+		
+		filteredKeyword = [keywordList componentsJoinedByString:@", "];
+	}
+	
+	return filteredKeyword;
+	
+}
+
 
 
 
