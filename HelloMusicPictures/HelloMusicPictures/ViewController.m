@@ -189,6 +189,20 @@
 }
 
 
+// 기기가 회전하면 애니매이션 중인 이미지가 깨지지 않도록 애니매이션이 멈추고 이미지 transform을 보정한다
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+
+	if (imageShowing == 1) {
+		[picImageView1.layer removeAllAnimations];
+		picImageView1.transform = CGAffineTransformIdentity;
+	} else {
+		[picImageView2.layer removeAllAnimations];
+		picImageView2.transform = CGAffineTransformIdentity;
+	}
+}
+
+
 
 #pragma mark - MediaPlayer
 
@@ -696,6 +710,8 @@
 	}
 	
 	[self toggleShowing];
+	
+	
 	
 	// Animation
 	[UIView 

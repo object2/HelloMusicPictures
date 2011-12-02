@@ -12,7 +12,6 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-//@synthesize flickrContext, flickrUserName;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
