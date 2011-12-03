@@ -446,6 +446,10 @@
 		[self presentViewController:twtCntrlr animated:YES completion:^{ 
 		}]; 
 	}
+	else
+	{
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=TWITTER"]];
+	}
 }
 
 #pragma mark - keyword
