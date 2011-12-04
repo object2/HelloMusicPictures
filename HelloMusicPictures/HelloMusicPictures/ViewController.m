@@ -474,7 +474,8 @@
 {
 	return [self makeKeywordWithTitle:[currentItem valueForProperty:MPMediaItemPropertyTitle]
 							   artist:[currentItem valueForProperty:MPMediaItemPropertyArtist]
-								album:[currentItem valueForProperty:MPMediaItemPropertyAlbumTitle]];
+								//album:[currentItem valueForProperty:MPMediaItemPropertyAlbumTitle]
+								album:@""]; // 앨범명 검색어에서 제외
 }
 
 // 키워드 뽑아내기
