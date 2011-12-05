@@ -10,6 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
+@class ImageLoader;
 @class ViewController;
 @interface PlayImageView : UIImageView {
 }
@@ -18,7 +19,7 @@
 -(void) loadNextImageWithViewController:(ViewController*) aViewCon withImageLoader:(ImageLoader*)anImageLoader;
 @end
 
-@class ImageLoader;
+
 
 @interface ViewController : UIViewController <MPMediaPickerControllerDelegate>
 {
