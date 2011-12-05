@@ -10,6 +10,12 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
+@class ViewController;
+@interface PlayImageView : UIImageView {
+}
+-(void) setAfterTransformWithViewController:(ViewController*)anObject;
+@end
+
 @class ImageLoader;
 
 @interface ViewController : UIViewController <MPMediaPickerControllerDelegate>
@@ -24,8 +30,8 @@
 	IBOutlet UIButton *prevButton;
 	IBOutlet UIButton *nextButton;	
 	IBOutlet UISwitch *randomSwitch;
-	IBOutlet UIImageView *picImageView1;
-	IBOutlet UIImageView *picImageView2;
+	IBOutlet PlayImageView *picImageView1;
+	IBOutlet PlayImageView *picImageView2;
 	IBOutlet UITextView *lyricsView;
 	
 	int imageIdx;

@@ -18,6 +18,16 @@
 
 #define GUI_TIME 5.0f
 
+
+@implementation PlayImageView
+-(void) setAfterTransformWithViewController:(ViewController*)anObject
+{
+	self.transform = [anObject getAfterTransformWithWidth:self.image.size.width height:self.image.size.height];
+}
+@end
+
+
+
 @implementation ViewController
 
 @synthesize controlsHideTimer;
@@ -737,11 +747,9 @@
 		  animations:^{ /* ken animations */
 			  
 			  if (imageShowing == 1) {
-				  picImageView1.transform = [self getAfterTransformWithWidth:picImageView1.image.size.width
-																   height:picImageView1.image.size.height];
+				  [picImageView1 setAfterTransformWithViewController:self];
 			  } else {
-				  picImageView2.transform = [self getAfterTransformWithWidth:picImageView2.image.size.width
-																   height:picImageView2.image.size.height];
+				  [picImageView2 setAfterTransformWithViewController:self];
 			  }
 			  
 			  
