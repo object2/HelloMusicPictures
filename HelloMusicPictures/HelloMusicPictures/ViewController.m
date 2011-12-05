@@ -303,25 +303,13 @@
 - (void)displayMusicInfo:(MPMediaItem *)currentItem
 {
 	NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
-    if (titleString) {
-        titleLabel.text = [NSString stringWithFormat:@"%@",titleString];
-    } else {
-        titleLabel.text = @"Unknown Title";
-    }
+	titleLabel.text = titleString?titleString:@"Unknown Title";
 	
     NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
-    if (artistString) {
-        artistLabel.text = [NSString stringWithFormat:@"%@",artistString];
-    } else {
-        artistLabel.text = @"Unknown Artist";
-    }
+	artistLabel.text = artistString?artistString:@"Unknown Artist";
 	
     NSString *albumString = [currentItem valueForProperty:MPMediaItemPropertyAlbumTitle];
-	if (albumString) {
-        albumLabel.text = [NSString stringWithFormat:@"%@",albumString];
-    } else {
-        albumLabel.text = @"Unknown Album";
-    }
+	albumLabel.text = albumString?albumString:@"Unknown Album";
 	
 	NSURL*     songURL = [currentItem valueForProperty:MPMediaItemPropertyAssetURL];
 	AVAsset* songAsset = [AVURLAsset URLAssetWithURL:songURL options:nil];
