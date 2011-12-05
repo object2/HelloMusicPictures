@@ -202,14 +202,10 @@
 // 기기가 회전하면 애니매이션 중인 이미지가 깨지지 않도록 애니매이션이 멈추고 이미지 transform을 보정한다
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-
-	if (imageShowing == 1) {
-		[picImageView1.layer removeAllAnimations];
-		picImageView1.transform = CGAffineTransformIdentity;
-	} else {
-		[picImageView2.layer removeAllAnimations];
-		picImageView2.transform = CGAffineTransformIdentity;
-	}
+	PlayImageView *theImageView = [self showingPicImageView];
+	
+	[theImageView.layer removeAllAnimations];
+	theImageView.transform = CGAffineTransformIdentity;
 }
 
 
@@ -712,17 +708,10 @@
 - (void)startSlideshow
 {
 	// beforeAnimation
-	if (imageShowing == 1) {
-		picImageView2.image = [imageLoader nextImage];//[imageList objectAtIndex:imageIdx];
-		picImageView2.transform = [self getBeforeTransformWithWidth:picImageView2.image.size.width 
-														  height:picImageView2.image.size.height];
-		
-	} else {
-		picImageView1.image = [imageLoader nextImage];//[imageList objectAtIndex:imageIdx];
-		picImageView1.transform = [self getBeforeTransformWithWidth:picImageView1.image.size.width 
-														  height:picImageView1.image.size.height];
-		
-	}
+	PlayImageView *theImageView = [self notShowingPicImageView];
+	theImageView.image = [imageLoader nextImage];//[imageList objectAtIndex:imageIdx];
+	theImageView.transform = [self getBeforeTransformWithWidth:theImageView.image.size.width 
+														 height:theImageView.image.size.height];
 	
 	[self toggleShowing];
 	
@@ -762,5 +751,14 @@
 	}
 	return picImageView2;
 }
+
+-(PlayImageView*) notShowingPicImageView
+{
+	if (imageShowing == 1) {
+		return picImageView2;
+	}
+	return picImageView1;
+}
+
 
 @end
