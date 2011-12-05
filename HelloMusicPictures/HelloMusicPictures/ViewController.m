@@ -82,12 +82,12 @@
 	
 	
 	swipeRecogRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeNextSong:)];
-	swipeRecogRight.numberOfTouchesRequired = 3;
+	swipeRecogRight.numberOfTouchesRequired = 2;
 	swipeRecogRight.direction = UISwipeGestureRecognizerDirectionLeft;
 	[self.view addGestureRecognizer:swipeRecogRight];
 	
 	swipeRecogLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipePrevSong:)];
-	swipeRecogLeft.numberOfTouchesRequired = 3;
+	swipeRecogLeft.numberOfTouchesRequired = 2;
 	swipeRecogLeft.direction = UISwipeGestureRecognizerDirectionRight;
 	[self.view addGestureRecognizer:swipeRecogLeft];
 	
