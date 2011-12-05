@@ -13,7 +13,9 @@
 @class ViewController;
 @interface PlayImageView : UIImageView {
 }
+-(void) stopAllAnimation;
 -(void) setAfterTransformWithViewController:(ViewController*)anObject;
+-(void) loadNextImageWithViewController:(ViewController*) aViewCon withImageLoader:(ImageLoader*)anImageLoader;
 @end
 
 @class ImageLoader;

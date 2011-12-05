@@ -24,6 +24,19 @@
 {
 	self.transform = [anObject getAfterTransformWithWidth:self.image.size.width height:self.image.size.height];
 }
+
+-(void) loadNextImageWithViewController:(ViewController*) aViewCon withImageLoader:(ImageLoader*)anImageLoader
+{
+	self.image = [anImageLoader nextImage];
+	self.transform = [aViewCon getBeforeTransformWithWidth:self.image.size.width height:self.image.size.height];
+}
+
+-(void) stopAllAnimation
+{
+	[self.layer removeAllAnimations];
+	self.transform = CGAffineTransformIdentity;	
+}
+
 @end
 
 
@@ -202,12 +215,8 @@
 // 기기가 회전하면 애니매이션 중인 이미지가 깨지지 않도록 애니매이션이 멈추고 이미지 transform을 보정한다
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-	PlayImageView *theImageView = [self showingPicImageView];
-	
-	[theImageView.layer removeAllAnimations];
-	theImageView.transform = CGAffineTransformIdentity;
+	[[self showingPicImageView] stopAllAnimation];
 }
-
 
 
 #pragma mark - MediaPlayer
@@ -708,10 +717,7 @@
 - (void)startSlideshow
 {
 	// beforeAnimation
-	PlayImageView *theImageView = [self notShowingPicImageView];
-	theImageView.image = [imageLoader nextImage];//[imageList objectAtIndex:imageIdx];
-	theImageView.transform = [self getBeforeTransformWithWidth:theImageView.image.size.width 
-														 height:theImageView.image.size.height];
+	[[self notShowingPicImageView] loadNextImageWithViewController:self withImageLoader:imageLoader];
 	
 	[self toggleShowing];
 	
