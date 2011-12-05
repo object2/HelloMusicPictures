@@ -56,19 +56,16 @@
 
 -(void) twoFingerSwipeUp:(id)sender
 {
-	NSLog(@"swip!!");
 	[self showMediaPickerViewController:nil];
 }
 
 -(void)swipeNextSong:(id)sender
 {
-	NSLog(@"swipeNextSong========");
 	[self nextSong:nil];
 }
 
 -(void)swipePrevSong:(id)sender
 {
-	NSLog(@"swipePrevSong========");
 	[self previousSong:nil];
 }
 
@@ -151,14 +148,21 @@
 	[self animateControlsWithAlpha:0.0f];
 }
 
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+	
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self animateControlsWithAlpha:0.8f];
-	[self extendControlsHidingTimer];
+	if (self.controlsHideTimer != nil) {
+		[self onControlsHidingTimerEvent:nil];
+	}else
+	{
+		[self animateControlsWithAlpha:0.8f];
+		[self extendControlsHidingTimer];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated

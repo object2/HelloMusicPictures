@@ -80,6 +80,11 @@
 - (void)displayMusicInfo:(MPMediaItem *)currentItem;
 - (NSString *)makeKeywordWithItem:(MPMediaItem *)currentItem;
 
+
+//UI
+-(void) onControlsHidingTimerEvent:(NSTimer*)aTimer;
+
+
 // for MPMediaPlayer
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;
 
