@@ -13,6 +13,7 @@
 @class ImageLoader;
 @class ViewController;
 @interface PlayImageView : UIImageView {
+	CGFloat imageEffectFlag;
 }
 -(void) stopAllAnimation;
 -(void) setAfterTransformWithViewController:(ViewController*)anObject;
