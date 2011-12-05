@@ -312,10 +312,11 @@
 	AVAsset* songAsset = [AVURLAsset URLAssetWithURL:songURL options:nil];
 	NSString*   lyrics = [songAsset lyrics];
 	
-	if (lyrics) {
+	if (lyrics.length > 10) {
 		
 		[lyricsView setHidden:NO];
 		lyricsView.text = [NSString stringWithFormat:@"%@",lyrics];
+		NSLog(@"[%@], length = %d ", lyrics, lyrics.length);
 		
 	}else
 	{
