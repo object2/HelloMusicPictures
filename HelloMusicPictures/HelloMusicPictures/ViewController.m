@@ -20,15 +20,105 @@
 
 
 @implementation PlayImageView
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	self = [super initWithCoder:aDecoder];
+	imageEffectFlag = 1.0;
+	return self;
+}
+
+- (CGAffineTransform)getBeforeTransformWithWidth:(CGFloat)width height:(CGFloat)height
+{
+	CGAffineTransform transform = CGAffineTransformIdentity;
+	
+	if(UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+		if(width / height > 1.6) {
+			//float aspectRatio = L_HEIGHT / height;
+			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
+			NSLog(@"Moving hor");
+			
+		} else if(width / height < 0.8) {
+			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
+			NSLog(@"Moving ver %d", dy);
+		} else {
+			transform = CGAffineTransformMakeScale(1.4, 1.4);	
+		}
+		
+	} else {
+		if(width / height > 1.2) {
+			//float aspectRatio = P_HEIGHT / height;
+			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
+			
+		} else if(width / height < 0.6) {
+			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
+			
+		} else {
+			transform = CGAffineTransformMakeScale(1.4, 1.4);	
+		}
+		
+	}
+	
+	return transform;
+}
+
+- (CGAffineTransform)getAfterTransformWithWidth:(CGFloat)width height:(CGFloat)height
+{
+	CGAffineTransform transform = CGAffineTransformIdentity;
+	
+	if(UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ) {
+		if(width / height > 1.6) {
+			//float aspectRatio = L_HEIGHT / height;
+			imageEffectFlag = imageEffectFlag * -1;
+			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
+			
+		} else if(width / height < 0.8) {
+			imageEffectFlag = imageEffectFlag * -1;
+			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag);
+			
+		} else {
+			transform = CGAffineTransformIdentity;
+			
+		}
+		
+	} else {
+		if(width / height > 1.2) {
+			//float aspectRatio = P_HEIGHT / height;
+			imageEffectFlag = imageEffectFlag * -1;
+			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
+			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
+			
+		} else if(width / height < 0.6) {
+			imageEffectFlag = imageEffectFlag * -1;
+			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
+			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); 
+			
+		} else {
+			transform = CGAffineTransformIdentity;
+		}
+		
+	}
+	
+	return transform;
+	
+	
+}
+
 -(void) setAfterTransformWithViewController:(ViewController*)anObject
 {
-	self.transform = [anObject getAfterTransformWithWidth:self.image.size.width height:self.image.size.height];
+	self.transform = [self getAfterTransformWithWidth:self.image.size.width height:self.image.size.height];
 }
 
 -(void) loadNextImageWithViewController:(ViewController*) aViewCon withImageLoader:(ImageLoader*)anImageLoader
 {
 	self.image = [anImageLoader nextImage];
-	self.transform = [aViewCon getBeforeTransformWithWidth:self.image.size.width height:self.image.size.height];
+	self.transform = [self getBeforeTransformWithWidth:self.image.size.width height:self.image.size.height];
 }
 
 -(void) stopAllAnimation
@@ -625,90 +715,6 @@
 {
 	imageShowing = (imageShowing == 1) ? 2: 1;
 }
-
-- (CGAffineTransform)getBeforeTransformWithWidth:(CGFloat)width height:(CGFloat)height
-{
-	CGAffineTransform transform = CGAffineTransformIdentity;
-	
-	if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-		if(width / height > 1.6) {
-			//float aspectRatio = L_HEIGHT / height;
-			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			NSLog(@"Moving hor");
-			
-		} else if(width / height < 0.8) {
-			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
-			NSLog(@"Moving ver %d", dy);
-		} else {
-			transform = CGAffineTransformMakeScale(1.4, 1.4);	
-		}
-		
-	} else {
-		if(width / height > 1.2) {
-			//float aspectRatio = P_HEIGHT / height;
-			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			
-		} else if(width / height < 0.6) {
-			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
-			
-		} else {
-			transform = CGAffineTransformMakeScale(1.4, 1.4);	
-		}
-		
-	}
-	
-	return transform;
-}
-
-- (CGAffineTransform)getAfterTransformWithWidth:(CGFloat)width height:(CGFloat)height
-{
-	CGAffineTransform transform = CGAffineTransformIdentity;
-	
-	if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-		if(width / height > 1.6) {
-			//float aspectRatio = L_HEIGHT / height;
-			imageEffectFlag = imageEffectFlag * -1;
-			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			
-		} else if(width / height < 0.8) {
-			imageEffectFlag = imageEffectFlag * -1;
-			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag);
-
-		} else {
-			transform = CGAffineTransformIdentity;
-			
-		}
-		
-	} else {
-		if(width / height > 1.2) {
-			//float aspectRatio = P_HEIGHT / height;
-			imageEffectFlag = imageEffectFlag * -1;
-			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			
-		} else if(width / height < 0.6) {
-			imageEffectFlag = imageEffectFlag * -1;
-			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); 
-			
-		} else {
-			transform = CGAffineTransformIdentity;
-		}
-		
-	}
-	
-	return transform;
-	
-	
-}
-
-
 
 - (void)startSlideshow
 {
