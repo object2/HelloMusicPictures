@@ -545,6 +545,9 @@
 			
 		}
 		
+		
+		NSLog(@"keword : %@", [keywordList componentsJoinedByString:@", "]);
+		
 		filteredKeyword = [keywordList componentsJoinedByString:@", "];
 	}
 	
