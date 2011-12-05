@@ -54,6 +54,8 @@
 	UISwipeGestureRecognizer *swipeRecogRight;
 	UISwipeGestureRecognizer *swipeRecogLeft;
 }
+-(PlayImageView*) showingPicImageView;
+
 @property(nonatomic, retain) NSTimer *controlsHideTimer;
 - (void)showNextPicture;
 - (void)stopShowPicture;

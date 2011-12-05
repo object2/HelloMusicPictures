@@ -745,14 +745,7 @@
 		  delay:0.0
 		  options:UIViewAnimationCurveEaseInOut
 		  animations:^{ /* ken animations */
-			  
-			  if (imageShowing == 1) {
-				  [picImageView1 setAfterTransformWithViewController:self];
-			  } else {
-				  [picImageView2 setAfterTransformWithViewController:self];
-			  }
-			  
-			  
+			  [[self showingPicImageView] setAfterTransformWithViewController:self];
 		  }
 		  completion:^(BOOL finished){
 			  
@@ -760,6 +753,14 @@
 	 }
 	 ];
 	
+}
+
+-(PlayImageView*) showingPicImageView
+{
+	if (imageShowing == 1) {
+		return picImageView1;
+	}
+	return picImageView2;
 }
 
 @end
