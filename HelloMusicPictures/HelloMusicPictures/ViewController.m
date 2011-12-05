@@ -79,19 +79,16 @@
 
 -(void) twoFingerSwipeUp:(id)sender
 {
-	NSLog(@"swip!!");
 	[self showMediaPickerViewController:nil];
 }
 
 -(void)swipeNextSong:(id)sender
 {
-	NSLog(@"swipeNextSong========");
 	[self nextSong:nil];
 }
 
 -(void)swipePrevSong:(id)sender
 {
-	NSLog(@"swipePrevSong========");
 	[self previousSong:nil];
 }
 
@@ -108,12 +105,12 @@
 	
 	
 	swipeRecogRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeNextSong:)];
-	swipeRecogRight.numberOfTouchesRequired = 3;
+	swipeRecogRight.numberOfTouchesRequired = 2;
 	swipeRecogRight.direction = UISwipeGestureRecognizerDirectionLeft;
 	[self.view addGestureRecognizer:swipeRecogRight];
 	
 	swipeRecogLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipePrevSong:)];
-	swipeRecogLeft.numberOfTouchesRequired = 3;
+	swipeRecogLeft.numberOfTouchesRequired = 2;
 	swipeRecogLeft.direction = UISwipeGestureRecognizerDirectionRight;
 	[self.view addGestureRecognizer:swipeRecogLeft];
 	
@@ -174,14 +171,21 @@
 	[self animateControlsWithAlpha:0.0f];
 }
 
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+	
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self animateControlsWithAlpha:0.8f];
-	[self extendControlsHidingTimer];
+	if (self.controlsHideTimer != nil) {
+		[self onControlsHidingTimerEvent:nil];
+	}else
+	{
+		[self animateControlsWithAlpha:0.8f];
+		[self extendControlsHidingTimer];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -254,21 +258,6 @@
 	
 	[self displayMusicInfo:currentItem];
 	
-		
-	NSURL*     songURL = [currentItem valueForProperty:MPMediaItemPropertyAssetURL];
-	AVAsset* songAsset = [AVURLAsset URLAssetWithURL:songURL options:nil];
-	NSString*   lyrics = [songAsset lyrics];
-		
-	if (lyrics) {
-		
-		[lyricsView setHidden:NO];
-		lyricsView.text = [NSString stringWithFormat:@"%@",lyrics];
-		
-	}else
-	{
-		[lyricsView setHidden:YES];
-		lyricsView.text = @"가사가 없음..";
-	}
 	
 	if (picImageView1.image == nil) 
 	{
@@ -333,6 +322,22 @@
     } else {
         albumLabel.text = @"Unknown Album";
     }
+	
+	NSURL*     songURL = [currentItem valueForProperty:MPMediaItemPropertyAssetURL];
+	AVAsset* songAsset = [AVURLAsset URLAssetWithURL:songURL options:nil];
+	NSString*   lyrics = [songAsset lyrics];
+	
+	if (lyrics.length > 10) {
+		
+		[lyricsView setHidden:NO];
+		lyricsView.text = [NSString stringWithFormat:@"%@",lyrics];
+		NSLog(@"[%@], length = %d ", lyrics, lyrics.length);
+		
+	}else
+	{
+		[lyricsView setHidden:YES];
+		lyricsView.text = @"가사가 없음..";
+	}
 }
 
 
@@ -555,6 +560,9 @@
 			
 			
 		}
+		
+		
+		NSLog(@"keword : %@", [keywordList componentsJoinedByString:@", "]);
 		
 		filteredKeyword = [keywordList componentsJoinedByString:@", "];
 	}

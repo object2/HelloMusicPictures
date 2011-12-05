@@ -27,6 +27,8 @@
 		91A3D286148B634A004C4A28 /* control_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A3D285148B634A004C4A28 /* control_bar.png */; };
 		D33EFEDB1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */; };
 		D36B14231473697700BC39B0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36B14221473697700BC39B0 /* Twitter.framework */; };
+		D3A022E8148CF1B40003153E /* Appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A022E7148CF1B40003153E /* Appicon.png */; };
+		D3A022EA148CF1BC0003153E /* Appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A022E9148CF1BC0003153E /* Appicon.png */; };
 		D3BB9418146927B000CF59D5 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB9417146927B000CF59D5 /* ImageLoader.m */; };
 		D3DB535A1473AFF600EF8193 /* ImageCaching.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DB53591473AFF600EF8193 /* ImageCaching.m */; };
 		D3DB53831474E61700EF8193 /* FlickrImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DB53821474E61700EF8193 /* FlickrImageLoader.m */; };
@@ -94,6 +96,8 @@
 		D33EFED91468098C0044D1A7 /* MPMediaPickerControllerLandScape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPMediaPickerControllerLandScape.h; path = ../MPMediaPickerControllerLandScape.h; sourceTree = "<group>"; };
 		D33EFEDA1468098C0044D1A7 /* MPMediaPickerControllerLandScape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPMediaPickerControllerLandScape.m; path = ../MPMediaPickerControllerLandScape.m; sourceTree = "<group>"; };
 		D36B14221473697700BC39B0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		D3A022E7148CF1B40003153E /* Appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Appicon.png; sourceTree = "<group>"; };
+		D3A022E9148CF1BC0003153E /* Appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Appicon.png; sourceTree = "<group>"; };
 		D3BB9416146927B000CF59D5 /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		D3BB9417146927B000CF59D5 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		D3DB53581473AFF600EF8193 /* ImageCaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageCaching.h; path = ../ImageCaching.h; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 		39D123AF144C5925008C0E5C = {
 			isa = PBXGroup;
 			children = (
+				D3A022E9148CF1BC0003153E /* Appicon.png */,
 				91D51B441459BC380076C84D /* SystemConfiguration.framework */,
 				918FE4DC145595D300D87C5A /* ObjectiveFlickr.xcodeproj */,
 				39D123C4144C5925008C0E5C /* HelloMusicPictures */,
@@ -235,6 +240,7 @@
 		91A3D27F148B5FF9004C4A28 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3A022E7148CF1B40003153E /* Appicon.png */,
 				39D123D0144C5925008C0E5C /* MainStoryboard.storyboard */,
 				91A3D280148B6030004C4A28 /* Images */,
 			);
@@ -348,6 +354,8 @@
 				39D123C9144C5925008C0E5C /* InfoPlist.strings in Resources */,
 				39D123D2144C5925008C0E5C /* MainStoryboard.storyboard in Resources */,
 				91A3D286148B634A004C4A28 /* control_bar.png in Resources */,
+				D3A022E8148CF1B40003153E /* Appicon.png in Resources */,
+				D3A022EA148CF1BC0003153E /* Appicon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
