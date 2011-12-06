@@ -182,8 +182,6 @@
 	[self previousSong:nil];
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -211,7 +209,7 @@
 	[volumeSlider setValue:[musicPlayer volume]];
 	
 	
-	if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {		
+	if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
 		
 		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
 	}else {
