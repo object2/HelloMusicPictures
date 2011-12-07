@@ -69,8 +69,6 @@
 - (void)startSlideshow;
 - (void)toggleAlpha;
 - (void)toggleShowing;
-- (CGAffineTransform)getAfterTransformWithWidth:(CGFloat)width height:(CGFloat)height;
-- (CGAffineTransform)getBeforeTransformWithWidth:(CGFloat)width height:(CGFloat)height;
 
 
 
