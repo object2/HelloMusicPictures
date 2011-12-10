@@ -135,6 +135,7 @@
 
 @synthesize controlsHideTimer;
 @synthesize picImageView1, picImageView2;
+@synthesize progressBar, progressTimer;
 @synthesize nextPicTimer;
 @synthesize musicPlayer;
 @synthesize pauseStart, previousFireDate;
@@ -345,6 +346,11 @@
 		return; //곡이 없으면 스킵
 	
 	[self displayMusicInfo:currentItem];
+	progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressBar) userInfo:nil repeats:YES];
+	
+
+	
+	
 	
 	
 	if (picImageView1.image == nil) 
@@ -465,6 +471,17 @@
 	[self dismissModalViewControllerAnimated: YES];
 }
 
+
+- (void)updateProgressBar
+{
+	NSTimeInterval currentTime	= [musicPlayer currentPlaybackTime];
+	NSTimeInterval fullTime		= [[[musicPlayer nowPlayingItem] valueForProperty:MPMediaItemPropertyPlaybackDuration] doubleValue];
+	CGRect curFrame = [progressBar frame];
+	curFrame.size.width = 858 * currentTime / fullTime;
+	[progressBar setFrame:curFrame];
+	
+	
+}
 
 
 #pragma mark - buttons

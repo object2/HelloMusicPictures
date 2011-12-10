@@ -38,6 +38,8 @@
 	IBOutlet PlayImageView *picImageView2;
 	IBOutlet UITextView *lyricsView;
 	
+	IBOutlet UIImageView *progressBar;
+	
 	int imageIdx;
 	int imageShowing;
 	CGFloat imageEffectFlag; // 화면 애니메이션에서 사용
@@ -47,6 +49,7 @@
 	MPMusicPlayerController *musicPlayer;
 	
 	NSTimer *nextPicTimer;
+	NSTimer *progressTimer;
 	NSDictionary *responseDict;
 	
 	NSDate *pauseStart;
@@ -89,6 +92,7 @@
 - (void)registerMediaPlayerNotifications;
 - (void)displayMusicInfo:(MPMediaItem *)currentItem;
 - (NSString *)makeKeywordWithItem:(MPMediaItem *)currentItem;
+- (void)updateProgressBar;
 
 
 //UI
@@ -97,6 +101,8 @@
 
 // for MPMediaPlayer
 @property (nonatomic, strong) MPMusicPlayerController *musicPlayer;
+@property (nonatomic, strong) UIImageView *progressBar;
+@property (nonatomic, strong) NSTimer *progressTimer;
 
 // for Flicker
 @property (nonatomic, strong) NSDate *pauseStart;
