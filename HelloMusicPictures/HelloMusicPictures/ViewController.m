@@ -16,7 +16,10 @@
 #define P_WIDTH 768
 #define P_HEIGHT 1004
 
-#define GUI_TIME 5.0f
+#define GUI_TIME 7.0f
+#define GUI_ALPHA 1.0f
+
+#define PROGRESS_BAR_LENGTH 858
 
 
 @implementation PlayImageView
@@ -211,11 +214,11 @@
 	
 	
 	if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
-		
-		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
+		[self setPlayButtonToPause];
+//		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
 	}else {
-		
-		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
+		[self setPauseButtonToPlay];
+//		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
 	}
 
 	
@@ -272,7 +275,7 @@
 		[self onControlsHidingTimerEvent:nil];
 	}else
 	{
-		[self animateControlsWithAlpha:0.8f];
+		[self animateControlsWithAlpha:GUI_ALPHA];
 		[self extendControlsHidingTimer];
 	}
 }
@@ -346,7 +349,12 @@
 		return; //곡이 없으면 스킵
 	
 	[self displayMusicInfo:currentItem];
-	progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateProgressBar) userInfo:nil repeats:YES];
+	
+	// 음악 진행바
+	[progressTimer invalidate];
+	progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self 
+												   selector:@selector(updateProgressBar) 
+												   userInfo:nil repeats:YES];
 	
 
 	
@@ -413,7 +421,7 @@
 		
 		[lyricsView setHidden:NO];
 		lyricsView.text = [NSString stringWithFormat:@"%@",lyrics];
-		NSLog(@"[%@], length = %d ", lyrics, lyrics.length);
+		
 		
 	}else
 	{
@@ -429,13 +437,15 @@
 	MPMusicPlaybackState playbackState = [musicPlayer playbackState];
 	
 	if (playbackState == MPMusicPlaybackStatePaused) {
-		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
-		
+//		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
+		[self setPauseButtonToPlay];
 	} else if (playbackState == MPMusicPlaybackStatePlaying) {
-		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
+//		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
+		[self setPlayButtonToPause];
 		
 	} else if (playbackState == MPMusicPlaybackStateStopped) {
-		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
+//		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
+		[self setPauseButtonToPlay];
 		[musicPlayer stop];
 		[self stopShowPicture];
 		
@@ -443,6 +453,17 @@
 	
 
 	
+}
+
+- (void)setPlayButtonToPause
+{
+	[playPauseButton setImage:[UIImage imageNamed:@"pause_icon_02"] forState:UIControlStateNormal];
+
+}
+
+- (void)setPauseButtonToPlay
+{
+	[playPauseButton setImage:[UIImage imageNamed:@"play_icon_02"] forState:UIControlStateNormal];
 }
 
 - (void) handle_VolumeChanged: (id) notification
@@ -472,12 +493,14 @@
 }
 
 
+
+// 음악 진행바 업데이트
 - (void)updateProgressBar
 {
 	NSTimeInterval currentTime	= [musicPlayer currentPlaybackTime];
 	NSTimeInterval fullTime		= [[[musicPlayer nowPlayingItem] valueForProperty:MPMediaItemPropertyPlaybackDuration] doubleValue];
 	CGRect curFrame = [progressBar frame];
-	curFrame.size.width = 858 * currentTime / fullTime;
+	curFrame.size.width = PROGRESS_BAR_LENGTH * currentTime / fullTime;
 	[progressBar setFrame:curFrame];
 	
 	

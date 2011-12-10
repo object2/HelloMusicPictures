@@ -93,6 +93,10 @@
 - (void)displayMusicInfo:(MPMediaItem *)currentItem;
 - (NSString *)makeKeywordWithItem:(MPMediaItem *)currentItem;
 - (void)updateProgressBar;
+- (void)setPlayButtonToPause;
+- (void)setPauseButtonToPlay;
+
+
 
 
 //UI
