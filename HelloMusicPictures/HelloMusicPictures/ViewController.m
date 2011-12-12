@@ -26,7 +26,6 @@
 @implementation ViewController
 
 @synthesize controlsHideTimer;
-//@synthesize picImageView1, picImageView2;
 @synthesize progressBar, progressTimer;
 @synthesize nextPicTimer;
 @synthesize musicPlayer;
@@ -104,10 +103,8 @@
 	
 	if ([musicPlayer playbackState] == MPMusicPlaybackStatePlaying) {
 		[self setPlayButtonToPause];
-//		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
 	}else {
 		[self setPauseButtonToPlay];
-//		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
 	}
 
 	
@@ -130,7 +127,11 @@
 -(void) extendControlsHidingTimer
 {
 	[self.controlsHideTimer invalidate];
-	self.controlsHideTimer = [NSTimer scheduledTimerWithTimeInterval:GUI_TIME target:self selector:@selector(onControlsHidingTimerEvent:) userInfo:nil repeats:NO];
+	self.controlsHideTimer = [NSTimer scheduledTimerWithTimeInterval:GUI_TIME 
+															  target:self
+															selector:@selector(onControlsHidingTimerEvent:) 
+															userInfo:nil
+															 repeats:NO];
 }
 
 -(void) animateControlsWithAlpha:(CGFloat)aFloat
@@ -153,11 +154,6 @@
 	[self animateControlsWithAlpha:0.0f];
 }
 
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	
-}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -611,10 +607,6 @@
 	[nextPicTimer setFireDate:[previousFireDate initWithTimeInterval:pauseTime sinceDate:previousFireDate]];
 
 }
-
-
-
-#pragma mark animation
 
 
 @end
