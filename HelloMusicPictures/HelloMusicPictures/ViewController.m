@@ -166,25 +166,10 @@
 	}
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 	[controls setAlpha: 0.0];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -468,17 +453,13 @@
 
 
 
-
-
-
-#pragma mark - Picture
-
+#pragma mark - Timer
 
 - (void)stopShowPicture
 {
 	NSLog(@"stop pic");
 	[nextPicTimer invalidate];
-
+	
 }
 
 - (void)pauseShowPicture
@@ -491,15 +472,6 @@
 	[nextPicTimer setFireDate:[NSDate distantFuture]];
 }
 
-- (IBAction)saveImage:(id)sender {
-	[self extendControlsHidingTimer];
-	UIImageWriteToSavedPhotosAlbum((UIImage*)[aniView showingPicImageView], self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-	NSLog(@"%s %@ error=%@ context=%@", __PRETTY_FUNCTION__, image, error, contextInfo);
-}
 
 
 - (void)restartShowPicture
@@ -508,7 +480,21 @@
 	float pauseTime = -1 * [pauseStart timeIntervalSinceNow];
 	
 	[nextPicTimer setFireDate:[previousFireDate initWithTimeInterval:pauseTime sinceDate:previousFireDate]];
+	
+}
 
+
+
+#pragma mark - Picture
+
+- (IBAction)saveImage:(id)sender {
+	[self extendControlsHidingTimer];
+	UIImageWriteToSavedPhotosAlbum((UIImage*)[aniView showingPicImageView], self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+	NSLog(@"%s %@ error=%@ context=%@", __PRETTY_FUNCTION__, image, error, contextInfo);
 }
 
 
