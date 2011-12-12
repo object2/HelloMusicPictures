@@ -63,9 +63,6 @@
 
 
 - (IBAction)saveImage:(id)sender;
-// flickr
-- (NSString *)removeSpecialCharacter:(NSString *)str;
-- (NSString *)makeKeywordWithTitle:(NSString*)title artist:(NSString *)artist album:(NSString*)album;
 
 // for MPMediaPlayer
 - (IBAction)showMediaPickerViewController:(id)sender;
@@ -78,7 +75,6 @@
 
 - (void)registerMediaPlayerNotifications;
 - (void)displayMusicInfo:(MPMediaItem *)currentItem;
-- (NSString *)makeKeywordWithItem:(MPMediaItem *)currentItem;
 - (void)updateProgressBar;
 - (void)setPlayButtonToPause;
 - (void)setPauseButtonToPlay;
