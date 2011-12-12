@@ -21,6 +21,8 @@
 
 #define PROGRESS_BAR_LENGTH 858
 
+#pragma mark - PlayImageView
+
 
 @implementation PlayImageView
 
@@ -132,6 +134,7 @@
 
 @end
 
+#pragma mark - ViewController
 
 
 @implementation ViewController
@@ -437,14 +440,11 @@
 	MPMusicPlaybackState playbackState = [musicPlayer playbackState];
 	
 	if (playbackState == MPMusicPlaybackStatePaused) {
-//		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
 		[self setPauseButtonToPlay];
 	} else if (playbackState == MPMusicPlaybackStatePlaying) {
-//		[playPauseButton setTitle:@"일시정지" forState:UIControlStateNormal];
 		[self setPlayButtonToPause];
 		
 	} else if (playbackState == MPMusicPlaybackStateStopped) {
-//		[playPauseButton setTitle:@"재생" forState:UIControlStateNormal];
 		[self setPauseButtonToPlay];
 		[musicPlayer stop];
 		[self stopShowPicture];
@@ -691,11 +691,6 @@
 
 
 #pragma mark - Picture
-
-- (void)showNextPicture
-{
-	[picImageView1 setImage:[imageLoader nextImage]];
-}
 
 
 - (void)stopShowPicture

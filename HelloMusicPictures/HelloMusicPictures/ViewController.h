@@ -64,7 +64,6 @@
 -(PlayImageView*) showingPicImageView;
 -(PlayImageView*) notShowingPicImageView;
 @property(nonatomic, retain) NSTimer *controlsHideTimer;
-- (void)showNextPicture;
 - (void)stopShowPicture;
 - (void)restartShowPicture;
 - (void)pauseShowPicture;
