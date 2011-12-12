@@ -11,128 +11,14 @@
 #import "FlickrImageLoader.h"
 #import <Twitter/TWTweetComposeViewController.h> 
 
-#define L_WIDTH 1024
-#define L_HEIGHT 748
-#define P_WIDTH 768
-#define P_HEIGHT 1004
+
 
 #define GUI_TIME 7.0f
 #define GUI_ALPHA 1.0f
 
 #define PROGRESS_BAR_LENGTH 858
 
-#pragma mark - PlayImageView
 
-
-@implementation PlayImageView
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	self = [super initWithCoder:aDecoder];
-	imageEffectFlag = 1.0;
-	return self;
-}
-
-- (CGAffineTransform)getBeforeTransformWithWidth:(CGFloat)width height:(CGFloat)height
-{
-	CGAffineTransform transform = CGAffineTransformIdentity;
-	
-	if(UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
-		if(width / height > 1.6) {
-			//float aspectRatio = L_HEIGHT / height;
-			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			NSLog(@"Moving hor");
-			
-		} else if(width / height < 0.8) {
-			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
-			NSLog(@"Moving ver %d", dy);
-		} else {
-			transform = CGAffineTransformMakeScale(1.4, 1.4);	
-		}
-		
-	} else {
-		if(width / height > 1.2) {
-			//float aspectRatio = P_HEIGHT / height;
-			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			
-		} else if(width / height < 0.6) {
-			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); // 임시
-			
-		} else {
-			transform = CGAffineTransformMakeScale(1.4, 1.4);	
-		}
-		
-	}
-	
-	return transform;
-}
-
-- (CGAffineTransform)getAfterTransformWithWidth:(CGFloat)width height:(CGFloat)height
-{
-	CGAffineTransform transform = CGAffineTransformIdentity;
-	
-	if(UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ) {
-		if(width / height > 1.6) {
-			//float aspectRatio = L_HEIGHT / height;
-			imageEffectFlag = imageEffectFlag * -1;
-			int dx = (width * L_HEIGHT / height - L_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			
-		} else if(width / height < 0.8) {
-			imageEffectFlag = imageEffectFlag * -1;
-			int dy = (height * L_WIDTH / width - L_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag);
-			
-		} else {
-			transform = CGAffineTransformIdentity;
-			
-		}
-		
-	} else {
-		if(width / height > 1.2) {
-			//float aspectRatio = P_HEIGHT / height;
-			imageEffectFlag = imageEffectFlag * -1;
-			int dx = (width * P_HEIGHT / height - P_WIDTH) / 2.0;
-			transform = CGAffineTransformMakeTranslation(dx * imageEffectFlag, 0);
-			
-		} else if(width / height < 0.6) {
-			imageEffectFlag = imageEffectFlag * -1;
-			int dy = (height * P_WIDTH / width - P_HEIGHT) / 2.0;
-			transform = CGAffineTransformMakeTranslation(0, dy * imageEffectFlag); 
-			
-		} else {
-			transform = CGAffineTransformIdentity;
-		}
-		
-	}
-	
-	return transform;
-	
-	
-}
-
--(void) setAfterTransformWithViewController:(ViewController*)anObject
-{
-	self.transform = [self getAfterTransformWithWidth:self.image.size.width height:self.image.size.height];
-}
-
--(void) loadNextImageWithViewController:(ViewController*) aViewCon withImageLoader:(ImageLoader*)anImageLoader
-{
-	self.image = [anImageLoader nextImage];
-	self.transform = [self getBeforeTransformWithWidth:self.image.size.width height:self.image.size.height];
-}
-
--(void) stopAllAnimation
-{
-	[self.layer removeAllAnimations];
-	self.transform = CGAffineTransformIdentity;	
-}
-
-@end
 
 #pragma mark - ViewController
 
@@ -140,7 +26,7 @@
 @implementation ViewController
 
 @synthesize controlsHideTimer;
-@synthesize picImageView1, picImageView2;
+//@synthesize picImageView1, picImageView2;
 @synthesize progressBar, progressTimer;
 @synthesize nextPicTimer;
 @synthesize musicPlayer;
@@ -209,7 +95,7 @@
 	swipeRecogLeft.direction = UISwipeGestureRecognizerDirectionRight;
 	[self.view addGestureRecognizer:swipeRecogLeft];
 	
-	imageEffectFlag = 1.0;
+	
 	
 	// Do any additional setup after loading the view, typically from a nib.
 	musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
@@ -235,6 +121,7 @@
 - (void)viewDidUnload
 {
 	controls = nil;
+	aniView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -314,7 +201,7 @@
 // 기기가 회전하면 애니매이션 중인 이미지가 깨지지 않도록 애니매이션이 멈추고 이미지 transform을 보정한다
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-	[[self showingPicImageView] stopAllAnimation];
+	[[aniView showingPicImageView] stopAllAnimation];
 }
 
 
@@ -364,10 +251,10 @@
 	
 	
 	
-	if (picImageView1.image == nil) 
+	if (![aniView hasImage]) 
 	{
 		MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
-		[picImageView1 setImage:[artwork imageWithSize:artwork.bounds.size]];
+		[aniView setAnimationImage:[artwork imageWithSize:artwork.bounds.size]];
 	}
 	
 	
@@ -379,16 +266,11 @@
 	[imageLoader loadImages:filteredKeyword completion:^{
 		NSLog(@"load completed");
 		
-		imageShowing = 1;
-		picImageView1.alpha = 1.0;
-		picImageView2.alpha = 0.0;
-		
-
-		picImageView1.image = [imageLoader nextImage];
+		[aniView setAnimationImage:[imageLoader nextImage]];
 
 		[nextPicTimer invalidate];
-		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:9.2 target:self selector:@selector(startSlideshow) 
-														   userInfo:nil repeats:YES];
+		self.nextPicTimer = [NSTimer scheduledTimerWithTimeInterval:9.2 target:aniView selector:@selector(startSlideshow:) 
+														   userInfo:imageLoader repeats:YES];
 		
 		MPMusicPlaybackState playbackState = [musicPlayer playbackState];
 		if (playbackState == MPMusicPlaybackStatePlaying) {
@@ -712,7 +594,7 @@
 
 - (IBAction)saveImage:(id)sender {
 	[self extendControlsHidingTimer];
-	UIImageWriteToSavedPhotosAlbum(picImageView1.image, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
+	UIImageWriteToSavedPhotosAlbum([aniView showingPicImageView], self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -733,73 +615,6 @@
 
 
 #pragma mark animation
-- (void)toggleAlpha
-{
-	if (picImageView1.alpha == 1.0) {
-		picImageView1.alpha = 0.0;
-		picImageView2.alpha = 1.0;
-	} else {
-		picImageView1.alpha = 1.0;
-		picImageView2.alpha = 0.0;
-	}
-}
-
-- (void)toggleShowing
-{
-	imageShowing = (imageShowing == 1) ? 2: 1;
-}
-
-- (void)startSlideshow
-{
-	// beforeAnimation
-	[[self notShowingPicImageView] loadNextImageWithViewController:self withImageLoader:imageLoader];
-	
-	[self toggleShowing];
-	
-	
-	
-	// Animation
-	[UIView 
-	 animateWithDuration:2.0 
-	 //  delay:1.0
-	 //options:UIViewAnimationCurveLinear
-	 animations:^{ /* fade animations */ 
-		 [self toggleAlpha];
-	 } 
-	 completion:^(BOOL finished){
-		 // beforeAnimation
-		 
-		 // Animation
-		 [UIView 
-		  animateWithDuration:6.0
-		  delay:0.0
-		  options:UIViewAnimationCurveEaseInOut
-		  animations:^{ /* ken animations */
-			  [[self showingPicImageView] setAfterTransformWithViewController:self];
-		  }
-		  completion:^(BOOL finished){
-			  
-		  }];
-	 }
-	 ];
-	
-}
-
--(PlayImageView*) showingPicImageView
-{
-	if (imageShowing == 1) {
-		return picImageView1;
-	}
-	return picImageView2;
-}
-
--(PlayImageView*) notShowingPicImageView
-{
-	if (imageShowing == 1) {
-		return picImageView2;
-	}
-	return picImageView1;
-}
 
 
 @end

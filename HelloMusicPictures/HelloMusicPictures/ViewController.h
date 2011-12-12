@@ -10,17 +10,11 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
+#import "AnimationView.h"
+
+
 @class ImageLoader;
-@class ViewController;
-@interface PlayImageView : UIImageView {
-	CGFloat imageEffectFlag;
-}
--(void) stopAllAnimation;
--(void) setAfterTransformWithViewController:(ViewController*)anObject;
--(void) loadNextImageWithViewController:(ViewController*) aViewCon withImageLoader:(ImageLoader*)anImageLoader;
-@end
-
-
+@class AnimationView;
 
 @interface ViewController : UIViewController <MPMediaPickerControllerDelegate>
 {
@@ -34,15 +28,14 @@
 	IBOutlet UIButton *prevButton;
 	IBOutlet UIButton *nextButton;	
 	IBOutlet UISwitch *randomSwitch;
-	IBOutlet PlayImageView *picImageView1;
-	IBOutlet PlayImageView *picImageView2;
+
+	__weak IBOutlet AnimationView *aniView;
 	IBOutlet UITextView *lyricsView;
 	
 	IBOutlet UIImageView *progressBar;
 	
 	int imageIdx;
-	int imageShowing;
-	CGFloat imageEffectFlag; // 화면 애니메이션에서 사용
+	
 	
 	IBOutlet UIView *controls;
 	
@@ -61,16 +54,11 @@
 	UISwipeGestureRecognizer *swipeRecogRight;
 	UISwipeGestureRecognizer *swipeRecogLeft;
 }
--(PlayImageView*) showingPicImageView;
--(PlayImageView*) notShowingPicImageView;
+
 @property(nonatomic, retain) NSTimer *controlsHideTimer;
 - (void)stopShowPicture;
 - (void)restartShowPicture;
 - (void)pauseShowPicture;
-
-- (void)startSlideshow;
-- (void)toggleAlpha;
-- (void)toggleShowing;
 
 
 
@@ -111,12 +99,6 @@
 @property (nonatomic, strong) NSDate *pauseStart;
 @property (nonatomic, strong) NSDate *previousFireDate;
 @property (nonatomic, strong) NSTimer *nextPicTimer;
-
-@property (nonatomic, strong) UIImageView *picImageView2;
-@property (nonatomic, strong) UIImageView *picImageView1;
-
-
-
 
 
 @end
